@@ -11,7 +11,7 @@ lplr = plrs.LocalPlayer
 mouse = lplr:GetMouse()
 virtualUser = game:GetService("VirtualUser")
 
-if _G.ws_g then
+if _G.ws_g == nil then
 	_G.ws_g = 20
 end
 
