@@ -1,0 +1,15 @@
+-- 3039 = Dollar Dress
+-- 3050 = Teddy Dress
+-- 3049 = Stellar Dress
+-- 3037 = Nurse Dress
+-- 3034 = Military Dress
+-- 3035 = Snow Military Dress
+-- 3033 = Police Dress
+-- 3028 = Hot Dress
+-- 3027 = Mummy Dress
+-- 3026 = Old Dress
+-- 3025 = Elegant Dress
+-- 3024 = Noob Dress
+-- 3014 = Slendrina Dress
+-- 3012 = Jason Dress
+-- 3006 = Black Blood Dress
