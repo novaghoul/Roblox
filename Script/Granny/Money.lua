@@ -1,0 +1,1 @@
+game:GetService("ReplicatedStorage").Events.Winner:FireServer(9999999999)
