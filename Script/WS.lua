@@ -11,7 +11,9 @@ lplr = plrs.LocalPlayer
 mouse = lplr:GetMouse()
 virtualUser = game:GetService("VirtualUser")
 
-_G.ws_g = 20
+if _G.ws_g then
+	_G.ws_g = 20
+end
 
 function SendChat(String) -- Send a chat to the game chat
 	sg:SetCore(
