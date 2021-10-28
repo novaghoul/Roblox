@@ -1,1 +1,0 @@
-game:GetService("Workspace").Gravity = 150
