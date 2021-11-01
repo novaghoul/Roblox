@@ -57,21 +57,7 @@ for i, v in pairs(getgc(true)) do
     end
 end
 
-
-_G.autoTrain = true
-while _G.autoTrain do
-    wait()
-    pcall(function()
-        for i,v in pairs(game:GetService("Workspace").Resources.Pickups:GetChildren()) do
-            pcall(function()
-                v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-            end)
-        end
-    end)
-end
-
-local namePet = "Isaac"
-
+local namePet = "Zues"
 for _, v in pairs(game:GetService("Workspace")["__THINGS"].Pets:GetChildren()) do
     if tostring(v["__BILLBOARD"].Nickname.Text) == namePet then
         local table_1 = {
