@@ -86,3 +86,17 @@ RunSrv.RenderStepped:Connect(function()
     end
 end)
 
+for i, v in pairs(getgc(true)) do
+    if type(v) == 'table' and rawget(v, 'Damage') then
+        print("-------------------------------------------------------------")
+        -- v.Damage = 100
+        -- v.ReloadTime = 0.001
+        v.RecoilNum = 1
+        v.VMRecoil = 1
+        -- v.Sniper = true
+        v.Accuracy = 1
+        -- v.RateOfFire = 0.01
+        -- v.MaxAmmo = 100
+        v.CrosshairSpread = 1
+    end
+end

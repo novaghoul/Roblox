@@ -67,3 +67,7 @@ for _, v in pairs(game:GetService("Workspace")["__THINGS"].Pets:GetChildren()) d
         Target:InvokeServer(table_1);
     end
 end
+for _, v in pairs(game:GetService("Workspace").CandyHolder:GetChildren()) do
+    wait(0.1)
+    v.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+end

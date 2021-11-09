@@ -35,6 +35,11 @@ game:GetService("RunService").Stepped:connect(
                 lplr.Character[checkRigType()[i]].CanCollide = false
             end
             lplr.Character.HumanoidRootPart.CanCollide = false
+        else
+            for i = 1, #checkRigType() do
+                lplr.Character[checkRigType()[i]].CanCollide = true
+            end
+            lplr.Character.HumanoidRootPart.CanCollide = true
         end
     end
 )
