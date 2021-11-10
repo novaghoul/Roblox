@@ -7,7 +7,9 @@ plrs = game:GetService("Players")
 lplr = plrs.LocalPlayer
 mouse = lplr:GetMouse()
 
-_G.noclipAll = false
+if _G.noclipAll == nil then
+	_G.noclipAll = false
+end
 
 _G.r6 = {"Head", "Torso"}
 _G.r15 = {"Head", "UpperTorso", "LowerTorso"}
