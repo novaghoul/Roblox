@@ -57,46 +57,127 @@ if tool then
     tool.Handle.Size = Vector3.new(5, 5, 5)
 end
 
--- Entities.Infected.NameZombie.Head
--- Objectives
-for _, o in pairs(wp.Entities.Infected:GetChildren()) do
-    if o:WaitForChild("Head") then
+function createESPItem(parent, r, g, b, fontSize, name)
+    local bgui = Instance.new("BillboardGui", parent)
+    bgui.Name = ("EGUI")
+    bgui.AlwaysOnTop = true
+    bgui.ExtentsOffset = Vector3.new(0, 0, 0)
+    bgui.Size = UDim2.new(1, 0, 1, 0)
+    local nam = Instance.new("TextLabel", bgui)
+    nam.Text = name
+    nam.BackgroundTransparency = 1
+    nam.TextSize = fontSize
+    nam.Font = ("Arial")
+    nam.TextColor3 = Color3.fromRGB(r, g, b)
+    nam.Size = UDim2.new(1, 0, 1, 0)
+end
 
+for _, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
+    if tostring(v.Name) == "JudyCollection" then
+        for _, l in pairs(v:GetChildren()) do
+            if l:FindFirstChildOfClass("Part") then
+                createESPItem(l:FindFirstChildOfClass("Part"), 196, 40, 28, 10, l.Name)
+            end
+        end
+    else
+        if v:FindFirstChildOfClass("Part") then
+            createESPItem(v:FindFirstChildOfClass("Part"), 196, 40, 28, 10, v.Name)
+        end
     end
 end
-for i=1,2 do
-    local Zom = wp.Entities.Infected:GetChildren()[1]
-    for _,v in pairs(Zom["Head Model"]:GetChildren()) do
-        print("-------------")
-        print(v)
-    end
+
+
+local string_1 = "Dest";
+local userdata_1 = game:GetService("Workspace").Rooms["Room_1"].Destructible["Destructible-Shower Room1"].Model;
+local string_2 = "Destructible-Shower Room1";
+local Target = game:GetService("ReplicatedStorage").RemoteEvents.AttackRemote;
+Target:FireServer(string_1, userdata_1, string_2);
+
+_G.autoFarm = true
+while _G.autoFarm do
+    wait()
+    local string_1 = "Click";
+    local table_1 = {};
+    local Target = game:GetService("ReplicatedStorage").Events.Npc;
+    Target:FireServer(string_1, table_1);
 end
 
---[[ Variables ]]
-local RS = game:GetService("ReplicatedStorage")
-local PS = game:GetService("Players")
-local Client = RS:WaitForChild("CIient")
-local RunSrv = game:GetService("RunService")
 
-_G.auM = true
+-- game:GetService("Workspace").Areas.Starter.NPCs.Villager
 
-RunSrv.RenderStepped:Connect(function()
-    if _G.auM then
-        Client:FireServer("Melee", "Divine Shield", PS.LocalPlayer.Character)
-    end
-end)
+uis = game:GetService("UserInputService")
+cg = game:GetService("CoreGui")
+sg = game:GetService("StarterGui")
+wp = game:GetService("Workspace")
+cmr = wp.Camera
+rs = game:GetService("ReplicatedStorage")
+rsd = game:GetService("RunService").RenderStepped
+lgt = game:GetService("Lighting")
+plrs = game:GetService("Players")
+lplr = plrs.LocalPlayer
+mouse = lplr:GetMouse()
 
-for i, v in pairs(getgc(true)) do
-    if type(v) == 'table' and rawget(v, 'Damage') then
-        print("-------------------------------------------------------------")
-        -- v.Damage = 100
-        -- v.ReloadTime = 0.001
-        v.RecoilNum = 1
-        v.VMRecoil = 1
-        -- v.Sniper = true
-        v.Accuracy = 1
-        -- v.RateOfFire = 0.01
-        -- v.MaxAmmo = 100
-        v.CrosshairSpread = 1
+_G.hitBoxSize = {5, 5, 5}
+_G.hitBoxBody = "HumanoidRootPart"
+_G.hitBoxColor = "Really blue"
+_G.hitBoxTransparency = 0.9
+-- HumanoidRootPart
+
+function createHitBox(parent)
+    -- parent.Humanoid.HipHeight = 8
+    -- parent[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
+    -- parent[_G.hitBoxBody].Transparency = _G.hitBoxTransparency
+    -- parent[_G.hitBoxBody].BrickColor = BrickColor.new(_G.hitBoxColor)
+    -- parent[_G.hitBoxBody].Material = "Neon"
+    -- parent[_G.hitBoxBody].CanCollide = false
+
+    -- parent[_G.hitBoxBody].Changed:connect(
+    --     function(property)
+    --         wait(0.1)
+    --         if property == "Size" or property == "CanCollide" then
+    --             parent[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
+    --             parent[_G.hitBoxBody].CanCollide = false
+    --         end
+    --     end
+    -- )
+
+    local bgui = Instance.new("BillboardGui", parent.Head)
+    bgui.Name = ("EGUI")
+    bgui.AlwaysOnTop = true
+    bgui.ExtentsOffset = Vector3.new(0, 0, 0)
+    bgui.Size = UDim2.new(1, 0, 1, 0)
+    local nam = Instance.new("TextLabel", bgui)
+    nam.Text = "X"
+    nam.BackgroundTransparency = 1
+    nam.TextSize = 20
+    nam.Font = ("Arial")
+    nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+    nam.Size = UDim2.new(1, 0, 1, 0)
+end
+
+function hitBox()
+    for _, o in pairs(wp.dungeon:GetChildren()) do
+        if o:FindFirstChild("enemyFolder") then
+            for _, v in pairs(o.enemyFolder:GetChildren()) do
+                if v:FindFirstChild("HumanoidRootPart") then
+                    wait(0.1)
+                    createHitBox(v)
+                end
+            end
+            o.enemyFolder.ChildAdded:connect(
+                function(m)
+                    wait(1)
+                    if m:FindFirstChild("HumanoidRootPart") then
+                        wait(0.1)
+                        createHitBox(m)
+                    end
+                end
+            )
+        end
     end
 end
+hitBox()
+plrs.LocalPlayer.Character.Humanoid.HipHeight = 10
+_G.ws_g = 30
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/No%20Clip%20Other.lua"), true))()

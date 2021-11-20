@@ -22,7 +22,7 @@ end
 
 mouse.KeyDown:connect(
     function(keyDown)
-        if keyDown == "e" then
+        if keyDown == "f" then
             _G.noclipAll = not _G.noclipAll
         end
     end
