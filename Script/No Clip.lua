@@ -1,30 +1,8 @@
-uis = game:GetService("UserInputService")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-rs = game:GetService("ReplicatedStorage")
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-
-if _G.noclipAll == nil then
-	_G.noclipAll = false
-end
-
-_G.r6 = {"Head", "Torso"}
-_G.r15 = {"Head", "UpperTorso", "LowerTorso"}
-
-function checkRigType()
-    if lplr.Character:FindFirstChild("Torso") then
-        return _G.r6
-    else
-        return _G.r15
-    end
-end
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 mouse.KeyDown:connect(
     function(keyDown)
-        if keyDown == "f" then
+        if keyDown == _G.noclipAllKey then
             _G.noclipAll = not _G.noclipAll
         end
     end

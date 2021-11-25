@@ -1,50 +1,6 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
-
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-
-_G.hitBoxSize = {5, 5, 5}
-_G.hitBoxBody = "Head"
-_G.hitBoxColor = "Really blue"
-_G.hitBoxTransparency = 1
--- HumanoidRootPart
-
-_G.noclipAll = false
-
-_G.r6 = {"Head", "Torso"}
-_G.r15 = {"Head", "UpperTorso", "LowerTorso"}
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 _G.ws_g = 25
-_G.jp_g = 50
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
-
-function checkRigType()
-    if lplr.Character:FindFirstChild("Torso") then
-        return _G.r6
-    else
-        return _G.r15
-    end
-end
 
 function itemlist(thing)
     if string.find(string.lower(thing), string.lower("CrateDrop")) then

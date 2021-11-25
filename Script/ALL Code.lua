@@ -37,40 +37,12 @@ fireclickdetector(v)
 firetouchinterest(PartTouch,  BodyTouch, 0)
 table.foreach(v.damage, print)
 
-
-
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
-
 local tool = lplr.Backpack:FindFirstChildOfClass("Tool") or lplr.Character:FindFirstChildOfClass("Tool")
 if tool then
     tool.Handle.Size = Vector3.new(5, 5, 5)
 end
 
-function createESPItem(parent, r, g, b, fontSize, name)
-    local bgui = Instance.new("BillboardGui", parent)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-    bgui.Size = UDim2.new(1, 0, 1, 0)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = fontSize
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(r, g, b)
-    nam.Size = UDim2.new(1, 0, 1, 0)
-end
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 for _, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
     if tostring(v.Name) == "JudyCollection" then
@@ -105,23 +77,6 @@ end
 
 -- game:GetService("Workspace").Areas.Starter.NPCs.Villager
 
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-
-_G.hitBoxSize = {5, 5, 5}
-_G.hitBoxBody = "HumanoidRootPart"
-_G.hitBoxColor = "Really blue"
-_G.hitBoxTransparency = 0.9
--- HumanoidRootPart
 
 function createHitBox(parent)
     -- parent.Humanoid.HipHeight = 8
@@ -182,23 +137,6 @@ _G.ws_g = 30
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/No%20Clip%20Other.lua"), true))()
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))()
 
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-
-_G.hitBoxSize = {50, 50, 50}
-_G.hitBoxBody = "HumanoidRootPart"
-_G.hitBoxColor = "Really blue"
-_G.hitBoxTransparency = 0.9
--- HumanoidRootPart
 
 function createHitBox(parent)
     -- parent[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
