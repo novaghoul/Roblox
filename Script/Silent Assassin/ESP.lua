@@ -44,20 +44,20 @@ function createESP(parent)
 	parent.role:GetPropertyChangedSignal("Value"):connect(
 		function()
 			if tostring(parent.role.Value) == "assassin" then
-				nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+				parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(196, 40, 28)
 			elseif tostring(parent.role.Value) == "target" then
-				nam.TextColor3 = Color3.fromRGB(249, 214, 46)
+				parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(249, 214, 46)
 			elseif tostring(parent.role.Value) == "guard" then
-				nam.TextColor3 = Color3.fromRGB(13, 105, 172)
+				parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(13, 105, 172)
 			end
 		end
 	)
 	if tostring(parent.role.Value) == "assassin" then
-		nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+		parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(196, 40, 28)
 	elseif tostring(parent.role.Value) == "target" then
-		nam.TextColor3 = Color3.fromRGB(249, 214, 46)
+		parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(249, 214, 46)
 	elseif tostring(parent.role.Value) == "guard" then
-		nam.TextColor3 = Color3.fromRGB(13, 105, 172)
+		parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(13, 105, 172)
 	end
 end
 
