@@ -5,7 +5,7 @@ rs = game:GetService("ReplicatedStorage")
 lgt = game:GetService("Lighting")
 plrs = game:GetService("Players")
 lplr = plrs.LocalPlayer
-bp = lplr:WaitForChild("Backpack")
+bp = lplr.Backpack
 mouse = lplr:GetMouse()
 
 pcall(

@@ -57,6 +57,12 @@ for i, v in pairs(getgc(true)) do
     end
 end
 
+for i, v in pairs(getgc()) do
+    if type(v) == "function" and getinfo(v).name == "Reload" then
+        debug.setupvalue(v, 2, math.huge)
+    end
+end
+
 local namePet = "Zues"
 for _, v in pairs(game:GetService("Workspace")["__THINGS"].Pets:GetChildren()) do
     if tostring(v["__BILLBOARD"].Nickname.Text) == namePet then
@@ -69,5 +75,5 @@ for _, v in pairs(game:GetService("Workspace")["__THINGS"].Pets:GetChildren()) d
 end
 for _, v in pairs(game:GetService("Workspace").CandyHolder:GetChildren()) do
     wait(0.1)
-    v.CFrame = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
 end
