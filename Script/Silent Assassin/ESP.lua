@@ -1,34 +1,11 @@
-uis = game:GetService("UserInputService")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
 _G.dis = 4
 _G.hitBoxSize = {7, 7, 7}
 _G.hitBoxBody = "HumanoidRootPart"
-_G.hitBoxColor = "Really blue"
-_G.hitBoxTransparency = 0.9
--- HumanoidRootPart
 
 function createESP(parent)
-	local bgui = Instance.new("BillboardGui", parent.Character.Head)
-	bgui.Name = ("EGUI")
-	bgui.AlwaysOnTop = true
-	bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-	bgui.Size = UDim2.new(0, 200, 0, 50)
-	local nam = Instance.new("TextLabel", bgui)
-	nam.Text = parent.Name
-	nam.BackgroundTransparency = 1
-	nam.TextSize = 14
-	nam.Font = ("Arial")
-	nam.TextColor3 = Color3.fromRGB(75, 151, 75)
-	nam.Size = UDim2.new(0, 200, 0, 50)
+	createESPItem(parent.Character.Head, 75, 151, 75, 14, parent.Name)
 	for _, p in pairs(parent.Character:GetChildren()) do
 		if p.Name == ("Head") then
 			for _, f in pairs(_G.faces) do

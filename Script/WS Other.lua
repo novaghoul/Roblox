@@ -1,28 +1,6 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-if _G.speedEN == nil then
-    _G.speedEN = false
-end
-
-if _G.speedDash == nil then
-    _G.speedDash = 50
-end
-
-function SendChat(String) -- Send a chat to the game chat
-    sg:SetCore("ChatMakeSystemMessage", {
-        Text = "[OUTPUT]: " .. String
-    })
-end
+_G.ws_g = 20
 
 _G.down = false
 _G.velocity = Instance.new("BodyVelocity")
@@ -43,14 +21,14 @@ function onButton1Down(v, g, d)
             v.Parent = lplr.Character.UpperTorso
             g.Parent = lplr.Character.UpperTorso
         end
-        v.velocity = (lplr.Character.Humanoid.MoveDirection) * _G.speedDash
+        v.velocity = (lplr.Character.Humanoid.MoveDirection) * _G.ws_g
         while d do
             if not d then
                 break
             end
             if lplr.Character then
                 if lplr.Character:FindFirstChild("UpperTorso") then
-                    v.velocity = (lplr.Character.Humanoid.MoveDirection) * _G.speedDash
+                    v.velocity = (lplr.Character.Humanoid.MoveDirection) * _G.ws_g
                     local refpos = g.Parent.Position + (g.Parent.Position - wp.CurrentCamera.CoordinateFrame.p).unit * 5
                     g.cframe = CFrame.new(g.Parent.Position, Vector3.new(refpos.x, g.Parent.Position.y, refpos.z))
                 end
@@ -82,13 +60,13 @@ end)
 
 function changeDA(typeDA)
     if typeDA == 0 then
-        _G.speedDash = _G.speedDash + 5
+        _G.ws_g = _G.ws_g + 5
     elseif typeDA == 1 then
-        if _G.speedDash >= 0 then
-            _G.speedDash = _G.speedDash - 5
+        if _G.ws_g >= 0 then
+            _G.ws_g = _G.ws_g - 5
         end
-        if _G.speedDash < 0 then
-            _G.speedDash = 0
+        if _G.ws_g < 0 then
+            _G.ws_g = 0
         end
     end
 end
@@ -96,19 +74,19 @@ end
 mouse.KeyDown:connect(function(keyDown)
     if keyDown == "c" then
         changeDA(0)
-        notify("Dash :" .. _G.speedDash)
+        notify("Dash :" .. _G.ws_g)
     end
     if keyDown == "v" then
         changeDA(1)
-        notify("Dash :" .. _G.speedDash)
+        notify("Dash :" .. _G.ws_g)
     end
     if keyDown == "x" then
-        if _G.speedDash == 20 then
-            _G.speedDash = 17
-            SendChat("Dash :" .. _G.speedDash)
+        if _G.ws_g == 20 then
+            _G.ws_g = 17
+            SendChat("Dash :" .. _G.ws_g)
         else
-            _G.speedDash = 20
-            SendChat("Dash :" .. _G.speedDash)
+            _G.ws_g = 20
+            SendChat("Dash :" .. _G.ws_g)
         end
     end
     if keyDown == "q" then
