@@ -1,58 +1,11 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-bp = lplr:WaitForChild("Backpack")
-mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-_G.ws_g = 20
-_G.jp_g = 50
 _G.arresttoolRemote = wp.Remote["arrest"]
 _G.meleetoolRemote = rs["meleeEvent"]
 _G.plrCurrent = nil
-_G.hitBoxSize = {5, 5, 5}
-_G.hitBoxBody = "Head"
-_G.hitBoxColor = "Really blue"
-_G.hitBoxTransparency = 1
+hitBoxSize = {5, 5, 5}
+hitBoxBody = "Head"
 -- HumanoidRootPart
-_G.noclipAll = false
-_G.r6 = {"Head", "Torso"}
-_G.r15 = {"Head", "UpperTorso", "LowerTorso"}
-
-function SendChat(String) -- Send a chat to the game chat
-    game.StarterGui:SetCore(
-        "ChatMakeSystemMessage",
-        {
-            Text = "[OUTPUT]: " .. String
-        }
-    )
-end
-
-function notify(msg, dec)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = dec,
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
-
-function checkRigType()
-    if lplr.Character:FindFirstChild("Torso") then
-        return _G.r6
-    else
-        return _G.r15
-    end
-end
 
 function checkESP(parent)
     local numEGUI = 0
@@ -88,7 +41,7 @@ function createESP(parent)
     nam.Size = UDim2.new(0, 200, 0, 50)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
+            for _, f in pairs(faces) do
                 local m = Instance.new("SurfaceGui", p)
                 m.Name = ("EGUI")
                 m.Face = f
@@ -469,41 +422,41 @@ function firstScript()
 end
 firstScript()
 
-spawn(
-    function()
-        loadstring(game:HttpGet(("https://pastebin.com/raw/TTZxVeAu"), true))() --Humanoid Teleport
-    end
-)
+-- spawn(
+--     function()
+--         loadstring(game:HttpGet(("https://pastebin.com/raw/TTZxVeAu"), true))() --Humanoid Teleport
+--     end
+-- )
 
-spawn(
-    function()
-        loadstring(game:HttpGet(("https://pastebin.com/raw/bYWhrnGA"), true))() --Hit Box
-    end
-)
+-- spawn(
+--     function()
+--         loadstring(game:HttpGet(("https://pastebin.com/raw/bYWhrnGA"), true))() --Hit Box
+--     end
+-- )
 
 function infJump()
-    lplr.Character.Humanoid.JumpPower = _G.jp_g
+    lplr.Character.Humanoid.JumpPower = jp_g
     lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 end
 
 function statsPlayerWs()
-    lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+    lplr.Character.Humanoid.WalkSpeed = ws_g
 
     lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
         function()
-            if lplr.Character.Humanoid.WalkSpeed ~= _G.ws_g then
-                lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+            if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+                lplr.Character.Humanoid.WalkSpeed = ws_g
             end
         end
     )
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait(1)
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+            lplr.Character.Humanoid.WalkSpeed = ws_g
             lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
                 function()
-                    if lplr.Character.Humanoid.WalkSpeed ~= _G.ws_g then
-                        lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+                    if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+                        lplr.Character.Humanoid.WalkSpeed = ws_g
                     end
                 end
             )
@@ -517,16 +470,16 @@ statsPlayerWs()
 
 function changeWS(typeWS)
     if typeWS == 0 then
-        _G.ws_g = _G.ws_g + 5
-        lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+        ws_g = ws_g + 5
+        lplr.Character.Humanoid.WalkSpeed = ws_g
     elseif typeWS == 1 then
-        if _G.ws_g >= 0 then
-            _G.ws_g = _G.ws_g - 5
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+        if ws_g >= 0 then
+            ws_g = ws_g - 5
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
-        if _G.ws_g < 16 then
-            _G.ws_g = 16
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+        if ws_g < 16 then
+            ws_g = 16
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
     end
 end
@@ -548,8 +501,8 @@ mouse.KeyDown:connect(
         end
 
         if keyDown == "e" then
-            _G.noclipAll = not _G.noclipAll
-            notify(tostring(_G.noclipAll), "NoClip")
+            noclipAll = not noclipAll
+            notify(tostring(noclipAll), "NoClip")
         end
     end
 )

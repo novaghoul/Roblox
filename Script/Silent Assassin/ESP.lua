@@ -5,7 +5,18 @@ _G.hitBoxSize = {7, 7, 7}
 _G.hitBoxBody = "HumanoidRootPart"
 
 function createESP(parent)
-	createESPItem(parent.Character.Head, 75, 151, 75, 14, parent.Name)
+	local bgui = Instance.new("BillboardGui", parent.Character.Head)
+	bgui.Name = ("EGUI")
+	bgui.AlwaysOnTop = true
+	bgui.ExtentsOffset = Vector3.new(0, 3, 0)
+	bgui.Size = UDim2.new(0, 200, 0, 50)
+	local nam = Instance.new("TextLabel", bgui)
+	nam.Text = parent.Name
+	nam.BackgroundTransparency = 1
+	nam.TextSize = 14
+	nam.Font = ("Arial")
+	nam.TextColor3 = Color3.fromRGB(75, 151, 75)
+	nam.Size = UDim2.new(0, 200, 0, 50)
 	for _, p in pairs(parent.Character:GetChildren()) do
 		if p.Name == ("Head") then
 			for _, f in pairs(_G.faces) do
@@ -44,20 +55,20 @@ function createESP(parent)
 	parent.role:GetPropertyChangedSignal("Value"):connect(
 		function()
 			if tostring(parent.role.Value) == "assassin" then
-				parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+				nam.TextColor3 = Color3.fromRGB(196, 40, 28)
 			elseif tostring(parent.role.Value) == "target" then
-				parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(249, 214, 46)
+				nam.TextColor3 = Color3.fromRGB(249, 214, 46)
 			elseif tostring(parent.role.Value) == "guard" then
-				parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(13, 105, 172)
+				nam.TextColor3 = Color3.fromRGB(13, 105, 172)
 			end
 		end
 	)
 	if tostring(parent.role.Value) == "assassin" then
-		parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+		nam.TextColor3 = Color3.fromRGB(196, 40, 28)
 	elseif tostring(parent.role.Value) == "target" then
-		parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(249, 214, 46)
+		nam.TextColor3 = Color3.fromRGB(249, 214, 46)
 	elseif tostring(parent.role.Value) == "guard" then
-		parent.Character.Head.EGUI.nam.TextColor3 = Color3.fromRGB(13, 105, 172)
+		nam.TextColor3 = Color3.fromRGB(13, 105, 172)
 	end
 end
 

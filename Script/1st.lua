@@ -1,43 +1,45 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-bp = lplr.Backpack
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
+repeat wait() until game:IsLoaded()
 
-_G.ws_g = 20
-_G.jp_g = 50
-_G.noclipAll = false
+getgenv().uis = game:GetService("UserInputService")
+getgenv().cg = game:GetService("CoreGui")
+getgenv().sg = game:GetService("StarterGui")
+getgenv().wp = game:GetService("Workspace")
+getgenv().cmr = wp.Camera
+getgenv().rs = game:GetService("ReplicatedStorage")
+getgenv().rsd = game:GetService("RunService").RenderStepped
+getgenv().lgt = game:GetService("Lighting")
+getgenv().plrs = game:GetService("Players")
+getgenv().lplr = plrs.LocalPlayer
+getgenv().bp = lplr.Backpack
+getgenv().mouse = lplr:GetMouse()
+getgenv().virtualUser = game:GetService("VirtualUser")
 
-_G.noclipAllKey = "f"
+getgenv().ws_g = 20
+getgenv().jp_g = 50
+getgenv().noclipAll = false
 
-_G.r6 = {"Head", "Torso"}
-_G.r15 = {"Head", "UpperTorso", "LowerTorso"}
+getgenv().noclipAllKey = "f"
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
+getgenv().r6 = {"Head", "Torso"}
+getgenv().r15 = {"Head", "UpperTorso", "LowerTorso"}
 
-ENEMYCOLOR = {196, 40, 28} --//Color of the ESP  of people on NOT the same team
-TRANSPARENCY = 0.5 --//Transparency of the ESP
-HEALTHBAR_ACTIVATED = true --//Renders the Healthbar
+getgenv().faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
 
-_G.hitBoxSize = {5, 5, 5}
-_G.hitBoxBody = "Head"
-_G.hitBoxColor = "Really blue"
-_G.hitBoxTransparency = 1
+getgenv().ENEMYCOLOR = {196, 40, 28} --//Color of the ESP  of people on NOT the same team
+getgenv().TRANSPARENCY = 0.5 --//Transparency of the ESP
+getgenv().HEALTHBAR_ACTIVATED = true --//Renders the Healthbar
+
+getgenv().hitBoxSize = {5, 5, 5}
+getgenv().hitBoxBody = "Head"
+getgenv().hitBoxColor = "Really blue"
+getgenv().hitBoxTransparency = 1
 -- HumanoidRootPart
 
 function checkRigType()
     if lplr.Character:FindFirstChild("Torso") then
-        return _G.r6
+        return r6
     else
-        return _G.r15
+        return r15
     end
 end
 
@@ -87,7 +89,7 @@ end
 function actualESP(obj)
 	for i = 0, 5 do
 		surface = Instance.new("SurfaceGui", obj) --//Creates the SurfaceGui
-		surface.Face = Enum.NormalId[_G.faces[i + 1]] --//Adjusts the Face and chooses from the face table
+		surface.Face = Enum.NormalId[faces[i + 1]] --//Adjusts the Face and chooses from the face table
 		surface.AlwaysOnTop = true
 
 		frame = Instance.new("Frame", surface) --//Creates the viewable Frame

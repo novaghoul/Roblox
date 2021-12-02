@@ -1,27 +1,6 @@
-uis = game:GetService("UserInputService")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-
-_G.ws_g = 20
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
+_G.hitBoxBody = "HumanoidRootPart"
 
 function createESP(parent)
     local bgui = Instance.new("BillboardGui", parent.Character.Head)
@@ -201,6 +180,67 @@ function espFirst()
 end
 espFirst()
 
+function createHitBox(parent)
+    local sizeBody = parent.Character[_G.hitBoxBody].Size.x
+    parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
+    parent.Character[_G.hitBoxBody].Transparency = _G.hitBoxTransparency
+    parent.Character[_G.hitBoxBody].BrickColor = BrickColor.new(_G.hitBoxColor)
+    parent.Character[_G.hitBoxBody].Material = "Neon"
+    parent.Character[_G.hitBoxBody].CanCollide = false
+
+    parent.Character[_G.hitBoxBody].Changed:connect(
+        function(property)
+            wait(0.1)
+            if property == "Size" or property == "CanCollide" then
+                parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
+                parent.Character[_G.hitBoxBody].CanCollide = false
+            end
+        end
+    )
+end
+
+function hitBox()
+    for _, o in pairs(plrs:GetPlayers()) do
+        if o.Name ~= lplr.Name then
+            o.CharacterAdded:Connect(
+                function(characterModel)
+                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                        wait(0.5)
+                        createHitBox(o)
+                    end
+                end
+            )
+        end
+    end
+
+    plrs.PlayerAdded:Connect(
+        function(newPlayer)
+            newPlayer.CharacterAdded:Connect(
+                function(characterModel)
+                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                        wait(0.5)
+                        createHitBox(newPlayer)
+                    end
+                end
+            )
+        end
+    )
+
+    for _, o in pairs(plrs:GetPlayers()) do
+        if o.Name ~= lplr.Name then
+            spawn(
+                function()
+                    if o.Character:WaitForChild(_G.hitBoxBody) then
+                        wait(0.1)
+                        createHitBox(o)
+                    end
+                end
+            )
+        end
+    end
+end
+hitBox()
+
 function tpGem()
     for _, v in pairs(wp.Gems:GetChildren()) do
         v.Base.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -3, 0)
@@ -277,12 +317,12 @@ mouse.KeyDown:connect(
 
         if keyDown == "c" then
             changeWS(0)
-            notify("Walk Speed : " .. lplr.Character.Humanoid.WalkSpeed)
+            notify("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
         end
 
         if keyDown == "v" then
             changeWS(1)
-            notify("Walk Speed : " .. lplr.Character.Humanoid.WalkSpeed)
+            notify("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
         end
     end
 )
