@@ -17,13 +17,17 @@ getgenv().virtualUser = game:GetService("VirtualUser")
 getgenv().ws_g = 20
 getgenv().jp_g = 50
 
+getgenv().disTeleport = -5
+
 getgenv().noclipAll = false
 getgenv().noclipAllKey = "f"
 
 getgenv().r6 = {"Head", "Torso"}
 getgenv().r15 = {"Head", "UpperTorso", "LowerTorso"}
 
-getgenv().faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
+if faces == nil then
+	getgenv().faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
+end
 
 getgenv().ENEMYCOLOR = {196, 40, 28} --//Color of the ESP  of people on NOT the same team
 getgenv().TRANSPARENCY = 0.5 --//Transparency of the ESP
@@ -63,14 +67,6 @@ getgenv().notify = function(tle, msg)
             Duration = 3
         }
     )
-end
-
-getgenv().checkReturn = function(tle, msg)
-	if sg:GetCoreGuiEnabled(3) == false then
-		return notify(tle, msg)
-	else
-		return SendChat(msg)
-	end
 end
 
 getgenv().createESPItem = function(parent, r, g, b, fontSize, name)
@@ -152,3 +148,37 @@ getgenv().plrlist = function(thing)
         end
     end
 end
+
+getgenv().eventTP = function(parent)
+    local pos = lplr.Character.HumanoidRootPart.CFrame
+    for _, v in pairs(parent) do
+        if tostring(v.Name) ~= tostring(lplr.Name) then
+            local charplayer = v.Character
+            if charplayer ~= nil then
+                charplayer.HumanoidRootPart.Anchored = false
+                charplayer.HumanoidRootPart.CanCollide = false
+                charplayer.HumanoidRootPart.CFrame = pos * CFrame.new(0, 2, disTeleport)
+                charplayer.HumanoidRootPart.Anchored = true
+            end
+        end
+    end
+end
+
+getgenv().resetTP = function()
+    for _, v in pairs(plrs:GetPlayers()) do
+        if tostring(v.Name) ~= tostring(lplr.Name) then
+            local charplayer = v.Character
+            if charplayer ~= nil then
+                charplayer.HumanoidRootPart.Anchored = false
+                charplayer.HumanoidRootPart.CanCollide = false
+            end
+        end
+    end
+end
+
+lplr.Idled:connect(
+    function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end
+)

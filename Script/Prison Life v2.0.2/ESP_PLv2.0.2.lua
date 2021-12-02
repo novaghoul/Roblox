@@ -3,27 +3,9 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 _G.arresttoolRemote = wp.Remote["arrest"]
 _G.meleetoolRemote = rs["meleeEvent"]
 _G.plrCurrent = nil
-hitBoxSize = {5, 5, 5}
+hitBoxSize = {7, 7, 7}
 hitBoxBody = "HumanoidRootPart"
 -- HumanoidRootPart
-
-function checkESP(parent)
-    local numEGUI = 0
-    for _, v in pairs(parent.Character.Head:GetChildren()) do
-        if v.Name == "EGUI" then
-            numEGUI = numEGUI + 1
-        end
-    end
-
-    if numEGUI ~= 7 then
-        for _, v in pairs(parent.Character.Head:GetChildren()) do
-            if v.Name == "EGUI" then
-                v:Destroy()
-            end
-        end
-        createESP(parent)
-    end
-end
 
 function createESP(parent)
     parent.Character.Head.CanCollide = false
@@ -126,7 +108,7 @@ function espFirst()
     for _, o in pairs(plrs:GetPlayers()) do
         if tostring(o.Name) ~= tostring(lplr.Name) then
             if o.Character:FindFirstChild("Head") then
-                checkESP(o)
+                createESP(o)
             end
         end
     end
@@ -137,21 +119,6 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Create%20GUI/Humanoid%20Teleport.lua"), true))() -- Teleport Players
 -------------------------------------------------------------
 --------------------------CMDS-------------------------------
-
-function eventTP(parent)
-    local pos = lplr.Character.HumanoidRootPart.CFrame
-    for _, v in pairs(parent) do
-        if tostring(v.Name) ~= tostring(lplr.Name) then
-            local charplayer = v.Character
-            if charplayer ~= nil then
-                charplayer.HumanoidRootPart.Anchored = false
-                charplayer.HumanoidRootPart.CanCollide = false
-                charplayer.HumanoidRootPart.CFrame = pos * CFrame.new(0, 2, -5)
-                charplayer.HumanoidRootPart.Anchored = true
-            end
-        end
-    end
-end
 
 function tpPlayer(choose)
     if tostring(choose) == "all" then
@@ -168,18 +135,6 @@ function tpPlayer(choose)
     else
         local players = {plrlist(tostring(choose))}
         eventTP(players)
-    end
-end
-
-function resetTP()
-    for _, v in pairs(plrs:GetPlayers()) do
-        if tostring(v.Name) ~= tostring(lplr.Name) then
-            local charplayer = v.Character
-            if charplayer ~= nil then
-                charplayer.HumanoidRootPart.Anchored = false
-                charplayer.HumanoidRootPart.CanCollide = false
-            end
-        end
     end
 end
 
@@ -314,8 +269,6 @@ local function executeChat(code)
             resetTP()
         elseif string.find("wp", command) then
             takeWeapon()
-        elseif string.find("esp", command) then
-            checkESP()
         elseif string.find("atool", command) then
             toolEvent("Arrest")
         elseif string.find("ktool", command) then
@@ -337,10 +290,10 @@ function funcGun(m)
         -- module.CurrentAmmo = 99999999;
         module.StoredAmmo = math.huge; 
         module.FireRate = 0.08;
-        module.AutoFire = true; 
+        -- module.AutoFire = true;
         module.Range = math.huge;
         module.Spread = 20;
-        module.ReloadTime = 0; 
+        -- module.ReloadTime = 0;
         -- module.Bullets = 5
     end
 end
@@ -485,14 +438,14 @@ mouse.KeyDown:connect(
 
         if keyDown == "e" then
             noclipAll = not noclipAll
-            notify(tostring(noclipAll), "NoClip")
+            notify("NoClip",tostring(noclipAll))
         end
     end
 )
 
 game:GetService("RunService").Stepped:connect(
     function()
-        if _G.noclipAll then
+        if noclipAll then
             for i = 1, #checkRigType() do
                 lplr.Character[checkRigType()[i]].CanCollide = false
             end
