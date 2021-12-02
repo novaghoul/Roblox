@@ -84,6 +84,12 @@ getgenv().createESPItem = function(parent, r, g, b, fontSize, name)
     nam.Size = UDim2.new(1, 0, 1, 0)
 end
 
+function checkPart(obj)
+    if (obj:IsA("Part") or obj:IsA("MeshPart")) and obj.Name ~= "HumanoidRootPart" then
+        return true
+    end
+end
+
 getgenv().actualESP = function(obj)
 	for i = 0, 5 do
 		surface = Instance.new("SurfaceGui", obj) --//Creates the SurfaceGui

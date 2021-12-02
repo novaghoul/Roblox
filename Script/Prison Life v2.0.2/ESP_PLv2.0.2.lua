@@ -21,39 +21,13 @@ function createESP(parent)
     nam.Font = ("Arial")
     nam.TextColor3 = Color3.fromRGB(205, 205, 205)
     nam.Size = UDim2.new(0, 200, 0, 50)
-    for _, p in pairs(parent.Character:GetChildren()) do
-        if p.Name == ("Head") then
-            for _, f in pairs(faces) do
-                local m = Instance.new("SurfaceGui", p)
-                m.Name = ("EGUI")
-                m.Face = f
-                m.Active = true
-                m.AlwaysOnTop = true
-                local mf = Instance.new("Frame", m)
-                mf.Size = UDim2.new(1, 0, 1, 0)
-                mf.BorderSizePixel = 0
-                mf.BackgroundTransparency = 0.5
-                mf.BackgroundColor3 = Color3.fromRGB(205, 205, 205)
-                parent:GetPropertyChangedSignal("Team"):connect(
-                    function()
-                        if tostring(parent.Team) == "Criminals" then
-                            mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                        elseif tostring(parent.Team) == "Guards" then
-                            mf.BackgroundColor3 = Color3.fromRGB(13, 105, 172)
-                        elseif tostring(parent.Team) == "Inmates" then
-                            mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                        end
-                    end
-                )
-                if tostring(parent.Team) == "Criminals" then
-                    mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                elseif tostring(parent.Team) == "Guards" then
-                    mf.BackgroundColor3 = Color3.fromRGB(13, 105, 172)
-                elseif tostring(parent.Team) == "Inmates" then
-                    mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                end
-            end
+    for _, v in pairs(c:GetChildren()) do
+        if checkPart(v) then
+            actualESP(v)
         end
+    end
+    if HEALTHBAR_ACTIVATED then --//If the user decided to
+        createHealthbar(c:WaitForChild("HumanoidRootPart")) --//Calls the function of the creation
     end
     parent:GetPropertyChangedSignal("Team"):connect(
         function()
@@ -329,6 +303,13 @@ function firstScript()
                     wp.Remote["loadchar"]:InvokeServer(lplr.Name)
                 end
             )
+            for _,v in pairs(getgc()) do
+                if type(v) == "function" and getfenv(v).script == lplr.Character.ClientInputHandler then
+                    if debug.getinfo(v).name == "taze" then
+                        hookfunction(v, function(...) end)
+                    end
+                end
+            end
         end
     )
 

@@ -1,10 +1,5 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-function checkPart(obj)
-    if (obj:IsA("Part") or obj:IsA("MeshPart")) and obj.Name ~= "HumanoidRootPart" then
-        return true
-    end
-end
 -- -----------------------------------------------------------------------------------
 function createESP(c) --//Checks and calls the proper function
     local bgui = Instance.new("BillboardGui", c.Head)
