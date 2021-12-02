@@ -1,13 +1,4 @@
-uis = game:GetService("UserInputService")
-sg = game:GetService("StarterGui")
-cg = game:GetService("CoreGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 if cg:FindFirstChild("HumanoidTeleport") then
 	cg["HumanoidTeleport"]:Destroy()
@@ -130,13 +121,6 @@ OpenBNT.TextColor3 = Color3.fromRGB(0, 0, 0)
 OpenBNT.TextSize = 30
 
 -- Scripts:
-function plrlist(thing)
-	for _, v in pairs(plrs:GetPlayers()) do
-		if string.find(string.lower(v.Name), string.lower(thing)) then
-			return v
-		end
-	end
-end
 
 OpenBNT.MouseButton1Down:connect(
 	function()

@@ -16,8 +16,8 @@ getgenv().virtualUser = game:GetService("VirtualUser")
 
 getgenv().ws_g = 20
 getgenv().jp_g = 50
-getgenv().noclipAll = false
 
+getgenv().noclipAll = false
 getgenv().noclipAllKey = "f"
 
 getgenv().r6 = {"Head", "Torso"}
@@ -45,11 +45,11 @@ getgenv().checkRigType = function()
     end
 end
 
-getgenv().SendChat = function(String) -- Send a chat to the game chat
+getgenv().SendChat = function(msg) -- Send a chat to the game chat
 	sg:SetCore(
 		"ChatMakeSystemMessage",
 		{
-			Text = "[OUTPUT]: " .. String
+			Text = "[OUTPUT]: " .. msg
 		}
 	)
 end
