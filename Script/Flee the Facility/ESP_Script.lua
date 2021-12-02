@@ -120,7 +120,7 @@ function createMap()
     for i = 1, #_G.children do
         if _G.children[i].Name == "ComputerTable" then
             -- local bgui = Instance.new("BillboardGui", _G.children[i].Screen)
-            createESPItem(_G.children[i].Screen, _G.children[i].Screen.Color.r*255, _G.children[i].Screen.Color.g*255, _G.children[i].Screen.Color.b*255, 14, "COMPUTER")
+            local espItem = createESPItem(_G.children[i].Screen, _G.children[i].Screen.Color.r*255, _G.children[i].Screen.Color.g*255, _G.children[i].Screen.Color.b*255, 14, "COMPUTER")
             -- bgui.Name = ("EGUI")
             -- bgui.AlwaysOnTop = true
             -- bgui.ExtentsOffset = Vector3.new(0, 0, 0)
@@ -134,7 +134,7 @@ function createMap()
             -- nam.Size = UDim2.new(1, 0, 1, 0)
             _G.children[i].Screen:GetPropertyChangedSignal("Color"):connect(
                 function()
-                    nam.TextColor3 = _G.children[i].Screen.Color
+                    espItem().nam.TextColor3 = _G.children[i].Screen.Color
                 end
             )end
         -- if _G.children[i].Name == "FreezePod" then
