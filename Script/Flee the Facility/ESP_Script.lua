@@ -124,20 +124,13 @@ function createMap()
                 function()
                     _G.children[i].Screen.EGUI.nameItems.TextColor3 = _G.children[i].Screen.Color
                 end
-            )end
+            )
+            _G.children[i][11].Size = Vector3.new(3, 3, 3)
+            _G.children[i][12].Size = Vector3.new(3, 3, 3)
+            _G.children[i][13].Size = Vector3.new(3, 3, 3)
+        end
         -- if _G.children[i].Name == "FreezePod" then
-        --     local bgui = Instance.new("BillboardGui", _G.children[i].BasePart)
-        --     bgui.Name = ("EGUI")
-        --     bgui.AlwaysOnTop = true
-        --     bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-        --     bgui.Size = UDim2.new(1, 0, 1, 0)
-        --     local nam = Instance.new("TextLabel", bgui)
-        --     nam.Text = "FP"
-        --     nam.BackgroundTransparency = 1
-        --     nam.TextSize = 14
-        --     nam.Font = ("Arial")
-        --     nam.TextColor3 = Color3.fromRGB(13, 105, 172)
-        --     nam.Size = UDim2.new(1, 0, 1, 0)
+        --     createESPItem(_G.children[i].BasePart, 13, 105, 172, 14, "FP")
         -- end
     end
 end
@@ -277,7 +270,15 @@ spawn(
 game:GetService("RunService").Stepped:connect(
     function()
         if noclipAll then
-            lplr.Character.Humanoid:ChangeState(11)
+            for i = 1, #checkRigType() do
+                lplr.Character[checkRigType()[i]].CanCollide = false
+            end
+            lplr.Character.HumanoidRootPart.CanCollide = false
+        else
+            for i = 1, #checkRigType() do
+                lplr.Character[checkRigType()[i]].CanCollide = true
+            end
+            lplr.Character.HumanoidRootPart.CanCollide = true
         end
     end
 )
