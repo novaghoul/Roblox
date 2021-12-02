@@ -21,13 +21,13 @@ function createESP(parent)
     nam.Font = ("Arial")
     nam.TextColor3 = Color3.fromRGB(205, 205, 205)
     nam.Size = UDim2.new(0, 200, 0, 50)
-    for _, v in pairs(c:GetChildren()) do
+    for _, v in pairs(parent.Character:GetChildren()) do
         if checkPart(v) then
             actualESP(v)
         end
     end
     if HEALTHBAR_ACTIVATED then --//If the user decided to
-        createHealthbar(c:WaitForChild("HumanoidRootPart")) --//Calls the function of the creation
+        createHealthbar(parent.Character:WaitForChild("HumanoidRootPart")) --//Calls the function of the creation
     end
     parent:GetPropertyChangedSignal("Team"):connect(
         function()
