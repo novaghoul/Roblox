@@ -134,7 +134,7 @@ function createMap()
             -- nam.Size = UDim2.new(1, 0, 1, 0)
             _G.children[i].Screen:GetPropertyChangedSignal("Color"):connect(
                 function()
-                    espItem().nam.TextColor3 = _G.children[i].Screen.Color
+                    espItem.TextColor3 = _G.children[i].Screen.Color
                 end
             )end
         -- if _G.children[i].Name == "FreezePod" then
