@@ -1,18 +1,5 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-_G.speedDash = 20
 _G.timeGame = true
 
 local Notify = Instance.new("ScreenGui")
@@ -53,29 +40,6 @@ lblbossmes.Text = "Eto"
 lblbossmes.TextColor3 = Color3.new(1, 1, 1)
 lblbossmes.TextSize = 14
 -- Scripts:
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
-
-function PointLight()
-    if not lplr.Character.Head:FindFirstChild("PLADD") then
-        local plg = Instance.new("PointLight", lplr.Character.Head)
-        plg.Name = ("PLADD")
-        plg.Range = 200
-        plg.Shadows = false
-        plg.Enabled = true
-        plg.Color = Color3.fromRGB(255, 255, 255)
-        plg.Brightness = 1
-    end
-end
 
 function createESP(parent)
     local bgui = Instance.new("BillboardGui", parent.Character.Head)
@@ -130,7 +94,7 @@ function enableESPCode()
             o.CharacterAdded:Connect(function(characterModel)
                 wait(1)
                 createESP(o)
-                PointLight()
+                pointLight()
             end)
         end
     end
@@ -140,7 +104,7 @@ function enableESPCode()
             newPlayer.CharacterAdded:Connect(function(characterModel)
                 wait(1)
                 createESP(newPlayer)
-                PointLight()
+                pointLight()
             end)
         end
     end)
@@ -151,7 +115,7 @@ function espFirst()
     for _, o in pairs(plrs:GetPlayers()) do
         if o.Name ~= lplr.Name then
             createESP(o)
-            PointLight()
+            pointLight()
         end
     end
     if wp.Objects:FindFirstChild("InvisibleWalls") then
@@ -159,21 +123,6 @@ function espFirst()
     end
 end
 espFirst()
-
-function createESPItem(parent, r, g, b, fontSize, name)
-    local bgui = Instance.new("BillboardGui", parent)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-    bgui.Size = UDim2.new(1, 0, 1, 0)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = fontSize
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(r, g, b)
-    nam.Size = UDim2.new(1, 0, 1, 0)
-end
 
 function eventESPItem(parent)
     if tostring(parent.Name) == "Relics" then
@@ -328,14 +277,14 @@ function onButton1Down(v, g, d)
             v.Parent = lplr.Character.UpperTorso
             g.Parent = lplr.Character.UpperTorso
         end
-        v.velocity = (lplr.Character.Humanoid.MoveDirection) * _G.speedDash
+        v.velocity = (lplr.Character.Humanoid.MoveDirection) * speedDash
         while d do
             if not d then
                 break
             end
             if lplr.Character then
                 if lplr.Character:FindFirstChild("UpperTorso") then
-                    v.velocity = (lplr.Character.Humanoid.MoveDirection) * _G.speedDash
+                    v.velocity = (lplr.Character.Humanoid.MoveDirection) * speedDash
                     local refpos = g.Parent.Position + (g.Parent.Position - wp.CurrentCamera.CoordinateFrame.p).unit * 5
                     g.cframe = CFrame.new(g.Parent.Position, Vector3.new(refpos.x, g.Parent.Position.y, refpos.z))
                 end
@@ -367,13 +316,13 @@ end)
 
 function changeDA(typeDA)
     if typeDA == 0 then
-        _G.speedDash = _G.speedDash + 5
+        speedDash = speedDash + 5
     elseif typeDA == 1 then
-        if _G.speedDash >= 0 then
-            _G.speedDash = _G.speedDash - 5
+        if speedDash >= 0 then
+            speedDash = speedDash - 5
         end
-        if _G.speedDash < 0 then
-            _G.speedDash = 0
+        if speedDash < 0 then
+            speedDash = 0
         end
     end
 end
@@ -381,19 +330,19 @@ end
 mouse.KeyDown:connect(function(keyDown)
     if keyDown == "c" then
         changeDA(0)
-        notify("Dash :" .. _G.speedDash)
+        notify("Dash", speedDash)
     end
     if keyDown == "v" then
         changeDA(1)
-        notify("Dash :" .. _G.speedDash)
+        notify("Dash", speedDash)
     end
     if keyDown == "x" then
-        if _G.speedDash == 20 then
-            _G.speedDash = 17
-            notify("Dash :" .. _G.speedDash)
+        if speedDash == 20 then
+            speedDash = 17
+            notify("Dash", speedDash)
         else
-            _G.speedDash = 20
-            notify("Dash :" .. _G.speedDash)
+            speedDash = 20
+            notify("Dash", speedDash)
         end
     end
     if keyDown == "q" then

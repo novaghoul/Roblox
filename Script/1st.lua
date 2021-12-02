@@ -16,6 +16,7 @@ getgenv().virtualUser = game:GetService("VirtualUser")
 
 getgenv().ws_g = 20
 getgenv().jp_g = 50
+getgenv().speedDash = 20
 
 getgenv().disTeleport = -5
 
@@ -75,6 +76,18 @@ getgenv().checkReturn = function(tle, msg)
 	else
 		return SendChat(tle, msg)
 	end
+end
+
+getgenv().pointLight = function()
+    if not lplr.Character.Head:FindFirstChild("PLADD") then
+        local plg = Instance.new("PointLight", lplr.Character.Head)
+        plg.Name = ("PLADD")
+        plg.Range = 200
+        plg.Shadows = false
+        plg.Enabled = true
+        plg.Color = Color3.fromRGB(255, 255, 255)
+        plg.Brightness = 1
+    end
 end
 
 getgenv().createESPItem = function(parent, r, g, b, fontSize, name)
