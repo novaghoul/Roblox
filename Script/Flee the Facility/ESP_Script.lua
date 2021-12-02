@@ -122,12 +122,9 @@ function createMap()
             createESPItem(_G.children[i].Screen, _G.children[i].Screen.Color.r*255, _G.children[i].Screen.Color.g*255, _G.children[i].Screen.Color.b*255, 14, "COMPUTER")
             _G.children[i].Screen:GetPropertyChangedSignal("Color"):connect(
                 function()
-                    _G.children[i].Screen.EGUI.nameItems.TextColor3 = _G.children[i].Screen.Color
+                    _G.children[i].Screen.EGUI.nameESP.TextColor3 = _G.children[i].Screen.Color
                 end
             )
-            _G.children[i][11].Size = Vector3.new(3, 3, 3)
-            _G.children[i][12].Size = Vector3.new(3, 3, 3)
-            _G.children[i][13].Size = Vector3.new(3, 3, 3)
         end
         -- if _G.children[i].Name == "FreezePod" then
         --     createESPItem(_G.children[i].BasePart, 13, 105, 172, 14, "FP")
