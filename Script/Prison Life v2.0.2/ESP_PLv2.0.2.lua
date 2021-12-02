@@ -134,6 +134,7 @@ end
 espFirst()
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Hit%20Box.lua"), true))() -- Hit Box
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Create%20GUI/Humanoid%20Teleport.lua"), true))() -- Teleport Players
 -------------------------------------------------------------
 --------------------------CMDS-------------------------------
 
@@ -415,18 +416,6 @@ function firstScript()
     -- };
 end
 firstScript()
-
--- spawn(
---     function()
---         loadstring(game:HttpGet(("https://pastebin.com/raw/TTZxVeAu"), true))() --Humanoid Teleport
---     end
--- )
-
--- spawn(
---     function()
---         loadstring(game:HttpGet(("https://pastebin.com/raw/bYWhrnGA"), true))() --Hit Box
---     end
--- )
 
 function infJump()
     lplr.Character.Humanoid.JumpPower = jp_g
