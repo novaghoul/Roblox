@@ -2,15 +2,15 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 mouse.KeyDown:connect(
     function(keyDown)
-        if keyDown == _G.noclipAllKey then
-            _G.noclipAll = not _G.noclipAll
+        if keyDown == noclipAllKey then
+            noclipAll = not noclipAll
         end
     end
 )
 
 game:GetService("RunService").Stepped:connect(
     function()
-        if _G.noclipAll then
+        if noclipAll then
             for i = 1, #checkRigType() do
                 lplr.Character[checkRigType()[i]].CanCollide = false
             end

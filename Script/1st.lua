@@ -49,11 +49,11 @@ getgenv().checkRigType = function()
     end
 end
 
-getgenv().SendChat = function(msg) -- Send a chat to the game chat
+getgenv().SendChat = function(tle, msg) -- Send a chat to the game chat
 	sg:SetCore(
 		"ChatMakeSystemMessage",
 		{
-			Text = "[OUTPUT]: " .. msg
+			Text = tle .. " : " .. msg
 		}
 	)
 end
@@ -67,6 +67,14 @@ getgenv().notify = function(tle, msg)
             Duration = 3
         }
     )
+end
+
+getgenv().checkReturn = function(tle, msg)
+	if sg:GetCoreGuiEnabled(3) == false then
+		return notify(tle, msg)
+	else
+		return SendChat(tle, msg)
+	end
 end
 
 getgenv().createESPItem = function(parent, r, g, b, fontSize, name)

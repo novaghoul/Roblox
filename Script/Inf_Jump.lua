@@ -1,60 +1,22 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 local humanoidP = lplr.Character:FindFirstChildOfClass("Humanoid")
 
-function SendChat(String) -- Send a chat to the game chat
-    game.StarterGui:SetCore("ChatMakeSystemMessage", {
-    Text = '[OUTPUT]: ' .. String
-})
-end
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
-
-local jump = 50
-
-function checkReturn(String)
-	if sg:GetCoreGuiEnabled(3) == false then
-		return notify(String)
-	else
-		return SendChat(String)
-	end
-end
-
 function statsPlayerJp()
-	humanoidP.JumpPower = jump
+	humanoidP.JumpPower = jp_g
 	humanoidP:GetPropertyChangedSignal("JumpPower"):connect(function()
-		if humanoidP.JumpPower ~= jump then
-			humanoidP.JumpPower = jump
+		if humanoidP.JumpPower ~= jp_g then
+			humanoidP.JumpPower = jp_g
 		end
 	end)
 
 	lplr.CharacterAdded:Connect(function(characterModel)
 		wait(1)
-		humanoidP = lplr.Character:FindFirstChildOfClass("Humanoid")
-		humanoidP.JumpPower = jump
+		humanoidP = characterModel:FindFirstChildOfClass("Humanoid")
+		humanoidP.JumpPower = jp_g
         humanoidP:GetPropertyChangedSignal("JumpPower"):connect(function()
-            if humanoidP.JumpPower ~= jump then
-                humanoidP.JumpPower = jump
+            if humanoidP.JumpPower ~= jp_g then
+                humanoidP.JumpPower = jp_g
             end
         end)
     end)
@@ -66,7 +28,7 @@ function infJump()
 	uis.JumpRequest:connect(
 		function()
 			if lplr.Character ~= nil then
-				lplr.Character.Humanoid.JumpPower = jump
+				lplr.Character.Humanoid.JumpPower = jp_g
 				lplr.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
 			end
 		end
@@ -76,16 +38,16 @@ infJump()
 
 function changeJP(typeJP)
 	if typeJP == 0 then
-		jump = jump + 5
-		humanoidP.JumpPower = jump
+		jp_g = jp_g + 5
+		humanoidP.JumpPower = jp_g
 	elseif typeJP == 1 then
-		if jump >= 50 then
-			jump = jump - 5
-			humanoidP.JumpPower = jump
+		if jp_g >= 50 then
+			jp_g = jp_g - 5
+			humanoidP.JumpPower = jp_g
 		end
-		if jump < 50 then
-			jump = 50
-			humanoidP.JumpPower = jump
+		if jp_g < 50 then
+			jp_g = 50
+			humanoidP.JumpPower = jp_g
 		end
 	end
 end
@@ -99,12 +61,12 @@ uis.InputBegan:Connect(function(input, gameProcessed)
 
 		if input.KeyCode.Value == 91 then
 			changeJP(0)
-			checkReturn("Jump Power :" .. humanoidP.JumpPower)
+			checkReturn("Jump Power", humanoidP.JumpPower)
 		end
 		
 		if input.KeyCode.Value == 93 then
 			changeJP(1)
-			checkReturn("Jump Power :" .. humanoidP.JumpPower)
+			checkReturn("Jump Power", humanoidP.JumpPower)
 		end
 	end
 end)
