@@ -97,13 +97,13 @@ getgenv().createESPItem = function(parent, r, g, b, fontSize, name)
     bgui.ExtentsOffset = Vector3.new(0, 0, 0)
     bgui.Size = UDim2.new(1, 0, 1, 0)
     local nam = Instance.new("TextLabel", bgui)
+    nam.Name = "nameItems"
     nam.Text = name
     nam.BackgroundTransparency = 1
     nam.TextSize = fontSize
     nam.Font = ("Arial")
     nam.TextColor3 = Color3.fromRGB(r, g, b)
     nam.Size = UDim2.new(1, 0, 1, 0)
-	return nam
 end
 
 getgenv().checkPart = function(obj)

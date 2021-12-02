@@ -119,22 +119,10 @@ function createMap()
     _G.children = _G.map:GetChildren()
     for i = 1, #_G.children do
         if _G.children[i].Name == "ComputerTable" then
-            -- local bgui = Instance.new("BillboardGui", _G.children[i].Screen)
-            local espItem = createESPItem(_G.children[i].Screen, _G.children[i].Screen.Color.r*255, _G.children[i].Screen.Color.g*255, _G.children[i].Screen.Color.b*255, 14, "COMPUTER")
-            -- bgui.Name = ("EGUI")
-            -- bgui.AlwaysOnTop = true
-            -- bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-            -- bgui.Size = UDim2.new(1, 0, 1, 0)
-            -- local nam = Instance.new("TextLabel", bgui)
-            -- nam.Text = "COMPUTER"
-            -- nam.BackgroundTransparency = 1
-            -- nam.TextSize = 14
-            -- nam.Font = ("Arial")
-            -- nam.TextColor3 = _G.children[i].Screen.Color
-            -- nam.Size = UDim2.new(1, 0, 1, 0)
+            createESPItem(_G.children[i].Screen, _G.children[i].Screen.Color.r*255, _G.children[i].Screen.Color.g*255, _G.children[i].Screen.Color.b*255, 14, "COMPUTER")
             _G.children[i].Screen:GetPropertyChangedSignal("Color"):connect(
                 function()
-                    espItem.TextColor3 = _G.children[i].Screen.Color
+                    _G.children[i].Screen.EGUI.nameItems.TextColor3 = _G.children[i].Screen.Color
                 end
             )end
         -- if _G.children[i].Name == "FreezePod" then
