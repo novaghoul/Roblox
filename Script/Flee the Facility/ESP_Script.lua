@@ -1,39 +1,7 @@
-uis = game:GetService("UserInputService")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-_G.WS = 20
-_G.JP = 45
 _G.map = nil
 _G.children = nil
-_G.noclipAll = false
-
-function SendChat(String) -- Send a chat to the game chat
-    game.StarterGui:SetCore(
-        "ChatMakeSystemMessage",
-        {
-            Text = "[OUTPUT]: " .. String
-        }
-    )
-end
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
 
 function GetSizeOfObject(Obj)
     if Obj:IsA("BasePart") then
@@ -59,7 +27,7 @@ function createESP(parent)
     nam.Size = UDim2.new(0, 200, 0, 50)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
+            for _, f in pairs(faces) do
                 local m = Instance.new("SurfaceGui", p)
                 m.Name = ("BS")
                 m.Face = f
@@ -151,18 +119,19 @@ function createMap()
     _G.children = _G.map:GetChildren()
     for i = 1, #_G.children do
         if _G.children[i].Name == "ComputerTable" then
-            local bgui = Instance.new("BillboardGui", _G.children[i].Screen)
-            bgui.Name = ("EGUI")
-            bgui.AlwaysOnTop = true
-            bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-            bgui.Size = UDim2.new(1, 0, 1, 0)
-            local nam = Instance.new("TextLabel", bgui)
-            nam.Text = "COMPUTER"
-            nam.BackgroundTransparency = 1
-            nam.TextSize = 14
-            nam.Font = ("Arial")
-            nam.TextColor3 = _G.children[i].Screen.Color
-            nam.Size = UDim2.new(1, 0, 1, 0)
+            -- local bgui = Instance.new("BillboardGui", _G.children[i].Screen)
+            createESPItem(_G.children[i].Screen, _G.children[i].Screen.Color.r*255, _G.children[i].Screen.Color.g*255, _G.children[i].Screen.Color.b*255, 14, "COMPUTER")
+            -- bgui.Name = ("EGUI")
+            -- bgui.AlwaysOnTop = true
+            -- bgui.ExtentsOffset = Vector3.new(0, 0, 0)
+            -- bgui.Size = UDim2.new(1, 0, 1, 0)
+            -- local nam = Instance.new("TextLabel", bgui)
+            -- nam.Text = "COMPUTER"
+            -- nam.BackgroundTransparency = 1
+            -- nam.TextSize = 14
+            -- nam.Font = ("Arial")
+            -- nam.TextColor3 = _G.children[i].Screen.Color
+            -- nam.Size = UDim2.new(1, 0, 1, 0)
             _G.children[i].Screen:GetPropertyChangedSignal("Color"):connect(
                 function()
                     nam.TextColor3 = _G.children[i].Screen.Color
@@ -237,11 +206,11 @@ end
 firstScript()
 
 function changeSpeed()
-    lplr.Character.Humanoid.WalkSpeed = _G.WS
+    lplr.Character.Humanoid.WalkSpeed = ws_g
     lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
         function()
-            if lplr.Character.Humanoid.WalkSpeed ~= _G.WS then
-                lplr.Character.Humanoid.WalkSpeed = _G.WS
+            if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+                lplr.Character.Humanoid.WalkSpeed = ws_g
             end
         end
     )
@@ -249,11 +218,11 @@ function changeSpeed()
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait(0.5)
-            characterModel.Humanoid.WalkSpeed = _G.WS
+            characterModel.Humanoid.WalkSpeed = ws_g
             characterModel.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
                 function()
-                    if characterModel.Humanoid.WalkSpeed ~= _G.WS then
-                        characterModel.Humanoid.WalkSpeed = _G.WS
+                    if characterModel.Humanoid.WalkSpeed ~= ws_g then
+                        characterModel.Humanoid.WalkSpeed = ws_g
                     end
                 end
             )
@@ -263,16 +232,16 @@ end
 
 function changeWS(typeWS)
     if typeWS == 0 then
-        _G.WS = _G.WS + 2
-        lplr.Character.Humanoid.WalkSpeed = _G.WS
+        ws_g = ws_g + 2
+        lplr.Character.Humanoid.WalkSpeed = ws_g
     elseif typeWS == 1 then
-        if _G.WS >= 0 then
-            _G.WS = _G.WS - 2
-            lplr.Character.Humanoid.WalkSpeed = _G.WS
+        if ws_g >= 0 then
+            ws_g = ws_g - 2
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
-        if _G.WS < 16 then
-            _G.WS = 16
-            lplr.Character.Humanoid.WalkSpeed = _G.WS
+        if ws_g < 16 then
+            ws_g = 16
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
     end
 end
@@ -280,7 +249,7 @@ changeSpeed()
 
 function infJump()
     if lplr.Character.Humanoid ~= nil then
-        lplr.Character.Humanoid.JumpPower = _G.JP
+        lplr.Character.Humanoid.JumpPower = jp_g
         lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
     end
 end
@@ -293,17 +262,17 @@ mouse.KeyDown:connect(
 
         if keyDown == "c" then
             changeWS(0)
-            notify("Walk Speed :" .. lplr.Character.Humanoid.WalkSpeed)
+            notify("Walk Speed", tostring(ws_g))
         end
 
         if keyDown == "v" then
             changeWS(1)
-            notify("Walk Speed :" .. lplr.Character.Humanoid.WalkSpeed)
+            notify("Walk Speed", tostring(ws_g))
         end
 
         if keyDown == "f" then
-            _G.noclipAll = not _G.noclipAll
-            notify("No Clip :" .. tostring(_G.noclipAll))
+            noclipAll = not noclipAll
+            notify("No Clip", tostring(noclipAll))
         end
     end
 )
@@ -319,7 +288,7 @@ spawn(
 
 game:GetService("RunService").Stepped:connect(
     function()
-        if _G.noclipAll then
+        if noclipAll then
             lplr.Character.Humanoid:ChangeState(11)
         end
     end

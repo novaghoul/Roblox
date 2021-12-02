@@ -1,4 +1,5 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
+-- loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/FPS%20Faster.lua"), true))()
 
 _G.timeGame = true
 
@@ -56,7 +57,7 @@ function createESP(parent)
     nam.Size = UDim2.new(0, 200, 0, 50)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
+            for _, f in pairs(faces) do
                 local m = Instance.new("SurfaceGui", p)
                 m.Name = ("EGUI")
                 m.Face = f
@@ -330,19 +331,19 @@ end
 mouse.KeyDown:connect(function(keyDown)
     if keyDown == "c" then
         changeDA(0)
-        notify("Dash", speedDash)
+        notify("Dash", tostring(speedDash))
     end
     if keyDown == "v" then
         changeDA(1)
-        notify("Dash", speedDash)
+        notify("Dash", tostring(speedDash))
     end
     if keyDown == "x" then
         if speedDash == 20 then
             speedDash = 17
-            notify("Dash", speedDash)
+            notify("Dash", tostring(speedDash))
         else
             speedDash = 20
-            notify("Dash", speedDash)
+            notify("Dash", tostring(speedDash))
         end
     end
     if keyDown == "q" then

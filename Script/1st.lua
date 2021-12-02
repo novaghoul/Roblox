@@ -103,6 +103,7 @@ getgenv().createESPItem = function(parent, r, g, b, fontSize, name)
     nam.Font = ("Arial")
     nam.TextColor3 = Color3.fromRGB(r, g, b)
     nam.Size = UDim2.new(1, 0, 1, 0)
+	return nam
 end
 
 getgenv().checkPart = function(obj)
