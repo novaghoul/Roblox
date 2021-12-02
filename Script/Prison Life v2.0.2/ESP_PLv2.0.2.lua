@@ -4,7 +4,7 @@ _G.arresttoolRemote = wp.Remote["arrest"]
 _G.meleetoolRemote = rs["meleeEvent"]
 _G.plrCurrent = nil
 hitBoxSize = {5, 5, 5}
-hitBoxBody = "Head"
+hitBoxBody = "HumanoidRootPart"
 -- HumanoidRootPart
 
 function checkESP(parent)
@@ -133,15 +133,9 @@ function espFirst()
 end
 espFirst()
 
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Hit%20Box.lua"), true))() -- Hit Box
 -------------------------------------------------------------
 --------------------------CMDS-------------------------------
-function plrlist(thing)
-    for _, v in pairs(plrs:GetPlayers()) do
-        if string.find(string.lower(v.Name), string.lower(thing)) then
-            return v
-        end
-    end
-end
 
 function eventTP(parent)
     local pos = lplr.Character.HumanoidRootPart.CFrame

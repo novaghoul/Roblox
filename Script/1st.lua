@@ -29,13 +29,15 @@ getgenv().ENEMYCOLOR = {196, 40, 28} --//Color of the ESP  of people on NOT the 
 getgenv().TRANSPARENCY = 0.5 --//Transparency of the ESP
 getgenv().HEALTHBAR_ACTIVATED = true --//Renders the Healthbar
 
-getgenv().hitBoxSize = {5, 5, 5}
-getgenv().hitBoxBody = "Head"
-getgenv().hitBoxColor = "Really blue"
-getgenv().hitBoxTransparency = 1
--- HumanoidRootPart
+if hitBoxSize == nil then
+	getgenv().hitBoxSize = {5, 5, 5}
+	getgenv().hitBoxBody = "Head"
+	getgenv().hitBoxColor = "Really blue"
+	getgenv().hitBoxTransparency = 1
+	-- HumanoidRootPart
+end
 
-function checkRigType()
+getgenv().checkRigType = function()
     if lplr.Character:FindFirstChild("Torso") then
         return r6
     else
@@ -43,7 +45,7 @@ function checkRigType()
     end
 end
 
-function SendChat(String) -- Send a chat to the game chat
+getgenv().SendChat = function(String) -- Send a chat to the game chat
 	sg:SetCore(
 		"ChatMakeSystemMessage",
 		{
@@ -52,7 +54,7 @@ function SendChat(String) -- Send a chat to the game chat
 	)
 end
 
-function notify(tle, msg)
+getgenv().notify = function(tle, msg)
     sg:SetCore(
         "SendNotification",
         {
@@ -63,7 +65,7 @@ function notify(tle, msg)
     )
 end
 
-function checkReturn(tle, msg)
+getgenv().checkReturn = function(tle, msg)
 	if sg:GetCoreGuiEnabled(3) == false then
 		return notify(tle, msg)
 	else
@@ -71,7 +73,7 @@ function checkReturn(tle, msg)
 	end
 end
 
-function createESPItem(parent, r, g, b, fontSize, name)
+getgenv().createESPItem = function(parent, r, g, b, fontSize, name)
     local bgui = Instance.new("BillboardGui", parent)
     bgui.Name = ("EGUI")
     bgui.AlwaysOnTop = true
@@ -86,7 +88,7 @@ function createESPItem(parent, r, g, b, fontSize, name)
     nam.Size = UDim2.new(1, 0, 1, 0)
 end
 
-function actualESP(obj)
+getgenv().actualESP = function(obj)
 	for i = 0, 5 do
 		surface = Instance.new("SurfaceGui", obj) --//Creates the SurfaceGui
 		surface.Face = Enum.NormalId[faces[i + 1]] --//Adjusts the Face and chooses from the face table
@@ -100,7 +102,7 @@ function actualESP(obj)
 	end
 end
 
-function createHealthbar(hrp)
+getgenv().createHealthbar = function(hrp)
 	board = Instance.new("BillboardGui", hrp) --//Creates the BillboardGui with HumanoidRootPart as the Parent
 	board.Name = "total"
 	board.Size = UDim2.new(1, 0, 1, 0)
@@ -122,4 +124,31 @@ function createHealthbar(hrp)
 			hrp.total.total2.Frame.Size = UDim2.new(1, 0, hrp.Parent.Humanoid.Health / 100, 0) --//Adjusts the size of the green Frame
 		end
 	)
+end
+
+getgenv().createHitBox = function(parent)
+    local sizeBody = parent[hitBoxBody].Size.x
+    parent[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+    parent[hitBoxBody].Transparency = hitBoxTransparency
+    parent[hitBoxBody].BrickColor = BrickColor.new(hitBoxColor)
+    parent[hitBoxBody].Material = "Neon"
+    parent[hitBoxBody].CanCollide = false
+
+    parent[hitBoxBody].Changed:connect(
+        function(property)
+            wait(0.1)
+            if property == "Size" or property == "CanCollide" then
+                parent[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+                parent[hitBoxBody].CanCollide = false
+            end
+        end
+    )
+end
+
+getgenv().plrlist = function(thing)
+    for _, v in pairs(plrs:GetPlayers()) do
+        if string.find(string.lower(v.Name), string.lower(thing)) then
+            return v
+        end
+    end
 end

@@ -1,40 +1,13 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-if _G.hitBoxSize == nil then
-    _G.hitBoxSize = {5, 5, 5}
-    _G.hitBoxBody = "Head"
-    _G.hitBoxColor = "Really blue"
-    _G.hitBoxTransparency = 0.9
--- HumanoidRootPart
-end
-
-function createHitBox(parent)
-    local sizeBody = parent.Character[_G.hitBoxBody].Size.x
-    parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
-    parent.Character[_G.hitBoxBody].Transparency = _G.hitBoxTransparency
-    parent.Character[_G.hitBoxBody].BrickColor = BrickColor.new(_G.hitBoxColor)
-    parent.Character[_G.hitBoxBody].Material = "Neon"
-    parent.Character[_G.hitBoxBody].CanCollide = false
-
-    parent.Character[_G.hitBoxBody].Changed:connect(
-        function(property)
-            wait(0.1)
-            if property == "Size" or property == "CanCollide" then
-                parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
-                parent.Character[_G.hitBoxBody].CanCollide = false
-            end
-        end
-    )
-end
-
 function hitBox()
     for _, o in pairs(plrs:GetPlayers()) do
         if o.Name ~= lplr.Name then
             o.CharacterAdded:Connect(
                 function(characterModel)
-                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                    if characterModel:WaitForChild(hitBoxBody) then
                         wait(0.5)
-                        createHitBox(o)
+                        createHitBox(characterModel)
                     end
                 end
             )
@@ -45,9 +18,9 @@ function hitBox()
         function(newPlayer)
             newPlayer.CharacterAdded:Connect(
                 function(characterModel)
-                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                    if characterModel:WaitForChild(hitBoxBody) then
                         wait(0.5)
-                        createHitBox(newPlayer)
+                        createHitBox(characterModel)
                     end
                 end
             )
@@ -58,9 +31,9 @@ function hitBox()
         if o.Name ~= lplr.Name then
             spawn(
                 function()
-                    if o.Character:WaitForChild(_G.hitBoxBody) then
+                    if o.Character:WaitForChild(hitBoxBody) then
                         wait(0.1)
-                        createHitBox(o)
+                        createHitBox(o.Character)
                     end
                 end
             )
