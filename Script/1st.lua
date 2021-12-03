@@ -117,7 +117,7 @@ getgenv().createESPCharm = function(parent, f, r, g, b)
     mf.Size = UDim2.new(1, 0, 1, 0)
     mf.BorderSizePixel = 0
     mf.BackgroundTransparency = 0.5
-    mf.BackgroundColor3 = Color3.fromRGB(r, b, g)
+    mf.BackgroundColor3 = Color3.fromRGB(r, g, b)
 end
 
 getgenv().checkPart = function(obj)
