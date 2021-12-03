@@ -12,22 +12,11 @@ function GetSizeOfObject(Obj)
 end
 
 function createESP(parent)
-    local bgui = Instance.new("BillboardGui", parent.Character.Head)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-    bgui.Size = UDim2.new(0, 200, 0, 50)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Name = "TN"
-    nam.Text = parent.Name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 14
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(75, 151, 75)
-    nam.Size = UDim2.new(0, 200, 0, 50)
+    createESPItem(parent.Character.Head, 75, 151, 75, 14, parent.Name)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
             for _, f in pairs(faces) do
+                createESPCharm()
                 local m = Instance.new("SurfaceGui", p)
                 m.Name = ("BS")
                 m.Face = f
@@ -62,14 +51,14 @@ function createESP(parent)
     parent.Character.ChildAdded:connect(
         function(m)
             if m.Name == "BeastPowers" then
-                nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+                parent.Character.Head.EGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
             end
         end
     )
     parent.Character.ChildRemoved:connect(
         function(m)
             if m.Name == "BeastPowers" then
-                nam.TextColor3 = Color3.fromRGB(75, 151, 75)
+                parent.Character.Head.EGUI.nameESP.TextColor3 = Color3.fromRGB(75, 151, 75)
             end
         end
     )

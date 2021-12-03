@@ -106,6 +106,20 @@ getgenv().createESPItem = function(parent, r, g, b, fontSize, name)
     nam.Size = UDim2.new(1, 0, 1, 0)
 end
 
+getgenv().createESPCharm = function(parent, f, r, g, b)
+    local m = Instance.new("SurfaceGui", p)
+    m.Name = ("BS")
+    m.Face = f
+    m.Active = true
+    m.AlwaysOnTop = true
+    local mf = Instance.new("Frame", m)
+    mf.Name = "FR"
+    mf.Size = UDim2.new(1, 0, 1, 0)
+    mf.BorderSizePixel = 0
+    mf.BackgroundTransparency = 0.5
+    mf.BackgroundColor3 = Color3.fromRGB(r, b, g)
+end
+
 getgenv().checkPart = function(obj)
     if (obj:IsA("Part") or obj:IsA("MeshPart")) and obj.Name ~= "HumanoidRootPart" then
         return true
