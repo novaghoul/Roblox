@@ -11,67 +11,40 @@ function GetSizeOfObject(Obj)
     end
 end
 
+function funcChangeColor(parent, r, g, b)
+    for _, v in pairs(parent:GetChildren()) do
+        if v.Name == "BS" then
+            v.FR.BackgroundColor3 = Color3.fromRGB(r, g, b)
+        end
+    end
+end
+
 function createESP(parent)
     createESPItem(parent.Character.Head, 75, 151, 75, 14, parent.Name)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
-            p.ChildAdded:connect(
-                function(l)
-                    if l.Name == "BS" then
-                        parent.Character.ChildAdded:connect(
-                            function(m)
-                                if m.Name == "BeastPowers" then
-                                    l.FR.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                                end
-                            end
-                        )
-                        parent.Character.ChildRemoved:connect(
-                            function(m)
-                                if m.Name == "BeastPowers" then
-                                    l.FR.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                                end
-                            end
-                        )
-                        if parent.Character:FindFirstChild("BeastPowers") then
-                            l.FR.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                        end
-                    end
-                end
-            )
             for _, f in pairs(faces) do
                 createESPCharm(p, f, 75, 151, 75)
-
-                -- local m = Instance.new("SurfaceGui", p)
-                -- m.Name = ("BS")
-                -- m.Face = f
-                -- m.Active = true
-                -- m.AlwaysOnTop = true
-                -- local mf = Instance.new("Frame", m)
-                -- mf.Size = UDim2.new(1, 0, 1, 0)
-                -- mf.BorderSizePixel = 0
-                -- mf.BackgroundTransparency = 0.5
-                -- mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                -- parent.Character.ChildAdded:connect(
-                --     function(m)
-                --         if m.Name == "BeastPowers" then
-                --             mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                --         end
-                --     end
-                -- )
-                -- parent.Character.ChildRemoved:connect(
-                --     function(m)
-                --         if m.Name == "BeastPowers" then
-                --             mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                --         end
-                --     end
-                -- )
-
-                -- if parent.Character:FindFirstChild("BeastPowers") then
-                --     mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                -- end
             end
         end
     end
+    if parent.Character:FindFirstChild("BeastPowers") then
+        funcChangeColor(parent.Character.Head, 196, 40, 28)
+    end
+    parent.Character.ChildAdded:connect(
+        function(m)
+            if m.Name == "BeastPowers" then
+                funcChangeColor(parent.Character.Head, 196, 40, 28)
+            end
+        end
+    )
+    parent.Character.ChildRemoved:connect(
+        function(m)
+            if m.Name == "BeastPowers" then
+                funcChangeColor(parent.Character.Head, 75, 151, 75)
+            end
+        end
+    )
     parent.Character.ChildAdded:connect(
         function(m)
             if m.Name == "BeastPowers" then
@@ -88,7 +61,7 @@ function createESP(parent)
     )
 
     if parent.Character:FindFirstChild("BeastPowers") then
-        nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+        parent.Character.Head.EGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
     end
 end
 
@@ -254,6 +227,18 @@ mouse.KeyDown:connect(
         if keyDown == "c" then
             changeWS(0)
             notify("Walk Speed", tostring(ws_g))
+        end
+
+        if keyDown == "x" then
+            if ws_g == 20 then
+                ws_g = 30
+                lplr.Character.Humanoid.WalkSpeed = ws_g
+                notify("Walk Speed", tostring(ws_g))
+            else
+                ws_g = 20
+                lplr.Character.Humanoid.WalkSpeed = ws_g
+                notify("Walk Speed", tostring(ws_g))
+            end
         end
 
         if keyDown == "v" then
