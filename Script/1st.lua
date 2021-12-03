@@ -107,7 +107,7 @@ getgenv().createESPItem = function(parent, r, g, b, fontSize, name)
 end
 
 getgenv().createESPCharm = function(parent, f, r, g, b)
-    local m = Instance.new("SurfaceGui", p)
+    local m = Instance.new("SurfaceGui", parent)
     m.Name = ("BS")
     m.Face = f
     m.Active = true

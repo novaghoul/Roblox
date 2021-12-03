@@ -16,35 +16,59 @@ function createESP(parent)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
             for _, f in pairs(faces) do
-                createESPCharm()
-                local m = Instance.new("SurfaceGui", p)
-                m.Name = ("BS")
-                m.Face = f
-                m.Active = true
-                m.AlwaysOnTop = true
-                local mf = Instance.new("Frame", m)
-                mf.Size = UDim2.new(1, 0, 1, 0)
-                mf.BorderSizePixel = 0
-                mf.BackgroundTransparency = 0.5
-                mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                parent.Character.ChildAdded:connect(
-                    function(m)
-                        if m.Name == "BeastPowers" then
-                            mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+                p.ChildAdded:connect(
+                    function(l)
+                        if l.Name == "BS" then
+                            parent.Character.ChildAdded:connect(
+                                function(m)
+                                    if m.Name == "BeastPowers" then
+                                        l.FR.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+                                    end
+                                end
+                            )
+                            parent.Character.ChildRemoved:connect(
+                                function(m)
+                                    if m.Name == "BeastPowers" then
+                                        l.FR.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
+                                    end
+                                end
+                            )
+                            if parent.Character:FindFirstChild("BeastPowers") then
+                                l.FR.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+                            end
                         end
                     end
                 )
-                parent.Character.ChildRemoved:connect(
-                    function(m)
-                        if m.Name == "BeastPowers" then
-                            mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                        end
-                    end
-                )
+                createESPCharm(p, f, 75, 151, 75)
 
-                if parent.Character:FindFirstChild("BeastPowers") then
-                    mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                end
+                -- local m = Instance.new("SurfaceGui", p)
+                -- m.Name = ("BS")
+                -- m.Face = f
+                -- m.Active = true
+                -- m.AlwaysOnTop = true
+                -- local mf = Instance.new("Frame", m)
+                -- mf.Size = UDim2.new(1, 0, 1, 0)
+                -- mf.BorderSizePixel = 0
+                -- mf.BackgroundTransparency = 0.5
+                -- mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
+                -- parent.Character.ChildAdded:connect(
+                --     function(m)
+                --         if m.Name == "BeastPowers" then
+                --             mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+                --         end
+                --     end
+                -- )
+                -- parent.Character.ChildRemoved:connect(
+                --     function(m)
+                --         if m.Name == "BeastPowers" then
+                --             mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
+                --         end
+                --     end
+                -- )
+
+                -- if parent.Character:FindFirstChild("BeastPowers") then
+                --     mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+                -- end
             end
         end
     end
