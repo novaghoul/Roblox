@@ -111,6 +111,9 @@ function createMap()
                     _G.children[i].Screen.EGUI.nameESP.TextColor3 = _G.children[i].Screen.Color
                 end
             )
+            for l = 1, 3 do
+                _G.children[i]["ComputerTrigger" .. l].Size = Vector3.new(3, 3, 3)
+            end
         end
         -- if _G.children[i].Name == "FreezePod" then
         --     createESPItem(_G.children[i].BasePart, 13, 105, 172, 14, "FP")
@@ -190,8 +193,49 @@ function changeSpeed()
                     end
                 end
             )
+            characterModel.ChildAdded:connect(
+                function(m)
+                    wait(0.5)
+                    if m.Name == "Humanoid" then
+                        if characterModel.Humanoid:FindFirstChild("HumanoidDescription") then
+                            characterModel.Humanoid:FindFirstChild("HumanoidDescription"):Destroy()
+                        end
+                    elseif m.Name == "Animate" then
+                        if characterModel.Animate:FindFirstChild("fall") then
+                            characterModel.Animate:FindFirstChild("fall"):Destroy()
+                        end
+                        if characterModel.Animate:FindFirstChild("sit") then
+                            characterModel.Animate:FindFirstChild("sit"):Destroy()
+                        end
+                    elseif m.Name == "Ragdoller" then
+                        if characterModel:FindFirstChild("Ragdoller") then
+                            characterModel:FindFirstChild("Ragdoller"):Destroy()
+                        end
+                    elseif m.Name == "TestLocalScript" then
+                        if characterModel:FindFirstChild("TestLocalScript") then
+                            characterModel:FindFirstChild("TestLocalScript"):Destroy()
+                        end
+                    end
+                end
+            )
         end
     )
+    wait(0.5)
+    if lplr.Character.Humanoid:FindFirstChild("HumanoidDescription") then
+        lplr.Character.Humanoid:FindFirstChild("HumanoidDescription"):Destroy()
+    end
+    if lplr.Character.Animate:FindFirstChild("fall") then
+        lplr.Character.Animate:FindFirstChild("fall"):Destroy()
+    end
+    if lplr.Character.Animate:FindFirstChild("sit") then
+        lplr.Character.Animate:FindFirstChild("sit"):Destroy()
+    end
+    if lplr.Character:FindFirstChild("Ragdoller") then
+        lplr.Character:FindFirstChild("Ragdoller"):Destroy()
+    end
+    if lplr.Character:FindFirstChild("TestLocalScript") then
+        lplr.Character:FindFirstChild("TestLocalScript"):Destroy()
+    end
 end
 
 function changeWS(typeWS)
@@ -262,18 +306,18 @@ spawn(
     end
 )
 
-game:GetService("RunService").Stepped:connect(
-    function()
-        if noclipAll then
-            for i = 1, #checkRigType() do
-                lplr.Character[checkRigType()[i]].CanCollide = false
-            end
-            lplr.Character.HumanoidRootPart.CanCollide = false
-        else
-            for i = 1, #checkRigType() do
-                lplr.Character[checkRigType()[i]].CanCollide = true
-            end
-            lplr.Character.HumanoidRootPart.CanCollide = true
-        end
-    end
-)
+-- game:GetService("RunService").Stepped:connect(
+--     function()
+--         if noclipAll then
+--             for i = 1, #checkRigType() do
+--                 lplr.Character[checkRigType()[i]].CanCollide = false
+--             end
+--             lplr.Character.HumanoidRootPart.CanCollide = false
+--         else
+--             for i = 1, #checkRigType() do
+--                 lplr.Character[checkRigType()[i]].CanCollide = true
+--             end
+--             lplr.Character.HumanoidRootPart.CanCollide = true
+--         end
+--     end
+-- )

@@ -1,4 +1,8 @@
 repeat wait() until game:IsLoaded()
+if init == true then
+    return
+end
+getgenv().init = true
 
 getgenv().uis = game:GetService("UserInputService")
 getgenv().cg = game:GetService("CoreGui")

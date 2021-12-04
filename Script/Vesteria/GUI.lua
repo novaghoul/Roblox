@@ -14,11 +14,12 @@ end
 
 local damage = function()
     local distance, enemiesFolder = 15, workspace.placeFolders.entityManifestCollection:GetChildren()
-    for i = 1, #enemiesFolder do enemy = enemiesFolder[i]
+    for i = 1, #enemiesFolder do
+        enemy = enemiesFolder[i]
         if enemy and enemy:IsA('Part') and (player.Character.hitbox.Position - enemy.Position).magnitude < distance then
-            game:GetService("ReplicatedStorage").modules.network.replicatePlayerAnimationSequence:FireServer('swordAnimations', 'strike1', {["attackSpeed"] = 0})
-            game:GetService("ReplicatedStorage").modules.network.replicatePlayerAnimationSequence:FireServer('swordAnimations', 'strike2', {["attackSpeed"] = 0})
-            game:GetService("ReplicatedStorage").modules.network.playerRequest_damageEntity:FireServer(enemy, Vector3.new(0,0,0), 'equipment')       
+            game:GetService("ReplicatedStorage").signal:FireServer('swordAnimations', 'strike1', {["attackSpeed"] = 0})
+            game:GetService("ReplicatedStorage").signal:FireServer("playerRequest_damageEntity", enemy, Vector3.new(0,0,0), "equipment")
+            game:GetService("ReplicatedStorage").signal:FireServer("attackInteractionAttackableAttacked", enemy, Vector3.new(0,0,0))   
         end
     end
 end
