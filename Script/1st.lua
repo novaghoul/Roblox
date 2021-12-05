@@ -94,9 +94,9 @@ if init == nil then
 
     getgenv().createESPItem = function(parent, r, g, b, fontSize, name)
         local bgui = Instance.new("BillboardGui", parent)
-        bgui.Name = ("EGUI")
+        bgui.Name = ("nameEGUI")
         bgui.AlwaysOnTop = true
-        bgui.ExtentsOffset = Vector3.new(0, 2, 0)
+        bgui.ExtentsOffset = Vector3.new(0, 3, 0)
         bgui.Size = UDim2.new(1, 0, 1, 0)
         local nam = Instance.new("TextLabel", bgui)
         nam.Name = "nameESP"

@@ -1,5 +1,4 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
--- loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/FPS%20Faster.lua"), true))()
 
 _G.timeGame = true
 
@@ -43,18 +42,7 @@ lblbossmes.TextSize = 14
 -- Scripts:
 
 function createESP(parent)
-    local bgui = Instance.new("BillboardGui", parent.Character.Head)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-    bgui.Size = UDim2.new(0, 200, 0, 50)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = parent.Name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 14
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(75, 151, 75)
-    nam.Size = UDim2.new(0, 200, 0, 50)
+    createESPItem(parent.Character.Head, 75, 151, 75, 14, parent.Name)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
             for _, f in pairs(faces) do
@@ -80,11 +68,11 @@ function createESP(parent)
         end
     end
     if parent.Character:FindFirstChild("HideWhenZoomed") then
-        nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+        parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
     end
     parent.Character.ChildAdded:connect(function(m)
         if m.Name == "HideWhenZoomed" then
-            nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+            parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
         end
     end)
 end
@@ -331,19 +319,19 @@ end
 mouse.KeyDown:connect(function(keyDown)
     if keyDown == "c" then
         changeDA(0)
-        notify("Dash", tostring(speedDash))
+        NotifyG("Dash", speedDash)
     end
     if keyDown == "v" then
         changeDA(1)
-        notify("Dash", tostring(speedDash))
+        NotifyG("Dash", speedDash)
     end
     if keyDown == "x" then
         if speedDash == 20 then
             speedDash = 17
-            notify("Dash", tostring(speedDash))
+            NotifyG("Dash", speedDash)
         else
             speedDash = 20
-            notify("Dash", tostring(speedDash))
+            NotifyG("Dash", speedDash)
         end
     end
     if keyDown == "q" then
