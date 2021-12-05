@@ -1,142 +1,51 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-VirtualUser = game:GetService("VirtualUser")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ESP%20Test.lua"), true))()
 
-function createESP(parent)
-    local bgui = Instance.new("BillboardGui", parent.Character.Head)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-    bgui.Size = UDim2.new(0, 200, 0, 50)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = parent.Name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 14
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(75, 151, 75)
-    nam.Size = UDim2.new(0, 200, 0, 50)
-    for _, p in pairs(parent.Character:GetChildren()) do
-        if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
-                local m = Instance.new("SurfaceGui", p)
-                m.Name = ("EGUI")
-                m.Face = f
-                m.Active = true
-                m.AlwaysOnTop = true
-                local mf = Instance.new("Frame", m)
-                mf.Size = UDim2.new(1, 0, 1, 0)
-                mf.BorderSizePixel = 0
-                mf.BackgroundTransparency = 0.5
-                mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-            end
+function checkItems(parent)
+    if parent:FindFirstChildOfClass("MeshPart") or parent:FindFirstChildOfClass("Part") then
+        local itemPart = parent:FindFirstChildOfClass("MeshPart") or parent:FindFirstChildOfClass("Part")
+        if itemPart then
+            createESPItem(itemPart, 245, 205, 48, 14, tostring(parent.Name))
         end
     end
-end
-
-function enableESPCode()
-    for _, o in pairs(plrs:GetPlayers()) do
-        if o.Name ~= lplr.Name then
-            o.CharacterAdded:Connect(
-                function(characterModel)
-                    if characterModel:WaitForChild("Head") then
-                        wait(0.5)
-                        createESP(o)
-                    end
-                end
-            )
+    parent.ChildAdded:connect(function(m)
+        wait(0.5)
+        if m:IsA("MeshPart") or m:IsA("Part") then
+            createESPItem(m, 245, 205, 48, 14, tostring(parent.Name))
         end
-    end
-
-    plrs.PlayerAdded:Connect(
-        function(newPlayer)
-            newPlayer.CharacterAdded:Connect(
-                function(characterModel)
-                    if characterModel:WaitForChild("Head") then
-                        wait(0.5)
-                        createESP(newPlayer)
-                    end
-                end
-            )
-        end
-    )
-end
-enableESPCode()
-
-function espFirst()
-    for _, o in pairs(plrs:GetPlayers()) do
-        if o.Name ~= lplr.Name then
-            spawn(
-                function()
-                    if o.Character:WaitForChild("Head") then
-                        wait(0.1)
-                        createESP(o)
-                    end
-                end
-            )
-        end
-    end
-end
-espFirst()
-
-function createESPItem(parent, name)
-    print("4")
-    local bgui = Instance.new("BillboardGui", parent)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-    bgui.Size = UDim2.new(1, 0, 1, 0)
-    print("5")
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 10
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(245, 205, 48)
-    nam.Size = UDim2.new(1, 0, 1, 0)
+    end)
 end
 
 function enableESPItemsCode()
     wp.Gravity = 100
-    print("2")
-
+    
     for _, v in pairs(wp.GameObjects.Physical.Items:GetChildren()) do
-        if v:FindFirstChild("Root") then
-            print("0")
-            createESPItem(v.Root, v)
-        end
-       v.ChildAdded:connect(function(m)
-            wait(1)
-            print("3")
-            createESPItem(m, m.Parent)
-        end)
+        checkItems(v)
     end
+    -- MeshPart
+    -- Part
     wp.GameObjects.Physical.Items.ChildAdded:connect(function(m)
         wait(1)
-        if m:FindFirstChild("Root") then
-            print("1")
-            createESPItem(m.Root, m)
-        end
+        checkItems(m)
     end)
+
     for _, v in pairs(wp.GameObjects.Physical.Employees:GetChildren()) do
-        createESPItem(v:FindFirstChildOfClass("Shirt"), v)
+        if v:FindFirstChild("Head") then
+            createESPItem(v.Head, 13, 105, 14, tostring(v.Name))
+        end
+        
+        v.ChildAdded:connect(function(m)
+            if m.Name == "Head" then
+                createESPItem(m, 13, 105, 172, 14, tostring(v.Name))
+            end
+        end)
     end
-    wp.GameObjects.Physical.Employees.ChildAdded:connect(function(m)
-        createESPItem(m:FindFirstChildOfClass("Shirt"), m)
-    end)
 end
 enableESPItemsCode()
 
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump_Other.lua"), true))()
 lplr.Idled:connect(
     function()
         VirtualUser:CaptureController()

@@ -1,5 +1,6 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 function createHitBoxS(parent)
+    parent.Humanoid.HipHeight = 9
     local bgui = Instance.new("BillboardGui", parent.Head)
     bgui.Name = ("EGUI")
     bgui.AlwaysOnTop = true
@@ -37,23 +38,23 @@ function hitBoxE()
 end
 hitBoxE()
 
-local PartBoss = nil
-mouse.KeyDown:connect(function(keyDown)
-    if keyDown == "f" then
-        if PartBoss ~= nil then
-            PartBoss:Destroy()
-        end
-        wait(0.01)
-        local Part = Instance.new("Part")
-        Part.Name = "PartKillBoss"
-        Part.Parent = wp
-        Part.Size = Vector3.new(10, 1, 10)
-        Part.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 5, 0)
-        Part.Anchored = true
-        lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0)
-        PartBoss = Part
-    end
-end)
+-- local PartBoss = nil
+-- mouse.KeyDown:connect(function(keyDown)
+--     if keyDown == "f" then
+--         if PartBoss ~= nil then
+--             PartBoss:Destroy()
+--         end
+--         wait(0.01)
+--         local Part = Instance.new("Part")
+--         Part.Name = "PartKillBoss"
+--         Part.Parent = wp
+--         Part.Size = Vector3.new(10, 1, 10)
+--         Part.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 3, 0)
+--         Part.Anchored = true
+--         PartBoss = Part
+--     end
+-- end)
 
-ws_g = 50
+ws_g = 30
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump_Other.lua"), true))()
