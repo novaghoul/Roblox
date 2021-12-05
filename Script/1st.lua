@@ -52,7 +52,7 @@ if init == nil then
         end
     end
 
-    getgenv().SendChat = function(tle, msg) -- Send a chat to the game chat
+    getgenv().SendChatG = function(tle, msg) -- Send a chat to the game chat
         sg:SetCore(
             "ChatMakeSystemMessage",
             {
@@ -76,7 +76,7 @@ if init == nil then
         if sg:GetCoreGuiEnabled(3) == false then
             return NotifyG(tle, msg)
         else
-            return SendChat(tle, msg)
+            return SendChatG(tle, msg)
         end
     end
 

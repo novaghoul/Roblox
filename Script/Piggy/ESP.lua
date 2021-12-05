@@ -242,22 +242,22 @@ mouse.KeyDown:connect(
             if ws_g == 20 then
                 ws_g = 18
                 lplr.Character.Humanoid.WalkSpeed = ws_g
-                NotifyG("Walk Speed", tostring(ws_g))
+                NotifyG("Walk Speed", ws_g)
             else
                 ws_g = 20
                 lplr.Character.Humanoid.WalkSpeed = ws_g
-                NotifyG("Walk Speed", tostring(ws_g))
+                NotifyG("Walk Speed", ws_g)
             end
         end
 
         if keyDown == "c" then
             changeWS(0)
-            NotifyG("Walk Speed", tostring(ws_g))
+            NotifyG("Walk Speed", ws_g)
         end
 
         if keyDown == "v" then
             changeWS(1)
-            NotifyG("Walk Speed", tostring(ws_g))
+            NotifyG("Walk Speed", ws_g)
         end
 
         if keyDown == " " then

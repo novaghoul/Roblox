@@ -409,17 +409,17 @@ mouse.KeyDown:connect(
 
         if keyDown == "[" then
             changeWS(0)
-            SendChat("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
+            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
         end
 
         if keyDown == "]" then
             changeWS(1)
-            SendChat("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
+            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
         end
 
         if keyDown == "e" then
             noclipAll = not noclipAll
-            notify("NoClip", tostring(noclipAll))
+            NotifyG("NoClip", noclipAll)
         end
     end
 )
