@@ -56,17 +56,17 @@ if init == nil then
         sg:SetCore(
             "ChatMakeSystemMessage",
             {
-                Text = tle .. " : " .. msg
+                Text = tostring(tle) .. " : " .. tostring(msg)
             }
         )
     end
 
-    getgenv().notify = function(tle, msg)
+    getgenv().NotifyG = function(tle, msg)
         sg:SetCore(
             "SendNotification",
             {
-                Title = tle,
-                Text = msg,
+                Title = tostring(tle),
+                Text = tostring(msg),
                 Duration = 3
             }
         )
@@ -74,7 +74,7 @@ if init == nil then
 
     getgenv().checkReturn = function(tle, msg)
         if sg:GetCoreGuiEnabled(3) == false then
-            return notify(tle, msg)
+            return NotifyG(tle, msg)
         else
             return SendChat(tle, msg)
         end

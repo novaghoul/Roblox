@@ -1,34 +1,9 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
-
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-_G.ws = 20
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 _G.folderItem = nil
 _G.folderItemMod = nil
 _G.folderNPC = nil
 _G.folderNPCMod = nil
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
 
 function createESP(parent, r, g, b)
     local bgui = Instance.new("BillboardGui", parent.Head)
@@ -45,7 +20,7 @@ function createESP(parent, r, g, b)
     nam.Size = UDim2.new(0, 200, 0, 50)
     for _, p in pairs(parent:GetChildren()) do
         if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
+            for _, f in pairs(faces) do
                 local m = Instance.new("SurfaceGui", p)
                 m.Name = ("EGUI")
                 m.Face = f
@@ -114,35 +89,35 @@ function espFirst()
 end
 espFirst()
 
-function createESPItem(parent, r, g, b, fontSize)
-    local bgui = Instance.new("BillboardGui", parent)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-    bgui.Size = UDim2.new(1, 0, 1, 0)
-    local nam = Instance.new("TextLabel", bgui)
-    if tonumber(nam.Text) ~= nil then
-        nam.Text = "Items"
-    else
-        nam.Text = parent.Name
-    end
-    nam.BackgroundTransparency = 1
-    nam.TextSize = fontSize
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(r, g, b)
-    nam.Size = UDim2.new(1, 0, 1, 0)
-end
+-- function createESPItem(parent, r, g, b, fontSize)
+--     local bgui = Instance.new("BillboardGui", parent)
+--     bgui.Name = ("EGUI")
+--     bgui.AlwaysOnTop = true
+--     bgui.ExtentsOffset = Vector3.new(0, 0, 0)
+--     bgui.Size = UDim2.new(1, 0, 1, 0)
+--     local nam = Instance.new("TextLabel", bgui)
+--     if tonumber(nam.Text) ~= nil then
+--         nam.Text = "Items"
+--     else
+--         nam.Text = parent.Name
+--     end
+--     nam.BackgroundTransparency = 1
+--     nam.TextSize = fontSize
+--     nam.Font = ("Arial")
+--     nam.TextColor3 = Color3.fromRGB(r, g, b)
+--     nam.Size = UDim2.new(1, 0, 1, 0)
+-- end
 
 function firstScript()
     if wp:FindFirstChild("ItemFolder") then
         _G.folderItem = wp.ItemFolder
         for _, v in pairs(_G.folderItem:GetChildren()) do
-            createESPItem(v, 245, 205, 48, 13)
+            createESPItem(v, 245, 205, 48, 13, tostring(v.Name))
         end
         _G.folderItem.ChildAdded:connect(
             function(m)
                 wait()
-                createESPItem(m, 245, 205, 48, 13)
+                createESPItem(m, 245, 205, 48, 13, tostring(m.Name))
             end
         )
     end
@@ -215,21 +190,21 @@ end
 
 function statsPlayerWs()
     if lplr:FindFirstChild("Character") then
-        lplr.Character.Humanoid.WalkSpeed = _G.ws
+        lplr.Character.Humanoid.WalkSpeed = ws_g
 
         lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
             function()
-                lplr.Character.Humanoid.WalkSpeed = _G.ws
+                lplr.Character.Humanoid.WalkSpeed = ws_g
             end
         )
     end
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait()
-            lplr.Character.Humanoid.WalkSpeed = _G.ws
+            lplr.Character.Humanoid.WalkSpeed = ws_g
             lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
                 function()
-                    lplr.Character.Humanoid.WalkSpeed = _G.ws
+                    lplr.Character.Humanoid.WalkSpeed = ws_g
                 end
             )
         end
@@ -239,16 +214,16 @@ statsPlayerWs()
 
 function changeWS(typeWS)
     if typeWS == 0 then
-        _G.ws = _G.ws + 2
-        lplr.Character.Humanoid.WalkSpeed = _G.ws
+        ws_g = ws_g + 2
+        lplr.Character.Humanoid.WalkSpeed = ws_g
     elseif typeWS == 1 then
-        if _G.ws >= 0 then
-            _G.ws = _G.ws - 2
-            lplr.Character.Humanoid.WalkSpeed = _G.ws
+        if ws_g >= 0 then
+            ws_g = ws_g - 2
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
-        if _G.ws < 16 then
-            _G.ws = 16
-            lplr.Character.Humanoid.WalkSpeed = _G.ws
+        if ws_g < 16 then
+            ws_g = 16
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
     end
 end
@@ -264,25 +239,25 @@ end
 mouse.KeyDown:connect(
     function(keyDown)
         if keyDown == "x" then
-            if _G.ws == 20 then
-                _G.ws = 18
-                lplr.Character.Humanoid.WalkSpeed = _G.ws
-                notify("Walk Speed : " .. _G.ws)
+            if ws_g == 20 then
+                ws_g = 18
+                lplr.Character.Humanoid.WalkSpeed = ws_g
+                NotifyG("Walk Speed", tostring(ws_g))
             else
-                _G.ws = 20
-                lplr.Character.Humanoid.WalkSpeed = _G.ws
-                notify("Walk Speed : " .. _G.ws)
+                ws_g = 20
+                lplr.Character.Humanoid.WalkSpeed = ws_g
+                NotifyG("Walk Speed", tostring(ws_g))
             end
         end
 
         if keyDown == "c" then
             changeWS(0)
-            notify("Walk Speed : " .. _G.ws)
+            NotifyG("Walk Speed", tostring(ws_g))
         end
 
         if keyDown == "v" then
             changeWS(1)
-            notify("Walk Speed : " .. _G.ws)
+            NotifyG("Walk Speed", tostring(ws_g))
         end
 
         if keyDown == " " then
