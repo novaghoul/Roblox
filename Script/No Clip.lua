@@ -4,6 +4,7 @@ mouse.KeyDown:connect(
     function(keyDown)
         if keyDown == noclipAllKey then
             noclipAll = not noclipAll
+            NotifyG("Noclip", noclipAll)
         end
     end
 )

@@ -46,33 +46,50 @@ function createESP(parent)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
             for _, f in pairs(faces) do
-                local m = Instance.new("SurfaceGui", p)
-                m.Name = ("EGUI")
-                m.Face = f
-                m.Active = true
-                m.AlwaysOnTop = true
-                local mf = Instance.new("Frame", m)
-                mf.Size = UDim2.new(1, 0, 1, 0)
-                mf.BorderSizePixel = 0
-                mf.BackgroundTransparency = 0.5
-                mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                if parent.Character:FindFirstChild("HideWhenZoomed") then
-                    mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                end
-                parent.Character.ChildAdded:connect(function(m)
-                    if m.Name == "HideWhenZoomed" then
-                        mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                    end
-                end)
+                createESPCharm(p, f, 75, 151, 75)
             end
+            if parent.Character:FindFirstChild("HideWhenZoomed") then
+                for _,v in pairs(parent.Character.Head:GetChildren()) do
+                    if v.Name == "BS" then
+                        if parent.Character.HideWhenZoomed:FindFirstChild("FakeHead") then
+                            v.FR.BackgroundColor3 = Color3.fromRGB(242, 243, 243)
+                        else
+                            v.FR.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+                        end
+                    end
+                end
+            end
+            parent.Character.ChildAdded:connect(function(m)
+                if m.Name == "HideWhenZoomed" then
+                    wait(0.1)
+                    for _,v in pairs(parent.Character.Head:GetChildren()) do
+                        if v.Name == "BS" then
+                            if m:FindFirstChild("FakeHead") then
+                                v.FR.BackgroundColor3 = Color3.fromRGB(242, 243, 243)
+                            else
+                                v.FR.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+                            end
+                        end
+                    end
+                end
+            end)
         end
     end
     if parent.Character:FindFirstChild("HideWhenZoomed") then
-        parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
+        if parent.Character.HideWhenZoomed:FindFirstChild("FakeHead") then
+            parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(242, 243, 243)
+        else
+            parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
+        end
     end
     parent.Character.ChildAdded:connect(function(m)
         if m.Name == "HideWhenZoomed" then
-            parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
+            wait(0.1)
+            if m:FindFirstChild("FakeHead") then
+                parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(242, 243, 243)
+            else
+                parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
+            end
         end
     end)
 end

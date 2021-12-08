@@ -54,7 +54,6 @@ hitBoxE()
 --         PartBoss = Part
 --     end
 -- end)
-
 ws_g = 30
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))()
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump_Other.lua"), true))()
