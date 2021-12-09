@@ -1,41 +1,10 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
 _G.white = {"green_bottle", "gas_can", "rope", "shattered_bottle", "shattered_shades", "rusty_lantern", "broken_bulb", "lighter", "broken_bottle"}
 _G.blue = {"pickaxe", "old_slycer", "busted_boombox", "tire", "car_engine", "rusty_pipe", "rusty_cleaver", "gen_1"}
 _G.red = {"laptop", "welding_goggles", "smartphone", "binoculars", "trophy", "smartwatch"}
 _G.violet = {"apocalypse_helmet", "golden_compass", "golden_pocket_watch"}
 _G.yellow = {"gold_bars", "pendant", "soul", "treasure_chest"}
-
-_G.speedDash = 20
-
-function SendChat(String) -- Send a chat to the game chat
-    sg:SetCore("ChatMakeSystemMessage", {
-        Text = "[OUTPUT]: " .. String
-    })
-end
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
 
 function createESP(parent)
     local bgui = Instance.new("BillboardGui", parent.Character.Head)
@@ -140,45 +109,30 @@ function lightCode()
     end)
 end
 
-function createESPItem(parent, r, g, b, fontSize)
-    local bgui = Instance.new("BillboardGui", parent)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-    bgui.Size = UDim2.new(1, 0, 1, 0)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = parent.Parent.Name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = fontSize
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(r, g, b)
-    nam.Size = UDim2.new(1, 0, 1, 0)
-end
-
 function eventESPItem(parent)
 	for i = 1, #_G.white do
 		if parent.Parent.Name == _G.white[i] then
-			createESPItem(parent, 242, 243, 243, 10)
+			createESPItem(parent, 242, 243, 243, 10, parent.Parent.Name)
 		end
 	end
 	for i = 1, #_G.blue do
 		if parent.Parent.Name == _G.blue[i] then
-			createESPItem(parent, 13, 105, 172, 10)
+			createESPItem(parent, 13, 105, 172, 10, parent.Parent.Name)
 		end
 	end
 	for i = 1, #_G.red do
 		if parent.Parent.Name == _G.red[i] then
-			createESPItem(parent, 196, 40, 28, 10)
+			createESPItem(parent, 196, 40, 28, 10, parent.Parent.Name)
 		end
 	end
 	for i = 1, #_G.violet do
 		if parent.Parent.Name == _G.violet[i] then
-			createESPItem(parent, 146, 57, 120, 10)
+			createESPItem(parent, 146, 57, 120, 10, parent.Parent.Name)
 		end
 	end
 	for i = 1, #_G.yellow do
 		if parent.Parent.Name == _G.yellow[i] then
-			createESPItem(parent, 245, 205, 48, 10)
+			createESPItem(parent, 245, 205, 48, 10, parent.Parent.Name)
 		end
 	end
 end
@@ -214,11 +168,6 @@ function tpCoin()
     end
 end
 
-function infJump()
-    -- lplr.Character.Humanoid.JumpPower = 50
-    lplr.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
-end
-
 down = false
 velocity = Instance.new("BodyVelocity")
 velocity.maxForce = Vector3.new(100000, 0, 100000)
@@ -236,12 +185,12 @@ function onKeyDown()
         velocity.Parent = lplr.Character.UpperTorso
         gyro.Parent = lplr.Character.UpperTorso
     end
-    velocity.velocity = (hum.MoveDirection) * _G.speedDash
+    velocity.velocity = (hum.MoveDirection) * speedDash
     while down do
         if not down then
             break
         end
-        velocity.velocity = (hum.MoveDirection) * _G.speedDash
+        velocity.velocity = (hum.MoveDirection) * speedDash
         local refpos = gyro.Parent.Position + (gyro.Parent.Position - wp.CurrentCamera.CoordinateFrame.p).unit * 5
         gyro.cframe = CFrame.new(gyro.Parent.Position, Vector3.new(refpos.x, gyro.Parent.Position.y, refpos.z))
         wait(0.1)
@@ -268,13 +217,13 @@ end)
 
 function changeDA(typeDA)
     if typeDA == 0 then
-        _G.speedDash = _G.speedDash + 2
+        speedDash = speedDash + 2
     elseif typeDA == 1 then
-        if _G.speedDash >= 0 then
-            _G.speedDash = _G.speedDash - 2
+        if speedDash >= 0 then
+            speedDash = speedDash - 2
         end
-        if _G.speedDash < 0 then
-            _G.speedDash = 0
+        if speedDash < 0 then
+            speedDash = 0
         end
     end
 end
@@ -287,26 +236,22 @@ mouse.KeyDown:connect(function(keyDown)
         tpCoin()
     end
     if keyDown == "x" then
-        if _G.speedDash == 22 then
-            _G.speedDash = 20
-            notify("Dash :" .. _G.speedDash)
+        if speedDash == 22 then
+            speedDash = 20
+            NotifyG("Dash", speedDash)
         else
-            _G.speedDash = 22
-            notify("Dash :" .. _G.speedDash)
+            speedDash = 22
+            NotifyG("Dash", speedDash)
         end
     end
     if keyDown == "[" then
         changeDA(0)
-        SendChat("Dash :" .. _G.speedDash)
+        SendChatG("Dash", speedDash)
     end
     if keyDown == "]" then
         changeDA(1)
-        SendChat("Dash :" .. _G.speedDash)
+        SendChatG("Dash", speedDash)
     end
-end)
-
-spawn(function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/TTZxVeAu", true))() -- Humanoid Teleport
 end)
 
 espFirst()

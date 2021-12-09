@@ -220,6 +220,12 @@ if init == nil then
         end
     end
 
+    
+    getgenv().infJump = function()
+        lplr.Character.Humanoid.JumpPower = 50
+        lplr.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+    end
+
     lplr.Idled:connect(
         function()
             VirtualUser:CaptureController()
