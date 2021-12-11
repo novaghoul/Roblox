@@ -10,45 +10,47 @@ function createESP(parent)
     local bgui = Instance.new("BillboardGui", parent.Character.Head)
     bgui.Name = ("EGUI")
     bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
+    bgui.ExtentsOffset = Vector3.new(0, 2, 0)
     bgui.Size = UDim2.new(0, 200, 0, 50)
     local nam = Instance.new("TextLabel", bgui)
-    nam.Text = parent.Name
+    nam.Text = "☠"
     nam.BackgroundTransparency = 1
-    nam.TextSize = 10
+    nam.TextSize = 24
     nam.Font = ("Arial")
     nam.TextColor3 = Color3.fromRGB(75, 151, 75)
     nam.Size = UDim2.new(0, 200, 0, 50)
-    for _, p in pairs(parent.Character:GetChildren()) do
-        if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
-                local m = Instance.new("SurfaceGui", p)
-                m.Name = ("EGUI")
-                m.Face = f
-                m.Active = true
-                m.AlwaysOnTop = true
-                local mf = Instance.new("Frame", m)
-                mf.Size = UDim2.new(1, 0, 1, 0)
-                mf.BorderSizePixel = 0
-                mf.BackgroundTransparency = 0.5
-                mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                if parent.Character:FindFirstChild("Knife") then
-                    mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                end
-                parent.Character.ChildAdded:connect(function(m)
-                    if m.Name == "Knife" then
-                        mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                    end
-                end)
-            end
-        end
-    end
+    -- for _, p in pairs(parent.Character:GetChildren()) do
+    --     if p.Name == ("Head") then
+    --         for _, f in pairs(faces) do
+    --             local m = Instance.new("SurfaceGui", p)
+    --             m.Name = ("EGUI")
+    --             m.Face = f
+    --             m.Active = true
+    --             m.AlwaysOnTop = true
+    --             local mf = Instance.new("Frame", m)
+    --             mf.Size = UDim2.new(1, 0, 1, 0)
+    --             mf.BorderSizePixel = 0
+    --             mf.BackgroundTransparency = 0.5
+    --             mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
+    --             if parent.Character:FindFirstChild("Knife") then
+    --                 mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+    --             end
+    --             parent.Character.ChildAdded:connect(function(m)
+    --                 if m.Name == "Knife" then
+    --                     mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
+    --                 end
+    --             end)
+    --         end
+    --     end
+    -- end
     if parent.Character:FindFirstChild("Knife") then
         nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+        nam.Text = "👹"
     end
     parent.Character.ChildAdded:connect(function(m)
         if m.Name == "Knife" then
             nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+            nam.Text = "👹"
         end
         if m.Name == "Head" then
             createESP(parent)
@@ -112,27 +114,27 @@ end
 function eventESPItem(parent)
 	for i = 1, #_G.white do
 		if parent.Parent.Name == _G.white[i] then
-			createESPItem(parent, 242, 243, 243, 10, parent.Parent.Name)
+			createESPItem(parent, 242, 243, 243, 14, "🤍")
 		end
 	end
 	for i = 1, #_G.blue do
 		if parent.Parent.Name == _G.blue[i] then
-			createESPItem(parent, 13, 105, 172, 10, parent.Parent.Name)
+			createESPItem(parent, 13, 105, 172, 14, "💙")
 		end
 	end
 	for i = 1, #_G.red do
 		if parent.Parent.Name == _G.red[i] then
-			createESPItem(parent, 196, 40, 28, 10, parent.Parent.Name)
+			createESPItem(parent, 196, 40, 28, 14, "❤")
 		end
 	end
 	for i = 1, #_G.violet do
 		if parent.Parent.Name == _G.violet[i] then
-			createESPItem(parent, 146, 57, 120, 10, parent.Parent.Name)
+			createESPItem(parent, 146, 57, 120, 14, "💜")
 		end
 	end
 	for i = 1, #_G.yellow do
 		if parent.Parent.Name == _G.yellow[i] then
-			createESPItem(parent, 245, 205, 48, 10, parent.Parent.Name)
+			createESPItem(parent, 245, 205, 48, 14, "💛")
 		end
 	end
 end
@@ -236,11 +238,11 @@ mouse.KeyDown:connect(function(keyDown)
         tpCoin()
     end
     if keyDown == "x" then
-        if speedDash == 22 then
+        if speedDash == 25 then
             speedDash = 20
             NotifyG("Dash", speedDash)
         else
-            speedDash = 22
+            speedDash = 25
             NotifyG("Dash", speedDash)
         end
     end
