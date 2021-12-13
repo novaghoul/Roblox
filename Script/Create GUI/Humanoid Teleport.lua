@@ -150,11 +150,11 @@ OpenBNT.MouseButton1Down:connect(
 
 BringPlayer.MouseButton1Down:connect(
 	function()
-		if tonumber(tostring(disTeleport)) == nil then
+		if tonumber(tostring(Distance.Text)) == nil then
 			Distance.BorderColor3 = Color3.fromRGB(196, 40, 28)
 		else
 			Distance.BorderColor3 = Color3.fromRGB(27, 42, 53)
-			local dis = tonumber(tostring(disTeleport))
+			local dis = tonumber(tostring(Distance.Text))
 			local pos = lplr.Character.HumanoidRootPart.CFrame
 			local charplayer = wp:FindFirstChild(plrlist(NamePlayer.Text).Name)
 			if charplayer then
@@ -176,14 +176,14 @@ AutoOne.MouseButton1Down:connect(
 			_G.autoOneT = true
 			AutoOne.Text = "Auto On"
 			while _G.autoOneT == true do
-				if tonumber(tostring(disTeleport)) == nil then
+				if tonumber(tostring(Distance.Text)) == nil then
 					Distance.BorderColor3 = Color3.fromRGB(196, 40, 28)
 				else
 					Distance.BorderColor3 = Color3.fromRGB(27, 42, 53)
-					local dis = tonumber(tostring(disTeleport))
+					local dis = tonumber(tostring(Distance.Text))
 					local pos = lplr.Character.HumanoidRootPart.CFrame
 					local charplayer = wp:FindFirstChild(plrlist(NamePlayer.Text).Name)
-					if charplayer then
+					if charplayer and charplayer:FindFirstChild("HumanoidRootPart") then
 						wait(0.1)
 						if plrlist(NamePlayer.Text).Name ~= lplr.Name then
 							charplayer.HumanoidRootPart.Anchored = false
@@ -208,15 +208,15 @@ AutoAll.MouseButton1Down:connect(
 			_G.autoAllT = true
 			AutoAll.Text = "Auto On"
 			while _G.autoAllT == true do
-				if tonumber(tostring(disTeleport)) == nil then
+				if tonumber(tostring(Distance.Text)) == nil then
 					Distance.BorderColor3 = Color3.fromRGB(196, 40, 28)
 				else
 					Distance.BorderColor3 = Color3.fromRGB(27, 42, 53)
-					local dis = tonumber(tostring(disTeleport))
+					local dis = tonumber(tostring(Distance.Text))
 					local pos = lplr.Character.HumanoidRootPart.CFrame
 					for _, v in pairs(plrs:GetPlayers()) do
 						local charplayer = wp:FindFirstChild(v.Name)
-						if charplayer then
+						if charplayer and charplayer:FindFirstChild("HumanoidRootPart") then
 							wait()
 							if v.Name ~= lplr.Name then
 								charplayer.HumanoidRootPart.Anchored = false
@@ -238,11 +238,11 @@ AutoAll.MouseButton1Down:connect(
 
 BringAll.MouseButton1Down:connect(
 	function()
-		if tonumber(tostring(disTeleport)) == nil then
+		if tonumber(tostring(Distance.Text)) == nil then
 			Distance.BorderColor3 = Color3.fromRGB(196, 40, 28)
 		else
 			Distance.BorderColor3 = Color3.fromRGB(27, 42, 53)
-			local dis = tonumber(tostring(disTeleport))
+			local dis = tonumber(tostring(Distance.Text))
 			local pos = lplr.Character.HumanoidRootPart.CFrame
 			for _, v in pairs(plrs:GetPlayers()) do
 				local charplayer = wp:FindFirstChild(v.Name)

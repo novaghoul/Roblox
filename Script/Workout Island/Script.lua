@@ -1,6 +1,7 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-ws_g = 20
+ws_g = 400
+jp_g = 200
 disTeleport = 50
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))()
