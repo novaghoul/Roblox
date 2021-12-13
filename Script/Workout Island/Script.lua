@@ -583,7 +583,7 @@ AirdropButtonToggle.MouseButton1Down:connect(
 			while TAirdrop do
 				if wp.Airdrops:FindFirstChild("Airdrop") then
 					HaveTAirdrop = true
-					if wp.Airdrops:FindFirstChild("Ring") then
+					if wp.Airdrops.Airdrop.Airdrop:FindFirstChild("Ring") then
 						local PartAirdrop = Instance.new("Part")
 						PartAirdrop.Name = "PartAirdrop"
 						PartAirdrop.Parent = wp
