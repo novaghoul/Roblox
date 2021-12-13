@@ -2,7 +2,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 ws_g = 400
 jp_g = 200
-disTeleport = 50
+disTeleport = 20
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))()
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ESP.lua"), true))()
@@ -583,18 +583,20 @@ AirdropButtonToggle.MouseButton1Down:connect(
 			while TAirdrop do
 				if wp.Airdrops:FindFirstChild("Airdrop") then
 					HaveTAirdrop = true
-					local PartAirdrop = Instance.new("Part")
-					PartAirdrop.Name = "PartAirdrop"
-					PartAirdrop.Parent = wp
-					PartAirdrop.Size = Vector3.new(200, 1, 200)
-					PartAirdrop.CFrame = wp.Airdrops.Airdrop.Airdrop.Ring.CFrame * CFrame.new(0, 20000, 0)
-					PartAirdrop.Anchored = true
-					if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
-						lplr.Character.HumanoidRootPart.CFrame = PartAirdrop.CFrame * CFrame.new(0, 100, 0)
-					end
-					wait(1)
-					if PartAirdrop ~= nil then
-						PartAirdrop:Destroy()
+					if wp.Airdrops:FindFirstChild("Ring") then
+						local PartAirdrop = Instance.new("Part")
+						PartAirdrop.Name = "PartAirdrop"
+						PartAirdrop.Parent = wp
+						PartAirdrop.Size = Vector3.new(200, 1, 200)
+						PartAirdrop.CFrame = wp.Airdrops.Airdrop.Airdrop.Ring.CFrame * CFrame.new(0, 20000, 0)
+						PartAirdrop.Anchored = true
+						if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+							lplr.Character.HumanoidRootPart.CFrame = PartAirdrop.CFrame * CFrame.new(0, 100, 0)
+						end
+						wait(.5)
+						if PartAirdrop ~= nil then
+							PartAirdrop:Destroy()
+						end
 					end
 				end
 				wait()
@@ -652,18 +654,6 @@ GemButtonToggle.MouseButton1Down:connect(
 		end
 	end
 )
-
-local string_1 = "Taco Galaxy";
-local string_2 = "Weight";
-local string_3 = "Islands";
-local Target = game:GetService("ReplicatedStorage").Remotes.Shop.RequestPurchase;
-Target:InvokeServer(string_1, string_2, string_3);
-
-local number_1 = 48;
-local string_1 = "DNA";
-local string_2 = "Islands";
-local Target = game:GetService("ReplicatedStorage").Remotes.Shop.RequestPurchase;
-Target:InvokeServer(number_1, string_1, string_2);
 
 KingButtonToggle.MouseButton1Down:connect(
 	function()
@@ -728,6 +718,21 @@ BuyButtonToggle.MouseButton1Down:connect(
 			TBuy = true
 			-- BuyFrameToggle:TweenPosition(BuyFrameToggle.Position + UDim2.new(.5,0,0,0),"In","Sine",.1)
 			BuyFrameToggle.BackgroundColor3 = Color3.fromRGB(170, 255, 127)
+			while TBuy do
+				for i=1,100 do
+					local string_1 = "Weight";
+					local string_2 = "Islands";
+					local Target = game:GetService("ReplicatedStorage").Remotes.Shop.RequestBuyAll;
+					Target:InvokeServer(string_1, string_2);
+		
+					local number_1 = i;
+					local string_1 = "DNA";
+					local string_2 = "Islands";
+					local Target = game:GetService("ReplicatedStorage").Remotes.Shop.RequestPurchase;
+					Target:InvokeServer(number_1, string_1, string_2);
+				end
+				wait()
+			end
 		else
 			TBuy = false
 			-- BuyFrameToggle:TweenPosition(BuyFrameToggle.Position + UDim2.new(-.5,0,0,0),"In","Sine",.1)
