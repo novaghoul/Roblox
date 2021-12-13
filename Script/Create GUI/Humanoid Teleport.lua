@@ -55,7 +55,7 @@ Distance.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Distance.Position = UDim2.new(0, 265, 0, 0)
 Distance.Size = UDim2.new(0, 25, 0, 25)
 Distance.Font = Enum.Font.SourceSans
-Distance.Text = "5"
+Distance.Text = tostring(disTeleport)
 Distance.TextColor3 = Color3.fromRGB(0, 0, 0)
 Distance.TextSize = 14.000
 Distance.TextWrapped = true
@@ -150,11 +150,11 @@ OpenBNT.MouseButton1Down:connect(
 
 BringPlayer.MouseButton1Down:connect(
 	function()
-		if tonumber(tostring(Distance.Text)) == nil then
+		if tonumber(tostring(disTeleport)) == nil then
 			Distance.BorderColor3 = Color3.fromRGB(196, 40, 28)
 		else
 			Distance.BorderColor3 = Color3.fromRGB(27, 42, 53)
-			local dis = tonumber(tostring(Distance.Text))
+			local dis = tonumber(tostring(disTeleport))
 			local pos = lplr.Character.HumanoidRootPart.CFrame
 			local charplayer = wp:FindFirstChild(plrlist(NamePlayer.Text).Name)
 			if charplayer then
@@ -176,11 +176,11 @@ AutoOne.MouseButton1Down:connect(
 			_G.autoOneT = true
 			AutoOne.Text = "Auto On"
 			while _G.autoOneT == true do
-				if tonumber(tostring(Distance.Text)) == nil then
+				if tonumber(tostring(disTeleport)) == nil then
 					Distance.BorderColor3 = Color3.fromRGB(196, 40, 28)
 				else
 					Distance.BorderColor3 = Color3.fromRGB(27, 42, 53)
-					local dis = tonumber(tostring(Distance.Text))
+					local dis = tonumber(tostring(disTeleport))
 					local pos = lplr.Character.HumanoidRootPart.CFrame
 					local charplayer = wp:FindFirstChild(plrlist(NamePlayer.Text).Name)
 					if charplayer then
@@ -208,11 +208,11 @@ AutoAll.MouseButton1Down:connect(
 			_G.autoAllT = true
 			AutoAll.Text = "Auto On"
 			while _G.autoAllT == true do
-				if tonumber(tostring(Distance.Text)) == nil then
+				if tonumber(tostring(disTeleport)) == nil then
 					Distance.BorderColor3 = Color3.fromRGB(196, 40, 28)
 				else
 					Distance.BorderColor3 = Color3.fromRGB(27, 42, 53)
-					local dis = tonumber(tostring(Distance.Text))
+					local dis = tonumber(tostring(disTeleport))
 					local pos = lplr.Character.HumanoidRootPart.CFrame
 					for _, v in pairs(plrs:GetPlayers()) do
 						local charplayer = wp:FindFirstChild(v.Name)
@@ -238,11 +238,11 @@ AutoAll.MouseButton1Down:connect(
 
 BringAll.MouseButton1Down:connect(
 	function()
-		if tonumber(tostring(Distance.Text)) == nil then
+		if tonumber(tostring(disTeleport)) == nil then
 			Distance.BorderColor3 = Color3.fromRGB(196, 40, 28)
 		else
 			Distance.BorderColor3 = Color3.fromRGB(27, 42, 53)
-			local dis = tonumber(tostring(Distance.Text))
+			local dis = tonumber(tostring(disTeleport))
 			local pos = lplr.Character.HumanoidRootPart.CFrame
 			for _, v in pairs(plrs:GetPlayers()) do
 				local charplayer = wp:FindFirstChild(v.Name)
