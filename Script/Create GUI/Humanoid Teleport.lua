@@ -162,7 +162,7 @@ BringPlayer.MouseButton1Down:connect(
 				if plrlist(NamePlayer.Text).Name ~= lplr.Name then
 					charplayer.HumanoidRootPart.Anchored = false
 					charplayer.HumanoidRootPart.CanCollide = false
-					charplayer.HumanoidRootPart.CFrame = pos * CFrame.new(0, 2, -dis)
+					charplayer.HumanoidRootPart.CFrame = pos * CFrame.new(-50, 2, -dis)
 					charplayer.HumanoidRootPart.Anchored = true
 				end
 			end

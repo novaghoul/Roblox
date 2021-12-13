@@ -483,7 +483,7 @@ StrengthButtonToggle.MouseButton1Down:connect(
 			StrengthFrameToggle.BackgroundColor3 = Color3.fromRGB(170, 255, 127)
             while TStr do
                 wait()
-                local Target = game:GetService("ReplicatedStorage").Remotes.LiftWeight;
+                local Target = rs.Remotes.LiftWeight;
                 Target:FireServer();
             end
 		else
@@ -504,10 +504,10 @@ AttackButtonToggle.MouseButton1Down:connect(
                 wait()
                 local string_1 = "Punch";
                 local number_1 = 1;
-                local Target = game:GetService("ReplicatedStorage").Remotes.PVP.AttackAttempt;
+                local Target = rs.Remotes.PVP.AttackAttempt;
                 Target:FireServer(string_1, number_1);
                 local string_1 = "Stomp";
-                local Target = game:GetService("ReplicatedStorage").Remotes.PVP.AttackAttempt;
+                local Target = rs.Remotes.PVP.AttackAttempt;
                 Target:FireServer(string_1);
             end
 		else
@@ -527,7 +527,9 @@ CoinButtonToggle.MouseButton1Down:connect(
             while TFarmCoin do
                 wait(.5)
                 for _,v in pairs(wp.ConsumableSpawns:GetChildren()) do
-                    v.Position = lplr.Character.HumanoidRootPart.Position
+					if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+						v.Position = lplr.Character.HumanoidRootPart.Position
+					end
                 end
             end
 		else
@@ -548,8 +550,10 @@ BossButtonToggle.MouseButton1Down:connect(
                 wait(.1)
                 for _,v in pairs(wp.BossModels:GetChildren()) do
                     if v:FindFirstChild("HumanoidRootPart") then
-                        v.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame
-                        v.HumanoidRootPart.Anchored = true
+						if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+							v.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame
+							v.HumanoidRootPart.Anchored = true
+						end
                     end
                 end
             end
@@ -579,17 +583,18 @@ AirdropButtonToggle.MouseButton1Down:connect(
 			while TAirdrop do
 				if wp.Airdrops:FindFirstChild("Airdrop") then
 					HaveTAirdrop = true
-					local Part = Instance.new("Part")
-					Part.Name = "PartAirdrop"
-					Part.Parent = wp
-					Part.Size = Vector3.new(200, 1, 200)
-					Part.CFrame = wp.Airdrops.Airdrop.Airdrop.Ring.CFrame * CFrame.new(0, 20000, 0)
-					Part.Anchored = true
-					PartBoss = Part
-					lplr.Character.HumanoidRootPart.CFrame = Part.CFrame * CFrame.new(0, 100, 0)
+					local PartAirdrop = Instance.new("Part")
+					PartAirdrop.Name = "PartAirdrop"
+					PartAirdrop.Parent = wp
+					PartAirdrop.Size = Vector3.new(200, 1, 200)
+					PartAirdrop.CFrame = wp.Airdrops.Airdrop.Airdrop.Ring.CFrame * CFrame.new(0, 20000, 0)
+					PartAirdrop.Anchored = true
+					if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+						lplr.Character.HumanoidRootPart.CFrame = PartAirdrop.CFrame * CFrame.new(0, 100, 0)
+					end
 					wait(1)
-					if Part ~= nil then
-						Part:Destroy()
+					if PartAirdrop ~= nil then
+						PartAirdrop:Destroy()
 					end
 				end
 				wait()
@@ -616,20 +621,22 @@ GemButtonToggle.MouseButton1Down:connect(
                     if TFarmGem == false then break end
                     if tostring(v.Display.Title.Text) ~= string.upper(lplr.Name) .. "'S TERRITORY" and HaveTAirdrop == false then
 						HaveTFarmGem = true
-                        local Part = Instance.new("Part")
-                        Part.Name = "PartFarmGem"
-                        Part.Parent = wp
-                        Part.Size = Vector3.new(200, 1, 200)
+                        local PartFarmGem = Instance.new("Part")
+                        PartFarmGem.Name = "PartFarmGem"
+                        PartFarmGem.Parent = wp
+                        PartFarmGem.Size = Vector3.new(200, 1, 200)
                         if v.Name == "T5" then
-                            Part.CFrame = v.CFrame * CFrame.new(0, 1000, 0)
+                            PartFarmGem.CFrame = v.CFrame * CFrame.new(0, 1000, 0)
                         else
-                            Part.CFrame = v.CFrame * CFrame.new(0, 20000, 0)
+                            PartFarmGem.CFrame = v.CFrame * CFrame.new(0, 20000, 0)
                         end
-                        Part.Anchored = true
-                        lplr.Character.HumanoidRootPart.CFrame = Part.CFrame * CFrame.new(0, 100, 0)
+                        PartFarmGem.Anchored = true
+						if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+                        	lplr.Character.HumanoidRootPart.CFrame = PartFarmGem.CFrame * CFrame.new(0, 100, 0)
+						end
                         wait(1)
-                        if Part ~= nil then
-                            Part:Destroy()
+                        if PartFarmGem ~= nil then
+                            PartFarmGem:Destroy()
                         end
 					else
 						HaveTFarmGem = false
@@ -646,6 +653,18 @@ GemButtonToggle.MouseButton1Down:connect(
 	end
 )
 
+local string_1 = "Taco Galaxy";
+local string_2 = "Weight";
+local string_3 = "Islands";
+local Target = game:GetService("ReplicatedStorage").Remotes.Shop.RequestPurchase;
+Target:InvokeServer(string_1, string_2, string_3);
+
+local number_1 = 48;
+local string_1 = "DNA";
+local string_2 = "Islands";
+local Target = game:GetService("ReplicatedStorage").Remotes.Shop.RequestPurchase;
+Target:InvokeServer(number_1, string_1, string_2);
+
 KingButtonToggle.MouseButton1Down:connect(
 	function()
 		if TKing == false then
@@ -654,16 +673,18 @@ KingButtonToggle.MouseButton1Down:connect(
 			KingFrameToggle.BackgroundColor3 = Color3.fromRGB(170, 255, 127)
 			while TKing do
 				if HaveTAirdrop == false and HaveTFarmGem == false then
-					local Part = Instance.new("Part")
-					Part.Name = "PartKillBoss"
-					Part.Parent = wp
-					Part.Size = Vector3.new(200, 1, 200)
-					Part.CFrame = wp.RingAreas.RangeSystem.Server.KOTHArea.Ring.CFrame * CFrame.new(0, 20000, 0)
-					Part.Anchored = true
-					lplr.Character.HumanoidRootPart.CFrame = Part.CFrame * CFrame.new(0, 100, 0)
+					local PartKing = Instance.new("Part")
+					PartKing.Name = "PartKing"
+					PartKing.Parent = wp
+					PartKing.Size = Vector3.new(200, 1, 200)
+					PartKing.CFrame = wp.RingAreas.RangeSystem.Server.KOTHArea.Ring.CFrame * CFrame.new(0, 20000, 0)
+					PartKing.Anchored = true
+					if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+						lplr.Character.HumanoidRootPart.CFrame = PartKing.CFrame * CFrame.new(0, 100, 0)
+					end
 					wait(1)
-					if Part ~= nil then
-						Part:Destroy()
+					if PartKing ~= nil then
+						PartKing:Destroy()
 					end
 				end
 				wait()
@@ -685,9 +706,11 @@ SellButtonToggle.MouseButton1Down:connect(
             while TSell do
                 if wait(10) or lplr.PlayerGui.UI.MaxStrengthHit.Visible then
                     local curentPosition = lplr.Character.HumanoidRootPart.CFrame
-                    lplr.Character.HumanoidRootPart.CFrame = wp.RingAreas.RangeSystem.Server.Sell.Ring.CFrame * CFrame.new(0, 20000, 0)
-                    wait(.5)
-                    lplr.Character.HumanoidRootPart.CFrame = curentPosition
+					if lplr.Character and lplr.Character:FindFirstChild("HumanoidRootPart") then
+						lplr.Character.HumanoidRootPart.CFrame = wp.RingAreas.RangeSystem.Server.Sell.Ring.CFrame * CFrame.new(0, 20000, 0)
+						wait(.5)
+						lplr.Character.HumanoidRootPart.CFrame = curentPosition
+					end
                 end
 				wait()
             end
