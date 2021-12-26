@@ -42,9 +42,13 @@ if tool then
     tool.Handle.Size = Vector3.new(5, 5, 5)
 end
 
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))()
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump_Other.lua"), true))()
+
+while wait(10) do
+    local curentPosition = lplr.Character.HumanoidRootPart.CFrame
+    lplr.Character.HumanoidRootPart.CFrame = wp.RingAreas.RangeSystem.Server.Sell.Ring.CFrame * CFrame.new(0, 20000, 0)
+    wait(.5)
+    lplr.Character.HumanoidRootPart.CFrame = curentPosition
+end
 
 for _, v in pairs(game:GetService("Workspace").Characters:GetChildren()) do
     if tostring(v.Name) == "JudyCollection" then
@@ -78,4 +82,14 @@ end
 
 
 -- game:GetService("Workspace").Areas.Starter.NPCs.Villager
+
+local string_1 = "skin";
+local number_1 = 1;
+local Target = game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.GameService.OpenLegendaryCrate;
+Target:InvokeServer(string_1, number_1);
+
+local string_1 = "weapon";
+local number_1 = 1;
+local Target = game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.GameService.OpenLegendaryCrate;
+Target:InvokeServer(string_1, number_1);
 

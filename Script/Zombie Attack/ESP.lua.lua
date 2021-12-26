@@ -1,10 +1,21 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
+function funcHealth(parent)
+    spawn(function()
+        while parent do
+            wait()
+            parent.Head.nameEGUI.nameESP.Text = tostring(parent.Humanoid.Health)
+        end
+    end)
+end
+
 function hitBox()
     for _, o in pairs(wp.enemies:GetChildren()) do
         if o:WaitForChild("Head") then
             wait(0.1)
             createHitBox(o)
+            createESPItem(o.Head, 196, 40, 28, 14, tostring(o.Humanoid.Health))
+            funcHealth(o)
         end
     end
 
@@ -13,6 +24,8 @@ function hitBox()
             if m:WaitForChild("Head") then
                 wait(0.1)
                 createHitBox(m)
+                createESPItem(m.Head, 196, 40, 28, 14, tostring(m.Humanoid.Health))
+                funcHealth(m)
             end
         end
     )
@@ -20,6 +33,8 @@ function hitBox()
     for _, o in pairs(wp.BossFolder:GetChildren()) do
         wait(0.1)
         createHitBox(o)
+        createESPItem(o.Head, 196, 40, 28, 14, tostring(o.Humanoid.Health))
+        funcHealth(o)
     end
 
     wp.BossFolder.ChildAdded:connect(
@@ -27,6 +42,8 @@ function hitBox()
             if m:WaitForChild("Head") then
                 wait(0.1)
                 createHitBox(m)
+                createESPItem(m.Head, 196, 40, 28, 14, tostring(m.Humanoid.Health))
+                funcHealth(m)
             end
         end
     )

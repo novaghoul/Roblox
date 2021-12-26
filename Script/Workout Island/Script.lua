@@ -2,7 +2,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 ws_g = 400
 jp_g = 200
-disTeleport = 20
+disTeleport = 30
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))()
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ESP.lua"), true))()
@@ -583,7 +583,7 @@ AirdropButtonToggle.MouseButton1Down:connect(
 			while TAirdrop do
 				if wp.Airdrops:FindFirstChild("Airdrop") then
 					HaveTAirdrop = true
-					if wp.Airdrops.Airdrop.Airdrop:FindFirstChild("Ring") then
+					if wp.Airdrops.Airdrop:FindFirstChild("Airdrop") and wp.Airdrops.Airdrop.Airdrop:FindFirstChild("Ring") then
 						local PartAirdrop = Instance.new("Part")
 						PartAirdrop.Name = "PartAirdrop"
 						PartAirdrop.Parent = wp
@@ -788,7 +788,7 @@ SuperMarket.MouseButton1Down:connect(
 
 function funAuto()
     while wait() do
-        if wp.RingAreas.RangeSystem.Server.DailyReward.Ring.Tag.Title.Text == "00:00:00" then
+        if wp.RingAreas.RangeSystem.Server.DailyReward.Ring.Tag.Title.Text == "DAILY REWARD" then
             local curentPosition = lplr.Character.HumanoidRootPart.CFrame
             lplr.Character.HumanoidRootPart.CFrame = wp.RingAreas.RangeSystem.Server.DailyReward.Ring.CFrame * CFrame.new(0, 20000, 0)
             wait(.5)
