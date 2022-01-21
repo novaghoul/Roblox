@@ -1,7 +1,7 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 _G.white = {"green_bottle", "gas_can", "rope", "shattered_bottle", "shattered_shades", "rusty_lantern", "broken_bulb", "lighter", "broken_bottle"}
-_G.blue = {"pickaxe", "old_slycer", "busted_boombox", "tire", "car_engine", "rusty_pipe", "rusty_cleaver", "gen_1"}
+_G.blue = {"pickaxe", "old_slycer", "busted_boombox", "tire", "car_engine", "rusty_pipe", "rusty_cleaver", "gen_1", "winter_1"}
 _G.red = {"laptop", "welding_goggles", "smartphone", "binoculars", "trophy", "smartwatch"}
 _G.violet = {"apocalypse_helmet", "golden_compass", "golden_pocket_watch"}
 _G.yellow = {"gold_bars", "pendant", "soul", "treasure_chest"}

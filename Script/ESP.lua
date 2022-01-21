@@ -22,7 +22,7 @@ function createESP(parent)
     bgui.ExtentsOffset = Vector3.new(0, 3, 0)
     bgui.Size = UDim2.new(0, 200, 0, 50)
     local nam = Instance.new("TextLabel", bgui)
-    nam.Text = parent.Name
+    nam.Text = parent.DisplayName
     nam.BackgroundTransparency = 1
     nam.TextSize = 14
     nam.Font = ("Arial")

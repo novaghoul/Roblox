@@ -24,6 +24,10 @@ st.ChildRemoved:connect(
     function(m)
     end
 )
+st.Touched:connect(
+    function(m)
+    end
+)
 st.Changed:connect(
     function(property)
     end
@@ -42,6 +46,23 @@ if tool then
     tool.Handle.Size = Vector3.new(5, 5, 5)
 end
 
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
+-- game:GetService("Workspace").Activities.IceSkating.PickupSpots.PickupSpot["Logo_Stadium"]
+
+local countLogo = 0
+mouse.KeyDown:connect(
+    function(keyDown)
+        if keyDown == "e" then
+            for _,v in pairs(wp.Activities.IceSkating.PickupSpots:GetChildren()) do
+                if v:FindFirstChildOfClass("Part") and countLogo < 2 then
+                    countLogo = countLogo + 1
+                    v:GetChildren()[1].CFrame = lplr.Character.HumanoidRootPart.CFrame
+                end
+            end
+            countLogo = 0
+        end
+    end
+)
 
 while wait(10) do
     local curentPosition = lplr.Character.HumanoidRootPart.CFrame
