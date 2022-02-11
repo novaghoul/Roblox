@@ -37,6 +37,10 @@ st:GetPropertyChangedSignal("WalkSpeed"):connect(
     end
 )
 
+spawn(function()
+    
+end)
+
 fireclickdetector(v)
 firetouchinterest(PartTouch,  BodyTouch, 0)
 table.foreach(v.damage, print)
@@ -113,4 +117,36 @@ local string_1 = "weapon";
 local number_1 = 1;
 local Target = game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.GameService.OpenLegendaryCrate;
 Target:InvokeServer(string_1, number_1);
+game:GetService("Workspace").Chests
+game:GetService("Workspace").Badges
+game:GetService("Workspace").Special.SectorTraps.Sector1.TrapTripper
+game:GetService("Workspace").AIGrievers
 
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
+if tostring(game.GameId) == "86781307" then
+    ws_g = 35
+    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS%20Other.lua"), true))()
+    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))()
+    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/No%20Clip.lua"), true))()
+    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ESP%20Test.lua"), true))()
+    for _,v in pairs(wp["_MAZE"].InnerMaze.Walls:GetChildren()) do
+        if tostring(v.Name) == "InnerWall" then
+            local posNus = v.Position.y - 550
+            local sizeNus = v.Size.y - 10
+            v.Position = v.Position + Vector3.new(0, -posNus, 0)
+            v.Size = v.Size + Vector3.new(0, -sizeNus, 0)
+        end
+    end
+    for _,v in pairs(wp["_MAZE"].OuterMaze.Walls:GetChildren()) do
+        if v:IsA("Model") then
+            for _,l in pairs(v:GetChildren()) do
+                local posNus = l.Position.y - 550
+                local sizeNus = l.Size.y - 10
+                l.Position = l.Position + Vector3.new(0, -posNus, 0)
+                l.Size = l.Size + Vector3.new(0, -sizeNus, 0)
+            end
+        end
+    end
+end
+
+game:GetService("Workspace")["_MAZE"].InnerMaze.Walls.InnerWall

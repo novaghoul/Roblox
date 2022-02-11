@@ -72,19 +72,19 @@ end
 mouse.KeyDown:connect(function(keyDown)
     if keyDown == "c" then
         changeDA(0)
-        notify("Dash", ws_g)
+        NotifyG("Dash", ws_g)
     end
     if keyDown == "v" then
         changeDA(1)
-        notify("Dash", ws_g)
+        NotifyG("Dash", ws_g)
     end
     if keyDown == "x" then
         if ws_g == 20 then
             ws_g = 17
-            SendChat("Dash", ws_g)
+            NotifyG("Dash", ws_g)
         else
             ws_g = 20
-            SendChat("Dash", ws_g)
+            NotifyG("Dash", ws_g)
         end
     end
     if keyDown == "q" then
