@@ -117,36 +117,50 @@ local string_1 = "weapon";
 local number_1 = 1;
 local Target = game:GetService("ReplicatedStorage").Aero.AeroRemoteServices.GameService.OpenLegendaryCrate;
 Target:InvokeServer(string_1, number_1);
-game:GetService("Workspace").Chests
-game:GetService("Workspace").Badges
-game:GetService("Workspace").Special.SectorTraps.Sector1.TrapTripper
-game:GetService("Workspace").AIGrievers
 
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
-if tostring(game.GameId) == "86781307" then
-    ws_g = 35
-    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS%20Other.lua"), true))()
-    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))()
-    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/No%20Clip.lua"), true))()
-    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ESP%20Test.lua"), true))()
-    for _,v in pairs(wp["_MAZE"].InnerMaze.Walls:GetChildren()) do
-        if tostring(v.Name) == "InnerWall" then
-            local posNus = v.Position.y - 550
-            local sizeNus = v.Size.y - 10
-            v.Position = v.Position + Vector3.new(0, -posNus, 0)
-            v.Size = v.Size + Vector3.new(0, -sizeNus, 0)
-        end
-    end
-    for _,v in pairs(wp["_MAZE"].OuterMaze.Walls:GetChildren()) do
-        if v:IsA("Model") then
-            for _,l in pairs(v:GetChildren()) do
-                local posNus = l.Position.y - 550
-                local sizeNus = l.Size.y - 10
-                l.Position = l.Position + Vector3.new(0, -posNus, 0)
-                l.Size = l.Size + Vector3.new(0, -sizeNus, 0)
-            end
-        end
-    end
+for _,v in pairs(game:GetService("Workspace").Coins:GetChildren()) do
+    local userdata_1 = v
+    local bool_1 = false
+    local Target = game:GetService("ReplicatedStorage").Events.GameEvents.CollectCoin
+    Target:FireServer(userdata_1, bool_1)
 end
 
-game:GetService("Workspace")["_MAZE"].InnerMaze.Walls.InnerWall
+------------ Magnet Simulator 2 ------------
+while wait(.1) do
+    wp.Rings.Sellx25.Touch.CFrame = lplr.Character.HumanoidRootPart.CFrame
+end
+
+mouse.KeyDown:connect(function(keyDown)
+    if keyDown == "c" then
+        lplr.Character.HumanoidRootPart.CFrame = wp.Rings.Sellx25.OuterRing.CFrame * CFrame.new(0, 10, 0)
+    end
+    if keyDown == "q" then
+        for i=1,10 do
+            local Target = rs.Events.GameEvents.UpgradeStorage;
+            Target:FireServer();
+        end
+    end
+end)
+
+---------------- Slayer Tycoon ------------
+getgenv().hitBoxSize = {30, 30, 30}
+getgenv().hitBoxBody = "HumanoidRootPart"
+getgenv().hitBoxColor = "Really blue"
+getgenv().hitBoxTransparency = 1
+-- HumanoidRootPart
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Hit%20Box.lua"), true))() -- Hit Box
+
+for _,v in pairs(wp.TycoonSets.Tycoons.Grasslands.PurchasedObjects:GetChildren()) do
+    if v.Name == "WisteriaTrees" then
+        v.Lasers:Destroy()
+    end
+end
+wp.TycoonSets.Tycoons.Grasslands.PurchasedObjects.ChildAdded:connect(
+    function(m)
+        if m.Name == "WisteriaTrees" then
+            wait(.5)
+            m.Lasers:Destroy()
+        end
+    end
+)
