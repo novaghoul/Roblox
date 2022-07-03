@@ -226,7 +226,7 @@ if init == nil then
 
     
     getgenv().infJump = function()
-        lplr.Character.Humanoid.JumpPower = 50
+        lplr.Character.Humanoid.JumpPower = jp_g
         lplr.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
     end
 
