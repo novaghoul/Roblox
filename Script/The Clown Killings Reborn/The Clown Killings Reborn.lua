@@ -1,26 +1,6 @@
-uis = game:GetService("UserInputService")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-bp = lplr:WaitForChild("Backpack")
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-_G.speedDash = 20
-
-function SendChat(String) -- Send a chat to the game chat
-    sg:SetCore(
-        "ChatMakeSystemMessage",
-        {
-            Text = "[OUTPUT]: " .. String
-        }
-    )
-end
+_G.dis = 4
 
 function createESP(parent)
 	local bgui = Instance.new("BillboardGui", parent.Character.Head)
@@ -37,7 +17,7 @@ function createESP(parent)
 	nam.Size = UDim2.new(0, 200, 0, 50)
 	for _, p in pairs(parent.Character:GetChildren()) do
 		if p.Name == ("Head") then
-			for _, f in pairs(_G.faces) do
+			for _, f in pairs(faces) do
 				local m = Instance.new("SurfaceGui", p)
 				m.Name = ("EGUI")
 				m.Face = f
@@ -182,86 +162,30 @@ function firstScript()
 end
 firstScript()
 
-function infJump()
-	--lplr.Character.Humanoid.JumpPower = 50
-	lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-end
-
-down = false
-velocity = Instance.new("BodyVelocity")
-velocity.maxForce = Vector3.new(100000, 0, 100000)
----vv Use that to change the speed v
-gyro = Instance.new("BodyGyro")
-gyro.maxTorque = Vector3.new(100000, 0, 100000)
-
-hum = lplr.Character.Humanoid
-function onKeyDown()
-    down = true
-    if lplr.Character:FindFirstChild("Torso") then
-        velocity.Parent = lplr.Character.Torso
-        gyro.Parent = lplr.Character.Torso
-    else
-        velocity.Parent = lplr.Character.UpperTorso
-        gyro.Parent = lplr.Character.UpperTorso
-    end
-    velocity.velocity = (hum.MoveDirection) * _G.speedDash
-    while down do
-        if not down then
-            break
-        end
-        velocity.velocity = (hum.MoveDirection) * _G.speedDash
-        local refpos = gyro.Parent.Position + (gyro.Parent.Position - wp.CurrentCamera.CoordinateFrame.p).unit * 5
-        gyro.cframe = CFrame.new(gyro.Parent.Position, Vector3.new(refpos.x, gyro.Parent.Position.y, refpos.z))
-        wait(0.1)
-    end
-end
-
-function onKeyUp()
-    velocity.Parent = nil
-    gyro.Parent = nil
-    down = false
-end
-
-lplr.CharacterAdded:Connect(
-    function(characterModel)
-        wait(1)
-        velocity = Instance.new("BodyVelocity")
-        velocity.maxForce = Vector3.new(100000, 0, 100000)
-        ---vv Use that to change the speed v
-        gyro = Instance.new("BodyGyro")
-        gyro.maxTorque = Vector3.new(100000, 0, 100000)
-
-        hum = lplr.Character.Humanoid
-        onKeyDown()
-    end
-)
-
-function changeDA(typeDA)
-    if typeDA == 0 then
-        _G.speedDash = _G.speedDash + 2
-    elseif typeDA == 1 then
-        if _G.speedDash >= 0 then
-            _G.speedDash = _G.speedDash - 2
-        end
-        if _G.speedDash < 0 then
-            _G.speedDash = 0
-        end
-    end
-end
-
 mouse.KeyDown:connect(
 	function(keyDown)
 		if keyDown == " " then
 			infJump()
 		end
-		if keyDown == "[" then
-            changeDA(0)
-            SendChat("Dash :" .. _G.speedDash)
+        if keyDown == "f" then
+            noclipAll = not noclipAll
+            NotifyG("Noclip", noclipAll)
         end
-        if keyDown == "]" then
-            changeDA(1)
-            SendChat("Dash :" .. _G.speedDash)
-        end
+		if keyDown == "q" then
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -_G.dis)
+		end
+	end
+)
+
+mouse.Button1Down:connect(
+	function()
+		if not mouse.Target then
+			return
+		end
+		if lplr.Backpack:FindFirstChild("Rifle") then
+			local l__RemoteEvent__6 = lplr.Backpack.Rifle:WaitForChild("RemoteEvent")
+			l__RemoteEvent__6:FireServer(mouse.Hit.p)
+		end
 	end
 )
 
@@ -273,4 +197,19 @@ lplr.Idled:connect(
 )
 
 lightChange()
-onKeyDown()
+
+game:GetService("RunService").Stepped:connect(
+    function()
+        if noclipAll then
+            for i = 1, #checkRigType() do
+                lplr.Character[checkRigType()[i]].CanCollide = false
+            end
+            lplr.Character.HumanoidRootPart.CanCollide = false
+        else
+            for i = 1, #checkRigType() do
+                lplr.Character[checkRigType()[i]].CanCollide = true
+            end
+            lplr.Character.HumanoidRootPart.CanCollide = true
+        end
+    end
+)

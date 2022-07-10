@@ -1,63 +1,6 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 local humanoidP = lplr.Character:FindFirstChildOfClass("Humanoid")
-
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-
-_G.noclipAll = false
-
-_G.r6 = {"Head", "Torso"}
-_G.r15 = {"Head", "UpperTorso", "LowerTorso"}
-
-_G.ws_g = 20
-_G.jp_g = 50
-
-function checkReturn(String)
-    if sg:GetCoreGuiEnabled(3) == false then
-        return notify(String)
-    else
-        return SendChat(String)
-    end
-end
-
-function SendChat(String) -- Send a chat to the game chat
-    game.StarterGui:SetCore(
-        "ChatMakeSystemMessage",
-        {
-            Text = "[OUTPUT]: " .. String
-        }
-    )
-end
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
-
-function checkRigType()
-    if lplr.Character:FindFirstChild("Torso") then
-        return _G.r6
-    else
-        return _G.r15
-    end
-end
 
 function createESP(parent)
     local bgui = Instance.new("BillboardGui", parent.Character.Head)
@@ -74,7 +17,7 @@ function createESP(parent)
     nam.Size = UDim2.new(0, 200, 0, 50)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
+            for _, f in pairs(faces) do
                 local m = Instance.new("SurfaceGui", p)
                 m.Name = ("EGUI")
                 m.Face = f
@@ -161,12 +104,12 @@ function takeCoin()
 end
 
 function statsPlayerWs()
-    humanoidP.WalkSpeed = _G.ws_g
+    humanoidP.WalkSpeed = ws_g
 
     humanoidP:GetPropertyChangedSignal("WalkSpeed"):connect(
         function()
-            if humanoidP.WalkSpeed ~= _G.ws_g then
-                humanoidP.WalkSpeed = _G.ws_g
+            if humanoidP.WalkSpeed ~= ws_g then
+                humanoidP.WalkSpeed = ws_g
             end
         end
     )
@@ -175,11 +118,11 @@ function statsPlayerWs()
         function(characterModel)
             wait(1)
             humanoidP = lplr.Character:FindFirstChildOfClass("Humanoid")
-            humanoidP.WalkSpeed = _G.ws_g
+            humanoidP.WalkSpeed = ws_g
             humanoidP:GetPropertyChangedSignal("WalkSpeed"):connect(
                 function()
-                    if humanoidP.WalkSpeed ~= _G.ws_g then
-                        humanoidP.WalkSpeed = _G.ws_g
+                    if humanoidP.WalkSpeed ~= ws_g then
+                        humanoidP.WalkSpeed = ws_g
                     end
                 end
             )
@@ -190,39 +133,35 @@ statsPlayerWs()
 
 function changeWS(typeWS)
     if typeWS == 0 then
-        _G.ws_g = _G.ws_g + 5
-        humanoidP.WalkSpeed = _G.ws_g
+        ws_g = ws_g + 5
+        humanoidP.WalkSpeed = ws_g
     elseif typeWS == 1 then
-        if _G.ws_g >= 0 then
-            _G.ws_g = _G.ws_g - 5
-            humanoidP.WalkSpeed = _G.ws_g
+        if ws_g >= 0 then
+            ws_g = ws_g - 5
+            humanoidP.WalkSpeed = ws_g
         end
-        if _G.ws_g < 16 then
-            _G.ws_g = 16
-            humanoidP.WalkSpeed = _G.ws_g
+        if ws_g < 16 then
+            ws_g = 16
+            humanoidP.WalkSpeed = ws_g
         end
     end
 end
 
-function infJump()
-    -- lplr.Character.Humanoid.JumpPower = _G.jp_g
-    lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-end
-
 mouse.KeyDown:connect(
     function(keyDown)
-        if keyDown == "e" then
-            _G.noclipAll = not _G.noclipAll
+        if keyDown == "c" then
+            noclipAll = not noclipAll
+            NotifyG("Noclip", noclipAll)
         end
 
         if keyDown == "k" then
             changeWS(0)
-            SendChat("Walk Speed :" .. humanoidP.WalkSpeed)
+            SendChatG("Walk Speed", humanoidP.WalkSpeed)
         end
 
         if keyDown == "l" then
             changeWS(1)
-            SendChat("Walk Speed :" .. humanoidP.WalkSpeed)
+            SendChatG("Walk Speed", humanoidP.WalkSpeed)
         end
 
         if keyDown == " " then
@@ -244,11 +183,16 @@ lplr.Idled:connect(
 
 game:GetService("RunService").Stepped:connect(
     function()
-        if _G.noclipAll then
+        if noclipAll then
             for i = 1, #checkRigType() do
                 lplr.Character[checkRigType()[i]].CanCollide = false
             end
             lplr.Character.HumanoidRootPart.CanCollide = false
+        else
+            for i = 1, #checkRigType() do
+                lplr.Character[checkRigType()[i]].CanCollide = true
+            end
+            lplr.Character.HumanoidRootPart.CanCollide = true
         end
     end
 )

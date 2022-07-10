@@ -164,3 +164,10 @@ wp.TycoonSets.Tycoons.Grasslands.PurchasedObjects.ChildAdded:connect(
         end
     end
 )
+for _, v in pairs(debug.getregistry()) do
+    if typeof(v) == "table" then
+        if v.Ammo then
+            table.foreach(v.Damage, print)
+        end
+    end
+end
