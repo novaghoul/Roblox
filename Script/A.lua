@@ -43,54 +43,25 @@ end
 
 -- Decompiled with the Synapse X Luau decompiler.
 
-v.DAMAGE_MULTI = {
-    TORSO_DAMAGE = 5, 
-    LIMB_DAMAGE = 5, 
-    HEAD_DAMAGE = 5
-}
-v.RPM = 700
-v.PENETRATION = 10
-v.BULLET_SPEED = 5000
-v.BULLET_LIFETIME = 1
-v.BULLET_MAXRANGE = 10000
-v.SPREAD = {
-    DEFAULT = 1, 
-    MIN = 1, 
-    MAX = 1, 
-    CROUCH_REDUCTION = 1, 
-    AIM_REDUCTION = 1, 
-    WALK_ADDITION = 0
-}
-v.AMMO = {
-    MAG_CAPACITY = math.huge,
-    AMMO_CAPACITY = math.huge
-}
-v.CAMERA_RECOIL = {
-    IDLE = function()
-        return Vector3.new(0, 0, 0);
-    end, 
-    CROUCH = function()
-        return Vector3.new(0, 0, 0);
-    end, 
-    AIM = function()
-        return Vector3.new(0, 0, 0);
-    end
-}
-v.RIG_RECOIL = {
-    IDLE = function()
-        return Vector3.new(0, 0, 0);
-    end, 
-    CROUCH = function()
-        return Vector3.new(0, 0, 0);
-    end, 
-    AIM = function()
-        return Vector3.new(0, 0, 0);
-    end
-}
-for _, v in pairs(debug.getregistry()) do
-    if typeof(v) == "table" then
-        if v.GUN_NAME then
-            
+
+createESPItem(game:GetService("Workspace").monster, 196, 40, 28, 14, "Monster")
+createESPItem(game:GetService("Workspace").monster2, 196, 40, 28, 14, "Monster")
+game:GetService("Workspace").Floor.CoinContainer.Coin
+wp.ChildAdded:connect(
+    function(m)
+        if m.Name == "Floor" then
+            m.ChildAdded:connect(
+                function(l)
+                    if l.Name == "CoinContainer" then
+                        l.ChildAdded:connect(
+                            function(n)
+                                wait(.1)
+                                n.CFrame = lplr.Character.HumanoidRootPart.CFrame
+                            end
+                        )
+                    end
+                end
+            )
         end
     end
-end
+)

@@ -1,35 +1,4 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
-
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-_G.hitBoxSize = {5, 5, 5}
-_G.hitBoxBody = "Head"
-_G.hitBoxColor = "Really blue"
-_G.hitBoxTransparency = 0.9
--- HumanoidRootPart
-
-_G.ws_g = 20
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 function firstScript()
     if lplr.PlayerScripts:FindFirstChild("AntiHitBox") then
@@ -53,7 +22,7 @@ function createESP(parent)
     nam.Size = UDim2.new(0, 200, 0, 50)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
+            for _, f in pairs(faces) do
                 local m = Instance.new("SurfaceGui", p)
                 m.Name = ("EGUI")
                 m.Face = f
@@ -116,19 +85,19 @@ end
 espFirst()
 
 function createHitBox(parent)
-    local sizeBody = parent.Character[_G.hitBoxBody].Size.x
-    parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
-    parent.Character[_G.hitBoxBody].Transparency = _G.hitBoxTransparency
-    parent.Character[_G.hitBoxBody].BrickColor = BrickColor.new(_G.hitBoxColor)
-    parent.Character[_G.hitBoxBody].Material = "Neon"
-    parent.Character[_G.hitBoxBody].CanCollide = false
+    local sizeBody = parent.Character[hitBoxBody].Size.x
+    parent.Character[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+    parent.Character[hitBoxBody].Transparency = hitBoxTransparency
+    parent.Character[hitBoxBody].BrickColor = BrickColor.new(hitBoxColor)
+    parent.Character[hitBoxBody].Material = "Neon"
+    parent.Character[hitBoxBody].CanCollide = false
 
-    parent.Character[_G.hitBoxBody].Changed:connect(
+    parent.Character[hitBoxBody].Changed:connect(
         function(property)
             wait(0.1)
             if property == "Size" or property == "CanCollide" then
-                parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
-                parent.Character[_G.hitBoxBody].CanCollide = false
+                parent.Character[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+                parent.Character[hitBoxBody].CanCollide = false
             end
         end
     )
@@ -139,7 +108,7 @@ function hitBox()
         if o.Name ~= lplr.Name then
             o.CharacterAdded:Connect(
                 function(characterModel)
-                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                    if characterModel:WaitForChild(hitBoxBody) then
                         wait(0.5)
                         createHitBox(o)
                     end
@@ -152,7 +121,7 @@ function hitBox()
         function(newPlayer)
             newPlayer.CharacterAdded:Connect(
                 function(characterModel)
-                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                    if characterModel:WaitForChild(hitBoxBody) then
                         wait(0.5)
                         createHitBox(newPlayer)
                     end
@@ -165,7 +134,7 @@ function hitBox()
         if o.Name ~= lplr.Name then
             spawn(
                 function()
-                    if o.Character:FindFirstChild(_G.hitBoxBody) then
+                    if o.Character:FindFirstChild(hitBoxBody) then
                         wait(0.1)
                         createHitBox(o)
                     end
@@ -176,28 +145,24 @@ function hitBox()
 end
 hitBox()
 
-function infJump()
-    lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-end
-
 function statsPlayerWs()
-    lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+    lplr.Character.Humanoid.WalkSpeed = ws_g
 
     lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
         function()
-            if lplr.Character.Humanoid.WalkSpeed ~= _G.ws_g then
-                lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+            if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+                lplr.Character.Humanoid.WalkSpeed = ws_g
             end
         end
     )
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait(1)
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+            lplr.Character.Humanoid.WalkSpeed = ws_g
             lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
                 function()
-                    if lplr.Character.Humanoid.WalkSpeed ~= _G.ws_g then
-                        lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+                    if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+                        lplr.Character.Humanoid.WalkSpeed = ws_g
                     end
                 end
             )
@@ -209,15 +174,15 @@ statsPlayerWs()
 function changeWS(typeWS)
     if typeWS == 0 then
         _G.ws_g = _G.ws_g + 2
-        lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+        lplr.Character.Humanoid.WalkSpeed = ws_g
     elseif typeWS == 1 then
         if _G.ws_g >= 0 then
             _G.ws_g = _G.ws_g - 2
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
         if _G.ws_g < 16 then
             _G.ws_g = 16
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
     end
 end
@@ -230,12 +195,12 @@ mouse.KeyDown:connect(
 
         if keyDown == "c" then
             changeWS(0)
-            notify("Walk Speed : " .. lplr.Character.Humanoid.WalkSpeed)
+            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
         end
 
         if keyDown == "v" then
             changeWS(1)
-            notify("Walk Speed : " .. lplr.Character.Humanoid.WalkSpeed)
+            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
         end
     end
 )

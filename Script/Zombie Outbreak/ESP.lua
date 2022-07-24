@@ -1,62 +1,11 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
-
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-_G.hitBoxSize = {5, 5, 5}
-_G.hitBoxBody = "Head"
-_G.hitBoxColor = "Really blue"
-_G.hitBoxTransparency = 0.9
--- HumanoidRootPart
-
-_G.ws_g = 16
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "Walk Speed and Jump Power",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 function createESP(parent, r, g, b)
-    local bgui = Instance.new("BillboardGui", parent.Character.Head)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-    bgui.Size = UDim2.new(0, 200, 0, 50)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = parent.Name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 14
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(r, g, b)
-    nam.Size = UDim2.new(0, 200, 0, 50)
+    createESPItem(parent, r, g, b, 14, parent.Name)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
-                local m = Instance.new("SurfaceGui", p)
-                m.Name = ("EGUI")
-                m.Face = f
-                m.Active = true
-                m.AlwaysOnTop = true
-                local mf = Instance.new("Frame", m)
-                mf.Size = UDim2.new(1, 0, 1, 0)
-                mf.BorderSizePixel = 0
-                mf.BackgroundTransparency = 0.5
-                mf.BackgroundColor3 = Color3.fromRGB(r, g, b)
+            for _, f in pairs(faces) do
+                createESPCharm(parent, f, r, g, b)
             end
         end
     end
@@ -127,17 +76,17 @@ espFirst()
 
 function statsPlayerWs()
     if tostring(lplr.Team) == "Zombies" then
-        _G.ws_g = 25
+        ws_g = 25
     else
-        _G.ws_g = 16
+        ws_g = 16
     end
 
-    lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+    lplr.Character.Humanoid.WalkSpeed = ws_g
 
     lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
         function()
-            if lplr.Character.Humanoid.WalkSpeed ~= _G.ws_g then
-                lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+            if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+                lplr.Character.Humanoid.WalkSpeed = ws_g
             end
         end
     )
@@ -145,15 +94,15 @@ function statsPlayerWs()
         function(characterModel)
             wait(0.5)
             if tostring(lplr.Team) == "Zombies" then
-                _G.ws_g = 25
+                ws_g = 25
             else
-                _G.ws_g = 16
+                ws_g = 16
             end
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+            lplr.Character.Humanoid.WalkSpeed = ws_g
             lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
                 function()
-                    if lplr.Character.Humanoid.WalkSpeed ~= _G.ws_g then
-                        lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+                    if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+                        lplr.Character.Humanoid.WalkSpeed = ws_g
                     end
                 end
             )

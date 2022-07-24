@@ -2,18 +2,17 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 function createESP(parent)
     if not parent.Character.Hitbox:GetChildren()[1]:FindFirstChild("nameEGUI") then
-        createESPItem(parent.Character.Hitbox:GetChildren()[1], 192, 192, 192, 14, parent.Name)
+        createESPItem(parent.Character.Hitbox:GetChildren()[1], 196, 40, 28, 14, parent.Name)
         for _, p in pairs(parent.Character.Hitbox:GetChildren()) do
             if p:IsA("MeshPart") then
                 for _, f in pairs(faces) do
                     wait(.1)
-                    createESPCharm(p, f, 192, 192, 192)
+                    createESPCharm(p, f, 196, 40, 28)
                 end
             end
         end
     end
 end
-
 
 function espFirst()
     for _, o in pairs(plrs:GetPlayers()) do
@@ -57,9 +56,20 @@ function firstFun()
             end
         end
     end
+
+    lplr.CharacterAdded:Connect(
+        function(characterModel)
+            wait(2)
+            if characterModel:WaitForChild("Base") then
+                characterModel.Base.Recoil.Multiplier.Value = {1, 1, 1}
+            end
+        end
+    )
 end
 firstFun()
 
+-- game:GetService("Workspace").WAOKyoHana.RegenHealth
+-- game:GetService("Workspace").WAOKyoHana.Base.Recoil.Multiplier
 mouse.KeyDown:connect(
     function(keyDown)
         if keyDown == "e" then

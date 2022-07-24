@@ -1,8 +1,8 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 _G.dis = 4
-_G.hitBoxSize = {7, 7, 7}
-_G.hitBoxBody = "HumanoidRootPart"
+hitBoxSize = {7, 7, 7}
+hitBoxBody = "HumanoidRootPart"
 
 function createESP(parent)
 	local bgui = Instance.new("BillboardGui", parent.Character.Head)
@@ -19,7 +19,7 @@ function createESP(parent)
 	nam.Size = UDim2.new(0, 200, 0, 50)
 	for _, p in pairs(parent.Character:GetChildren()) do
 		if p.Name == ("Head") then
-			for _, f in pairs(_G.faces) do
+			for _, f in pairs(faces) do
 				local m = Instance.new("SurfaceGui", p)
 				m.Name = ("EGUI")
 				m.Face = f
@@ -105,7 +105,7 @@ enableESPCode()
 function espFirst()
 	for _, o in pairs(plrs:GetPlayers()) do
 		if tostring(o.Name) ~= tostring(lplr.Name) then
-			if o.Character ~= nil then
+			if o.Character ~= nil and o.Character:FindFirstChild("Head") then
 				wait(0.1)
 				createESP(o)
 			end
@@ -115,19 +115,19 @@ end
 espFirst()
 
 function createHitBox(parent)
-    local sizeBody = parent.Character[_G.hitBoxBody].Size.x
-    parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
-    parent.Character[_G.hitBoxBody].Transparency = _G.hitBoxTransparency
-    parent.Character[_G.hitBoxBody].BrickColor = BrickColor.new(_G.hitBoxColor)
-    parent.Character[_G.hitBoxBody].Material = "Neon"
-    parent.Character[_G.hitBoxBody].CanCollide = false
+    local sizeBody = parent.Character[hitBoxBody].Size.x
+    parent.Character[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+    parent.Character[hitBoxBody].Transparency = hitBoxTransparency
+    parent.Character[hitBoxBody].BrickColor = BrickColor.new(hitBoxColor)
+    parent.Character[hitBoxBody].Material = "Neon"
+    parent.Character[hitBoxBody].CanCollide = false
 
-    parent.Character[_G.hitBoxBody].Changed:connect(
+    parent.Character[hitBoxBody].Changed:connect(
         function(property)
             wait(0.1)
             if property == "Size" or property == "CanCollide" then
-                parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
-                parent.Character[_G.hitBoxBody].CanCollide = false
+                parent.Character[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+                parent.Character[hitBoxBody].CanCollide = false
             end
         end
     )
@@ -138,7 +138,7 @@ function hitBox()
         if o.Name ~= lplr.Name then
             o.CharacterAdded:Connect(
                 function(characterModel)
-                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                    if characterModel:WaitForChild(hitBoxBody) then
                         wait(0.5)
                         createHitBox(o)
                     end
@@ -151,7 +151,7 @@ function hitBox()
         function(newPlayer)
             newPlayer.CharacterAdded:Connect(
                 function(characterModel)
-                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                    if characterModel:WaitForChild(hitBoxBody) then
                         wait(0.5)
                         createHitBox(newPlayer)
                     end
@@ -164,7 +164,7 @@ function hitBox()
         if o.Name ~= lplr.Name then
             spawn(
                 function()
-                    if o.Character:WaitForChild(_G.hitBoxBody) then
+                    if o.Character:FindFirstChild(hitBoxBody) then
                         wait(0.1)
                         createHitBox(o)
                     end
