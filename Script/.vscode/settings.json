@@ -1,3 +1,10 @@
 {
-    "lua.targetVersion": "5.1"
+    "lua.targetVersion": "5.1",
+    "Lua.diagnostics.globals": [
+        "continue",
+        "game"
+    ],
+    "Lua.diagnostics.disable": [
+        "deprecated"
+    ]
 }

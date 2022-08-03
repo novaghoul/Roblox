@@ -1,5 +1,5 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
-game:GetService("Workspace").Activities.IceSkating.PickupSpots.PickupSpot["Logo_Stadium"]
+
 
 for _,v in pairs(wp) do
     print(k,v)

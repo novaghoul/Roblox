@@ -1282,7 +1282,7 @@ function t2s(t, l, p, n, vtv, i, pt, path, tables, tI)
         end
         if rawequal(k, t) then -- checks if the table being iterated over is being used as an index within itself (yay, lua)
             bottomstr = bottomstr .. "\n" .. tostring(n) .. tostring(path) .. "[" .. tostring(n) .. tostring(path) .. "]" .. " = " .. (rawequal(v, k) and tostring(n) .. tostring(path) or v2s(v, l, p, n, vtv, k, t, path .. "[" .. tostring(n) .. tostring(path) .. "]", tables))
-            size -= 1
+            size = size - 1
             continue
         end
         local currentPath = "" -- initializes the path of 'v' within 't'
@@ -1586,14 +1586,14 @@ function handlespecials(value, indentation)
         if i % 200 == 0 then
             indentStr = indentStr or string.rep(" ", indentation + indent)
             table.move({'"\n', indentStr, '... "'}, 1, 3, i, buildStr)
-            i += 3
+            i = i + 3
         end
     end
     return table.concat(buildStr)
 end
 
 -- safe (ish) tostring
-function safetostring(v: any)
+function safetostring(v)
     if typeof(v) == "userdata" or type(v) == "table" then
         local mt = getrawmetatable(v)
         local badtostring = mt and rawget(mt, "__tostring")
@@ -1632,7 +1632,7 @@ function getScriptFromSrc(src)
         e = src:sub(s, -1):find("%.")
         local i = 0
         repeat
-            i += 1
+            i = i + 1
             if not e then
                 runningTest = src:sub(s, -1)
                 local test = realPath.FindFirstChild(realPath, runningTest)
@@ -1714,7 +1714,7 @@ function remoteHandler(hookfunction, methodName, remote, args, funcInfo, calling
                 history[remote] = {badOccurances = 0, lastCall = tick()}
             end
             if tick() - history[remote].lastCall < 1 then
-                history[remote].badOccurances += 1
+                history[remote].badOccurances = history[remote].badOccurances + 1
                 return
             else
                 history[remote].badOccurances = 0

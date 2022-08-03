@@ -39,29 +39,34 @@ end
 function firstFun()
     for i,v in pairs(getgc(true)) do
         if type(v) == 'table' and rawget(v, 'Magazine') then
-    		v.Reserve = 100
-    		v.ReloadTime = 0.1
-    		v.FireRate = 0.0666666666666667
+    		v.Reserve = 500
+    		v.ReloadTime = 1
+    		v.FireRate = 10
     		v.VibrationScale = 0.01
+    		v.Weight = 1
+    		v.Damage = 1700
+    		v.Magazine = 30
+    		v.SpreadGain = 1000
+    		v.SpreadRecovery = 1000
         end
     end
-    for i,v in pairs(getgc(true)) do
-        if type(v) == 'table' and rawget(v, 'Armour') then
-    		v.Armour = 10000
-    		v.Health = 5000
-    		v.Acceleration = 1000
-    		v.TopSpeed = 1000
-            if v.VehicleType == 1 then
-                v.HullRotation = 500
-            end
-        end
-    end
+    -- for i,v in pairs(getgc(true)) do
+    --     if type(v) == 'table' and rawget(v, 'Armour') then
+    -- 		v.Armour = 10000
+    -- 		v.Health = 5000
+    -- 		v.Acceleration = 1000
+    -- 		v.TopSpeed = 1000
+    --         if v.VehicleType == 1 then
+    --             v.HullRotation = 500
+    --         end
+    --     end
+    -- end
 
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait(2)
             if characterModel:WaitForChild("Base") then
-                characterModel.Base.Recoil.Multiplier.Value = {1, 1, 1}
+                characterModel.Base.Recoil.Multiplier.Value = {0.1, 0.1, 0.1}
             end
         end
     )
