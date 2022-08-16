@@ -132,6 +132,14 @@ if init == nil then
         end
     end
 
+    getgenv().deleteAray = function(parent, name)
+        for _,v in pairs(parent:GetChildren()) do
+            if tostring(v.Name) == name then
+                v:Destroy()
+            end
+        end
+    end
+
     getgenv().actualESP = function(obj)
         for i = 0, 5 do
             surface = Instance.new("SurfaceGui", obj) --//Creates the SurfaceGui

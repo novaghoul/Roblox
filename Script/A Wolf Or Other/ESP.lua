@@ -1,36 +1,9 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
-_G.ws_g = 20
-_G.hitBoxSize = {5, 5, 5}
-_G.hitBoxBody = "HumanoidRootPart"
-_G.hitBoxColor = "Really blue"
-_G.hitBoxTransparency = 0.9
--- HumanoidRootPart
-
-function notify(msg)
-    sg:SetCore(
-        "SendNotification",
-        {
-            Title = "A Wolf Or Other",
-            Text = msg,
-            Duration = 3
-        }
-    )
-end
+hitBoxBody = "HumanoidRootPart"
 
 function createESP(parent, r, g, b)
+    createESPItem(parent.Character.Head, r, g, b, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
     local bgui = Instance.new("BillboardGui", parent.Character.Head)
     bgui.Name = ("EGUI")
     bgui.AlwaysOnTop = true
@@ -45,7 +18,7 @@ function createESP(parent, r, g, b)
     nam.Size = UDim2.new(0, 200, 0, 50)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
-            for _, f in pairs(_G.faces) do
+            for _, f in pairs(faces) do
                 local m = Instance.new("SurfaceGui", p)
                 m.Name = ("EGUI")
                 m.Face = f
@@ -175,31 +148,12 @@ function espFirst()
 end
 espFirst()
 
-function createHitBox(parent)
-    local sizeBody = parent.Character[_G.hitBoxBody].Size.x
-    parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
-    parent.Character[_G.hitBoxBody].Transparency = _G.hitBoxTransparency
-    parent.Character[_G.hitBoxBody].BrickColor = BrickColor.new(_G.hitBoxColor)
-    parent.Character[_G.hitBoxBody].Material = "Neon"
-    parent.Character[_G.hitBoxBody].CanCollide = false
-
-    parent.Character[_G.hitBoxBody].Changed:connect(
-        function(property)
-            wait(0.1)
-            if property == "Size" or property == "CanCollide" then
-                parent.Character[_G.hitBoxBody].Size = Vector3.new(_G.hitBoxSize[1], _G.hitBoxSize[2], _G.hitBoxSize[3])
-                parent.Character[_G.hitBoxBody].CanCollide = false
-            end
-        end
-    )
-end
-
 function hitBox()
     for _, o in pairs(plrs:GetPlayers()) do
         if o.Name ~= lplr.Name then
             o.CharacterAdded:Connect(
                 function(characterModel)
-                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                    if characterModel:WaitForChild(hitBoxBody) then
                         wait(0.5)
                         createHitBox(o)
                     end
@@ -212,7 +166,7 @@ function hitBox()
         function(newPlayer)
             newPlayer.CharacterAdded:Connect(
                 function(characterModel)
-                    if characterModel:WaitForChild(_G.hitBoxBody) then
+                    if characterModel:WaitForChild(hitBoxBody) then
                         wait(0.5)
                         createHitBox(newPlayer)
                     end
@@ -225,7 +179,7 @@ function hitBox()
         if o.Name ~= lplr.Name then
             spawn(
                 function()
-                    if o.Character:WaitForChild(_G.hitBoxBody) then
+                    if o.Character:WaitForChild(hitBoxBody) then
                         wait(0.1)
                         createHitBox(o)
                     end
@@ -308,12 +262,12 @@ end
 
 function statsPlayerWs()
     if wp:FindFirstChild(lplr.Name) then
-        lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+        lplr.Character.Humanoid.WalkSpeed = ws_g
 
         lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
             function()
-                if lplr.Character.Humanoid.WalkSpeed ~= _G.ws_g then
-                    lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+                if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+                    lplr.Character.Humanoid.WalkSpeed = ws_g
                 end
             end
         )
@@ -321,11 +275,11 @@ function statsPlayerWs()
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait(1)
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+            lplr.Character.Humanoid.WalkSpeed = ws_g
             lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
                 function()
-                    if lplr.Character.Humanoid.WalkSpeed ~= _G.ws_g then
-                        lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+                    if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+                        lplr.Character.Humanoid.WalkSpeed = ws_g
                     end
                 end
             )
@@ -336,16 +290,16 @@ statsPlayerWs()
 
 function changeWS(typeWS)
     if typeWS == 0 then
-        _G.ws_g = _G.ws_g + 2
-        lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+        ws_g = ws_g + 2
+        lplr.Character.Humanoid.WalkSpeed = ws_g
     elseif typeWS == 1 then
-        if _G.ws_g >= 0 then
-            _G.ws_g = _G.ws_g - 2
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+        if ws_g >= 0 then
+            ws_g = ws_g - 2
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
-        if _G.ws_g < 16 then
-            _G.ws_g = 16
-            lplr.Character.Humanoid.WalkSpeed = _G.ws_g
+        if ws_g < 16 then
+            ws_g = 16
+            lplr.Character.Humanoid.WalkSpeed = ws_g
         end
     end
 end
@@ -369,12 +323,5 @@ mouse.KeyDown:connect(
             changeWS(1)
             notify("Walk Speed : " .. lplr.Character.Humanoid.WalkSpeed)
         end
-    end
-)
-
-lplr.Idled:connect(
-    function()
-        VirtualUser:CaptureController()
-        VirtualUser:ClickButton2(Vector2.new())
     end
 )
