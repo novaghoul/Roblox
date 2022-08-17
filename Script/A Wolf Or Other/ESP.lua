@@ -2,69 +2,53 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 hitBoxBody = "HumanoidRootPart"
 
-function createESP(parent, r, g, b)
-    createESPItem(parent.Character.Head, r, g, b, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
-    local bgui = Instance.new("BillboardGui", parent.Character.Head)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-    bgui.Size = UDim2.new(0, 200, 0, 50)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")"
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 14
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(r, g, b)
-    nam.Size = UDim2.new(0, 200, 0, 50)
+function createHeadCharm(parent, r, g, b)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
             for _, f in pairs(faces) do
-                local m = Instance.new("SurfaceGui", p)
-                m.Name = ("EGUI")
-                m.Face = f
-                m.Active = true
-                m.AlwaysOnTop = true
-                local mf = Instance.new("Frame", m)
-                mf.Size = UDim2.new(1, 0, 1, 0)
-                mf.BorderSizePixel = 0
-                mf.BackgroundTransparency = 0.5
-                mf.BackgroundColor3 = Color3.fromRGB(r, g, b)
-                parent.Backpack.ChildAdded:connect(
-                    function(m)
-                        wait(0.1)
-                        if m:FindFirstChild("Ammo") then
-                            mf.BackgroundColor3 = Color3.fromRGB(13, 105, 172)
-                        elseif m:FindFirstChild("ClawScript") then
-                            mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                        end
-                    end
-                )
-                
-                parent.Character.ChildRemoved:connect(
-                    function(m)
-                        wait(0.1)
-                        if m:IsA("Tool") then
-                            local charTool = parent.Character:FindFirstChildOfClass("Tool")
-                            local backTool = parent.Backpack:FindFirstChildOfClass("Tool")
-                            if not charTool and not backTool then
-                                mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                            end
-                        end
-                    end
-                )
+                createESPCharm(p, f, r, g, b)
             end
         end
     end
+end
+
+function createESP(parent, r, g, b)
+    createESPItem(parent.Character.Head, r, g, b, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
+    createHeadCharm(parent, r, g, b)
+    
     parent.Backpack.ChildAdded:connect(
         function(m)
             wait(0.1)
             if m:FindFirstChild("Ammo") then
-                nam.TextColor3 = Color3.fromRGB(13, 105, 172)
+                deleteAray(parent.Character.Head, "BS")
+                deleteAray(parent.Character.Head, "nameEGUI")
+                createESPItem(parent.Character.Head, 13, 105, 172, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
+                createHeadCharm(parent, 13, 105, 172)
             elseif m:FindFirstChild("ClawScript") then
-                nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+                deleteAray(parent.Character.Head, "BS")
+                deleteAray(parent.Character.Head, "nameEGUI")
+                createESPItem(parent.Character.Head, 196, 40, 28, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
+                createHeadCharm(parent, 196, 40, 28)
             end
         end
     )
+    
+    parent.Character.ChildRemoved:connect(
+        function(m)
+            wait(0.1)
+            if m:IsA("Tool") then
+                local charTool = parent.Character:FindFirstChildOfClass("Tool")
+                local backTool = parent.Backpack:FindFirstChildOfClass("Tool")
+                if not charTool and not backTool then
+                    deleteAray(parent.Character.Head, "BS")
+                    deleteAray(parent.Character.Head, "nameEGUI")
+                    createESPItem(parent.Character.Head, 75, 151, 758, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
+                    createHeadCharm(parent, 75, 151, 75)
+                end
+            end
+        end
+    )
+
     parent.Character.ChildRemoved:connect(
         function(m)
             wait(0.1)
