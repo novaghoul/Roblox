@@ -6,6 +6,21 @@ end
 
 _G.guiOn = false
 
+if _G.arrayNameButton == nil then
+    _G.arrayNameButton = {
+        "addSpeed",
+        "subSpeed",
+        "infJump",
+        "noclipToggle"
+    }
+    _G.arrayTextButton = {
+        "Press C to + Speed",
+        "Press V to - Speed",
+        "Press Space to Inf Jump",
+        "Press F to Noclip"
+    }
+end
+
 local posCurent = 10
 local sizeMFCurent = 45
 
