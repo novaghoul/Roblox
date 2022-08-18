@@ -23,7 +23,7 @@ function enableESPCode()
 	for _, o in pairs(plrs:GetPlayers()) do
 		o.CharacterAdded:Connect(
 			function(characterModel)
-				if o.Name ~= lplr.Name then
+				if o.Name ~= lplr.Name and o.Team ~= lplr.Team then
 					if characterModel:WaitForChild("Head") then
 						wait(0.5)
 						createESP(o)
@@ -37,9 +37,11 @@ function enableESPCode()
 		function(newPlayer)
 			newPlayer.CharacterAdded:Connect(
 				function(characterModel)
-					if characterModel:WaitForChild("Head") then
-						wait(0.5)
-						createESP(newPlayer)
+					if newPlayer.Team ~= lplr.Team then
+						if characterModel:WaitForChild("Head") then
+							wait(0.5)
+							createESP(newPlayer)
+						end
 					end
 				end
 			)
@@ -50,7 +52,7 @@ enableESPCode()
 
 function espFirst()
 	for _, o in pairs(plrs:GetPlayers()) do
-		if o.Name ~= lplr.Name then
+		if o.Name ~= lplr.Name and o.Team ~= lplr.Team then
 			spawn(
 				function()
 					if o.Character:WaitForChild("Head") then
