@@ -16,6 +16,18 @@ function createESP(parent, r, g, b)
     createESPItem(parent.Character.Head, r, g, b, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
     createHeadCharm(parent, r, g, b)
     
+    if parent.Backpack:FindFirstChild("Ammo") then
+        deleteAray(parent.Character.Head, "BS")
+        deleteAray(parent.Character.Head, "nameEGUI")
+        createESPItem(parent.Character.Head, 13, 105, 172, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
+        createHeadCharm(parent, 13, 105, 172)
+    elseif parent.Backpack:FindFirstChild("ClawScript") then
+        deleteAray(parent.Character.Head, "BS")
+        deleteAray(parent.Character.Head, "nameEGUI")
+        createESPItem(parent.Character.Head, 196, 40, 28, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
+        createHeadCharm(parent, 196, 40, 28)
+    end
+
     parent.Backpack.ChildAdded:connect(
         function(m)
             wait(0.1)
@@ -36,31 +48,15 @@ function createESP(parent, r, g, b)
     parent.Character.ChildRemoved:connect(
         function(m)
             wait(0.1)
-            if m:IsA("Tool") then
-                local charTool = parent.Character:FindFirstChildOfClass("Tool")
-                local backTool = parent.Backpack:FindFirstChildOfClass("Tool")
-                if not charTool and not backTool then
-                    deleteAray(parent.Character.Head, "BS")
-                    deleteAray(parent.Character.Head, "nameEGUI")
-                    createESPItem(parent.Character.Head, 75, 151, 758, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
-                    createHeadCharm(parent, 75, 151, 75)
-                end
+            if m:IsA("Tool") and m:FindFirstChild("Ammo") then
+                deleteAray(parent.Character.Head, "BS")
+                deleteAray(parent.Character.Head, "nameEGUI")
+                createESPItem(parent.Character.Head, 75, 151, 75, 14, parent.Name .. "(" .. parent.Character.Head.Nametag.TextLabel.Text .. ")")
+                createHeadCharm(parent, 75, 151, 75)
             end
         end
     )
 
-    parent.Character.ChildRemoved:connect(
-        function(m)
-            wait(0.1)
-            if m:IsA("Tool") then
-                local charTool = parent.Character:FindFirstChildOfClass("Tool")
-                local backTool = parent.Backpack:FindFirstChildOfClass("Tool")
-                if not charTool and not backTool then
-                    nam.TextColor3 = Color3.fromRGB(75, 151, 75)
-                end
-            end
-        end
-    )
 end
 
 function enableESPCode()
@@ -132,101 +128,30 @@ function espFirst()
 end
 espFirst()
 
-function hitBox()
-    for _, o in pairs(plrs:GetPlayers()) do
-        if o.Name ~= lplr.Name then
-            o.CharacterAdded:Connect(
-                function(characterModel)
-                    if characterModel:WaitForChild(hitBoxBody) then
-                        wait(0.5)
-                        createHitBox(o)
-                    end
-                end
-            )
+function funcEffect(parent)
+    if tostring(parent.Name) == "Handle" then
+        createESPItem(parent, 242, 243, 243, 10, "Weapon Here", 0)
+    elseif parent:FindFirstChild("Head") then
+        for _, l in pairs(parent.Head:GetChildren()) do
+            if tostring(l.Name) == "nameEGUI" or tostring(l.Name) == "BS" then
+                l:Destroy()
+            end
         end
-    end
-
-    plrs.PlayerAdded:Connect(
-        function(newPlayer)
-            newPlayer.CharacterAdded:Connect(
-                function(characterModel)
-                    if characterModel:WaitForChild(hitBoxBody) then
-                        wait(0.5)
-                        createHitBox(newPlayer)
-                    end
-                end
-            )
-        end
-    )
-
-    for _, o in pairs(plrs:GetPlayers()) do
-        if o.Name ~= lplr.Name then
-            spawn(
-                function()
-                    if o.Character:WaitForChild(hitBoxBody) then
-                        wait(0.1)
-                        createHitBox(o)
-                    end
-                end
-            )
-        end
+    else
+        parent:Destroy()
     end
 end
-hitBox()
 
 function firstScript()
+    wp.Gravity = 150
+
     for _, v in pairs(wp.EffectsBin:GetChildren()) do
-        if tostring(v.Name) == "Handle" then
-            local bgui = Instance.new("BillboardGui", v)
-            bgui.Name = ("EGUI")
-            bgui.AlwaysOnTop = true
-            bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-            bgui.Size = UDim2.new(1, 0, 1, 0)
-            local nam = Instance.new("TextLabel", bgui)
-            nam.Text = "Weapon Here"
-            nam.BackgroundTransparency = 1
-            nam.TextSize = 10
-            nam.Font = ("Arial")
-            nam.TextColor3 = Color3.fromRGB(242, 243, 243)
-            nam.Size = UDim2.new(1, 0, 1, 0)
-        elseif v:FindFirstChild("Head") then
-            for _, l in pairs(v.Head:GetChildren()) do
-                if tostring(l.Name) == "EGUI" then
-                    l:Destroy()
-                end
-            end
-        else
-            v:Destroy()
-        end
+        funcEffect(v)
     end
     wp.EffectsBin.ChildAdded:connect(
         function(m)
             wait(0.1)
-            if tostring(m.Name) == "Handle" then
-                local bgui = Instance.new("BillboardGui", m)
-                bgui.Name = ("EGUI")
-                bgui.AlwaysOnTop = true
-                bgui.ExtentsOffset = Vector3.new(0, 0, 0)
-                bgui.Size = UDim2.new(1, 0, 1, 0)
-                local nam = Instance.new("TextLabel", bgui)
-                nam.Text = "Weapon Here"
-                nam.BackgroundTransparency = 1
-                nam.TextSize = 10
-                nam.Font = ("Arial")
-                nam.TextColor3 = Color3.fromRGB(242, 243, 243)
-                nam.Size = UDim2.new(1, 0, 1, 0)
-            else
-                wait(0.5)
-                if m:FindFirstChild("Head") then
-                    for _, l in pairs(m.Head:GetChildren()) do
-                        if tostring(l.Name) == "EGUI" then
-                            l:Destroy()
-                        end
-                    end
-                else
-                    m:Destroy()
-                end
-            end
+            funcEffect(m)
         end
     )
 end
@@ -237,11 +162,6 @@ function takeWeapon()
     if weapon then
         weapon.CFrame = lplr.Character.HumanoidRootPart.CFrame
     end
-end
-
-function infJump()
-    --lplr.Character.Humanoid.JumpPower = _G.jp_g
-    lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 end
 
 function statsPlayerWs()
@@ -300,12 +220,12 @@ mouse.KeyDown:connect(
 
         if keyDown == "c" then
             changeWS(0)
-            notify("Walk Speed : " .. lplr.Character.Humanoid.WalkSpeed)
+            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
         end
 
         if keyDown == "v" then
             changeWS(1)
-            notify("Walk Speed : " .. lplr.Character.Humanoid.WalkSpeed)
+            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
         end
     end
 )
