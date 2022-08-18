@@ -54,24 +54,24 @@ OpenBut.TextSize = 14.000
 
 function createUse(createArray)
     local Use = Instance.new("TextLabel")
-    Use.Name = arrayNameButton[createArray]
+    Use.Name = _G.arrayNameButton[createArray]
     Use.Parent = MFrame
     Use.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Use.BackgroundTransparency = 1.000
     Use.Position = UDim2.new(0, 10, 0, posCurent)
     Use.Size = UDim2.new(0.899999976, 0, 0, 25)
     Use.Font = Enum.Font.SourceSans
-    Use.Text = arrayTextButton[createArray]
+    Use.Text = _G.arrayTextButton[createArray]
     Use.TextColor3 = Color3.fromRGB(0, 0, 0)
     Use.TextSize = 14.000
 end
 
-for i = 1, #arrayNameButton do
+for i = 1, #_G.arrayNameButton do
     createUse(i)
     posCurent = posCurent +  25
 end
 
-MFrame.Size = UDim2.new(0, 200, 0, sizeMFCurent + 25 * (#arrayNameButton - 1))
+MFrame.Size = UDim2.new(0, 200, 0, sizeMFCurent + 25 * (#_G.arrayNameButton - 1))
 -- Scripts:
 
 OpenBut.MouseButton1Down:connect(
