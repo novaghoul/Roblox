@@ -1,7 +1,7 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-if cg:FindFirstChild("MainGUI") then
-	cg["MainGUI"]:Destroy()
+if cg:FindFirstChild("TutorialGUI") then
+	cg["TutorialGUI"]:Destroy()
 end
 
 _G.guiOn = false
@@ -24,15 +24,15 @@ end
 local posCurent = 10
 local sizeMFCurent = 45
 
-local MainGUI = Instance.new("ScreenGui")
+local TutorialGUI = Instance.new("ScreenGui")
 local MFrame = Instance.new("Frame")
 local OpenBut = Instance.new("TextButton")
 
-MainGUI.Name = "MainGUI"
-MainGUI.Parent = cg
+TutorialGUI.Name = "TutorialGUI"
+TutorialGUI.Parent = cg
 
 MFrame.Name = "MFrame"
-MFrame.Parent = MainGUI
+MFrame.Parent = TutorialGUI
 MFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 MFrame.BackgroundTransparency = 0.500
 MFrame.Position = UDim2.new(0.400000006, 0, 0.400000006, 0)
@@ -42,7 +42,7 @@ MFrame.Active = true
 MFrame.Draggable = true
 
 OpenBut.Name = "OpenBut"
-OpenBut.Parent = MainGUI
+OpenBut.Parent = TutorialGUI
 OpenBut.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 OpenBut.BackgroundTransparency = 0.3
 OpenBut.Position = UDim2.new(0, 0, 0.7, 0)
