@@ -2,7 +2,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 hitBoxSize = {7, 7, 7}
 
-local arrayNameButton = {
+_G.arrayNameButton = {
     "addSpeed",
     "subSpeed",
     "infJump",
@@ -10,7 +10,7 @@ local arrayNameButton = {
     "noclipToggle"
 }
 
-local arrayTextButton = {
+_G.arrayTextButton = {
     "Press C to + Speed",
     "Press V to - Speed",
     "Press Space to Inf Jump",
