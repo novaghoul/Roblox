@@ -44,6 +44,23 @@ end)
 fireclickdetector(v)
 firetouchinterest(PartTouch,  BodyTouch, 0)
 table.foreach(v.damage, print)
+_G.arrayNameButton = {
+    "addSpeed",
+    "subSpeed",
+    "infJump",
+    "killAllZom",
+    "noclipToggle"
+}
+
+_G.arrayTextButton = {
+    "Press C to + Speed",
+    "Press V to - Speed",
+    "Press Space to Inf Jump",
+    "Press E to Kill All Zombie",
+    "Press F to Noclip"
+}
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/TutorialMod.lua"), true))() -- Tutorial Lua
 
 local tool = lplr.Backpack:FindFirstChildOfClass("Tool") or lplr.Character:FindFirstChildOfClass("Tool")
 if tool then
