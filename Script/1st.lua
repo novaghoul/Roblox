@@ -18,6 +18,8 @@ if init == nil then
 
     getgenv().ws_g = 20
     getgenv().jp_g = 50
+    getgenv().toggleWS = true
+    getgenv().toggleJP = true
     getgenv().speedDash = 20
 
     getgenv().disTeleport = -5

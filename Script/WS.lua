@@ -43,18 +43,20 @@ function changeWS(typeWS)
 	end
 end
 
-uis.InputBegan:Connect(
-	function(input, gameProcessed)
-		if input.UserInputType.Value == 8 then
-			if input.KeyCode.Value == 107 then
-				changeWS(0)
-				checkReturn("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
-			end
-
-			if input.KeyCode.Value == 108 then
-				changeWS(1)
-				checkReturn("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
+if toggleWS then
+	uis.InputBegan:Connect(
+		function(input, gameProcessed)
+			if input.UserInputType.Value == 8 then
+				if input.KeyCode.Value == 107 then
+					changeWS(0)
+					checkReturn("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
+				end
+	
+				if input.KeyCode.Value == 108 then
+					changeWS(1)
+					checkReturn("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
+				end
 			end
 		end
-	end
-)
+	)
+end

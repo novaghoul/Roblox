@@ -52,21 +52,18 @@ function changeJP(typeJP)
 	end
 end
 
-uis.InputBegan:Connect(function(input, gameProcessed)
-	if input.UserInputType.Value == 8 then
-
-		-- if input.KeyCode.Value == 32 then
-		-- 	infJump()
-		-- end
-
-		if input.KeyCode.Value == 91 then
-			changeJP(0)
-			checkReturn("Jump Power", humanoidP.JumpPower)
+if toggleJP then
+	uis.InputBegan:Connect(function(input, gameProcessed)
+		if input.UserInputType.Value == 8 then
+			if input.KeyCode.Value == 91 then
+				changeJP(0)
+				checkReturn("Jump Power", humanoidP.JumpPower)
+			end
+			
+			if input.KeyCode.Value == 93 then
+				changeJP(1)
+				checkReturn("Jump Power", humanoidP.JumpPower)
+			end
 		end
-		
-		if input.KeyCode.Value == 93 then
-			changeJP(1)
-			checkReturn("Jump Power", humanoidP.JumpPower)
-		end
-	end
-end)
+	end)
+end
