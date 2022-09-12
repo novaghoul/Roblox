@@ -22,6 +22,8 @@ if init == nil then
     getgenv().toggleJP = true
     getgenv().speedDash = 20
 
+    getgenv().durTime = 3
+
     getgenv().disTeleport = -5
 
     getgenv().noclipAll = false
@@ -69,7 +71,7 @@ if init == nil then
             {
                 Title = tostring(tle),
                 Text = tostring(msg),
-                Duration = 3
+                Duration = durTime
             }
         )
     end
