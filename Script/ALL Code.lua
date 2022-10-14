@@ -44,6 +44,15 @@ end)
 fireclickdetector(v)
 firetouchinterest(PartTouch,  BodyTouch, 0)
 table.foreach(v.damage, print)
+
+local filetest = require(game:GetService("ReplicatedStorage").GTycoonClient.Modules.GamepassCache)
+filetest.CheckOwnsPass = function() return true end
+filetest.CheckOwnsPassAsync = function() return true end
+
+local filetest = require(game:GetService("Workspace").Plots["4"].Buttons.QuickSell.Button.QuickSell)
+filetest.Init = function() return; end
+
+
 _G.arrayNameButton = {
     "addSpeed",
     "subSpeed",
@@ -181,10 +190,3 @@ wp.TycoonSets.Tycoons.Grasslands.PurchasedObjects.ChildAdded:connect(
         end
     end
 )
-for _, v in pairs(debug.getregistry()) do
-    if typeof(v) == "table" then
-        if v.Ammo then
-            table.foreach(v.Damage, print)
-        end
-    end
-end
