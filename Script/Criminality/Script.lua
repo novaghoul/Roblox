@@ -77,40 +77,30 @@ for _,v in pairs(wp.Map.ATMz:GetChildren()) do
         end
     )
 end
-
+game:GetService("Workspace").Map.BredMakurz.Register_B_10.Values.Broken.Value
 for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
     if v.Parts:FindFirstChild("Door") then
-        if v.Values:FindFirstChild("BountV") then
+        if tostring(v.Values.Broken.Value) == "false" then
             createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
         end
-        v.Values.ChildAdded:connect(
-            function(m)
-                if tostring(m) == "BountV" then
+        v.Values.Broken:GetPropertyChangedSignal("Value"):connect(
+            function()
+                if tostring(v.Values.Broken.Value) == "false" then
                     createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
-                end
-            end
-        )
-        v.Values.ChildRemoved:connect(
-            function(m)
-                if tostring(m) == "BountV" then
+                else
                     v.MainPart.nameEGUI:Destroy()
                 end
             end
         )
     else
-        if v.Values:FindFirstChild("BountV") then
+        if tostring(v.Values.Broken.Value) == "false" then
             createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
         end
-        v.Values.ChildAdded:connect(
-            function(m)
-                if tostring(m) == "BountV" then
+        v.Values.Broken:GetPropertyChangedSignal("Value"):connect(
+            function()
+                if tostring(v.Values.Broken.Value) == "false" then
                     createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
-                end
-            end
-        )
-        v.Values.ChildRemoved:connect(
-            function(m)
-                if tostring(m) == "BountV" then
+                else
                     v.MainPart.nameEGUI:Destroy()
                 end
             end
@@ -160,9 +150,6 @@ mouse.KeyDown:connect(
 	function(keyDown)
 		if keyDown == "v" then
 			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, disTeleport)
-		end
-		if keyDown == "z" then
-			loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Water%20and%20Lighting.lua"), true))() -- Point Light Lua
 		end
 	end
 )
