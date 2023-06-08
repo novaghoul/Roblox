@@ -73,6 +73,50 @@ wp.Filter.SpawnedBread.ChildAdded:connect(
 --     end
 -- )
 
+for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
+    if v.Parts:FindFirstChild("Door") then
+        if v.Values:FindFirstChild("BountV") then
+            createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
+        end
+        v.Values.ChildAdded:connect(
+            function(m)
+                wait(.5)
+                if not v.MainPart:FindFirstChild("nameEGUI") then
+                    createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
+                end
+            end
+        )
+        v.Values.ChildRemoved:connect(
+            function(m)
+                wait(.5)
+                if v.MainPart:FindFirstChild("nameEGUI") then
+                    v.MainPart.nameEGUI:Destroy()
+                end
+            end
+        )
+    else
+        if v.Values:FindFirstChild("BountV") then
+            createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
+        end
+        v.Values.ChildAdded:connect(
+            function(m)
+                wait(.5)
+                if not v.MainPart:FindFirstChild("nameEGUI") then
+                    createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
+                end
+            end
+        )
+        v.Values.ChildRemoved:connect(
+            function(m)
+                wait(.5)
+                if v.MainPart:FindFirstChild("nameEGUI") then
+                    v.MainPart.nameEGUI:Destroy()
+                end
+            end
+        )
+    end
+end
+
 for _,v in pairs(wp.Map.VendingMachines:GetChildren()) do
     createESPItem(v.MainPart, 245, 205, 48, 14, "🍫", 0)
 end
@@ -141,36 +185,6 @@ mouse.KeyDown:connect(
 		end
 	end
 )
-
-while wait(.2) do
-    for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
-        if v.Parts:FindFirstChild("Door") then
-            if v.Values:FindFirstChild("BountV") then
-                wait(.2)
-                if not v.MainPart:FindFirstChild("nameEGUI") then
-                    createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
-                end
-            else
-                wait(.2)
-                if v.MainPart:FindFirstChild("nameEGUI") then
-                    v.MainPart.nameEGUI:Destroy()
-                end
-            end
-        else
-            if v.Values:FindFirstChild("BountV") then
-                wait(.2)
-                if not v.MainPart:FindFirstChild("nameEGUI") then
-                    createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
-                end
-            else
-                wait(.2)
-                if v.MainPart:FindFirstChild("nameEGUI") then
-                    v.MainPart.nameEGUI:Destroy()
-                end
-            end
-        end
-    end
-end
 
 -- loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Point%20Light.lua"), true))() -- Point Light Lua
 
