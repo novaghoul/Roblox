@@ -99,12 +99,12 @@ for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
         )
     else
         if v.Values:FindFirstChild("BountV") then
-            createESPItem(v.MainPart, 245, 205, 48, 14, "🛒", 0)
+            createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
         end
         v.Values.ChildAdded:connect(
             function(m)
                 if tostring(m) == "BountV" then
-                    createESPItem(v.MainPart, 245, 205, 48, 14, "🛒", 0)
+                    createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
                 end
             end
         )
