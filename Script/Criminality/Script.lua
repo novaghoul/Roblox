@@ -40,7 +40,7 @@ wp.Filter.SpawnedBread.ChildAdded:connect(
     function(m)
         wait(.5)
         createESPItem(m, 245, 205, 48, 14, "💵 " .. m.A.GUI.TextLabel.Text, 0)
-        m.CFrame = lplr.Character.UpperTorso.CFrame
+        m.CFrame = lplr.Character.HumanoidRootPart.CFrame
     end
 )
 
