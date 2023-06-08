@@ -19,6 +19,15 @@ for _,v in pairs(wp.Characters:GetChildren()) do
             createESP(v)
         end
     end
+    if not v.Head:FindFirstChild("PLADD") then
+        local plg      = Instance.new("PointLight",v.Head)
+        plg.Name       = ("PLADD")
+        plg.Range      = 200
+        plg.Shadows    = false
+        plg.Enabled    = true
+        plg.Color      = Color3.fromRGB(255, 255, 255)
+        plg.Brightness = 1
+    end
 end
 
 wp.Characters.ChildAdded:connect(
@@ -28,6 +37,15 @@ wp.Characters.ChildAdded:connect(
             if m:FindFirstChild("Head") then
                 createESP(m)
             end
+        end
+        if not m.Head:FindFirstChild("PLADD") then
+            local plg      = Instance.new("PointLight",m.Head)
+            plg.Name       = ("PLADD")
+            plg.Range      = 200
+            plg.Shadows    = false
+            plg.Enabled    = true
+            plg.Color      = Color3.fromRGB(255, 255, 255)
+            plg.Brightness = 1
         end
     end
 )
