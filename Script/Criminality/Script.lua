@@ -74,41 +74,49 @@ wp.Filter.SpawnedBread.ChildAdded:connect(
 
 for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
     if v.Parts:FindFirstChild("Door") then
-        if v.Values:FindFirstChild("BountV") then
+        local safein = 1
+        if v.Values:FindFirstChild("BountV") and safein == 1 then
+            safein = 2
             createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
         end
         v.Values.ChildAdded:connect(
             function(m)
-                wait(.5)
-                if not v.MainPart:FindFirstChild("nameEGUI") then
+                wait(1)
+                if not v.MainPart:FindFirstChild("nameEGUI") and safein == 1 then
+                    safein = 2
                     createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
                 end
             end
         )
         v.Values.ChildRemoved:connect(
             function(m)
-                wait(.2)
-                if v.MainPart:FindFirstChild("nameEGUI") then
+                wait(1)
+                if v.MainPart:FindFirstChild("nameEGUI") and safein == 2  then
+                    safein = 1
                     v.MainPart.nameEGUI:Destroy()
                 end
             end
         )
     else
-        if v.Values:FindFirstChild("BountV") then
+        local regin = 1
+        if v.Values:FindFirstChild("BountV") and regin == 1 then
+            regin = 2
             createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
         end
         v.Values.ChildAdded:connect(
             function(m)
-                wait(.5)
-                if not v.MainPart:FindFirstChild("nameEGUI") then
+                wait(1)
+                if not v.MainPart:FindFirstChild("nameEGUI") and regin == 1 then
+                    regin = 2
                     createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
                 end
             end
         )
         v.Values.ChildRemoved:connect(
             function(m)
-                wait(.2)
-                if v.MainPart:FindFirstChild("nameEGUI") then
+                wait(1)
+                if v.MainPart:FindFirstChild("nameEGUI") and regin == 2 then
+                    regin = 1
                     v.MainPart.nameEGUI:Destroy()
                 end
             end
