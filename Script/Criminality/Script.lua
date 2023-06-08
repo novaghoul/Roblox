@@ -118,20 +118,20 @@ for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
     end
 end
 
-for _,v in pairs(wp.Map.Security.Alarms:GetChildren()) do
-    if tostring(v.AlarmMain.Value.Value) == "false" then
-        createESPItem(v.MainPart, 245, 205, 48, 14, "🏧", 0)
-    end
-    v.AlarmMain.Value:GetPropertyChangedSignal("Value"):connect(
-        function()
-            if tostring(v.AlarmMain.Value.Value) == "false" then
-                createESPItem(v.MainPart, 245, 205, 48, 14, "🔔", 0)
-            else
-                v.MainPart.nameEGUI:Destroy()
-            end
-        end
-    )
-end
+-- for _,v in pairs(wp.Map.Security.Alarms:GetChildren()) do
+--     if tostring(v.AlarmMain.Value.Value) == "false" then
+--         createESPItem(v.MainPart, 245, 205, 48, 14, "🔔", 0)
+--     end
+--     v.AlarmMain.Value:GetPropertyChangedSignal("Value"):connect(
+--         function()
+--             if tostring(v.AlarmMain.Value.Value) == "false" then
+--                 createESPItem(v.MainPart, 245, 205, 48, 14, "🔔", 0)
+--             else
+--                 v.MainPart.nameEGUI:Destroy()
+--             end
+--         end
+--     )
+-- end
 
 for _,v in pairs(wp.Map.Security.Cameras:GetChildren()) do
     createESPItem(v.MainPart, 245, 205, 48, 14, "📹", 0)
