@@ -133,9 +133,9 @@ end
 --     )
 -- end
 
-for _,v in pairs(wp.Map.Security.Cameras:GetChildren()) do
-    createESPItem(v.MainPart, 245, 205, 48, 14, "📹", 0)
-end
+-- for _,v in pairs(wp.Map.Security.Cameras:GetChildren()) do
+--     createESPItem(v.MainPart, 245, 205, 48, 14, "📹", 0)
+-- end
 
 for _,v in pairs(wp.Map.Shopz:GetChildren()) do
     createESPItem(v.MainPart, 245, 205, 48, 14, "🔫", 0)
@@ -160,6 +160,9 @@ mouse.KeyDown:connect(
 	function(keyDown)
 		if keyDown == "v" then
 			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, disTeleport)
+		end
+		if keyDown == "z" then
+			loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Water%20and%20Lighting.lua"), true))() -- Point Light Lua
 		end
 	end
 )
