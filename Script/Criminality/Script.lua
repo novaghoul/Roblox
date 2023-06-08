@@ -77,7 +77,7 @@ for _,v in pairs(wp.Map.ATMz:GetChildren()) do
         end
     )
 end
-game:GetService("Workspace").Map.BredMakurz.Register_B_10.Values.Broken.Value
+-- game:GetService("Workspace").Map.BredMakurz.Register_B_10.Values.Broken.Value
 for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
     if v.Parts:FindFirstChild("Door") then
         if tostring(v.Values.Broken.Value) == "false" then
