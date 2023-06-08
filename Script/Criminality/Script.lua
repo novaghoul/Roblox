@@ -77,36 +77,6 @@ for _,v in pairs(wp.Map.ATMz:GetChildren()) do
         end
     )
 end
--- game:GetService("Workspace").Map.BredMakurz.Register_B_10.Values.Broken.Value
-for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
-    if v.Parts:FindFirstChild("Door") then
-        if tostring(v.Values.Broken.Value) == "false" then
-            createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
-        end
-        v.Values.Broken:GetPropertyChangedSignal("Value"):connect(
-            function()
-                if tostring(v.Values.Broken.Value) == "false" then
-                    createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
-                else
-                    v.MainPart.nameEGUI:Destroy()
-                end
-            end
-        )
-    else
-        if tostring(v.Values.Broken.Value) == "false" then
-            createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
-        end
-        v.Values.Broken:GetPropertyChangedSignal("Value"):connect(
-            function()
-                if tostring(v.Values.Broken.Value) == "false" then
-                    createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
-                else
-                    v.MainPart.nameEGUI:Destroy()
-                end
-            end
-        )
-    end
-end
 
 -- for _,v in pairs(wp.Map.Security.Alarms:GetChildren()) do
 --     if tostring(v.AlarmMain.Value.Value) == "false" then
@@ -153,8 +123,36 @@ mouse.KeyDown:connect(
 		end
 	end
 )
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Point%20Light.lua"), true))() -- Point Light Lua
 
+while wait(.5) do
+    for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
+        if v.Parts:FindFirstChild("Door") then
+            if v.Values:FindFirstChild("BountV") then
+                if not v.MainPart:FindFirstChild("nameEGUI") then
+                    createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
+                end
+            else
+                if v.MainPart:FindFirstChild("nameEGUI") then
+                    v.MainPart.nameEGUI:Destroy()
+                end
+            end
+        else
+            if v.Values:FindFirstChild("BountV") then
+                if not v.MainPart:FindFirstChild("nameEGUI") then
+                    createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
+                end
+            else
+                if v.MainPart:FindFirstChild("nameEGUI") then
+                    v.MainPart.nameEGUI:Destroy()
+                end
+            end
+        end
+    end
+end
+
+-- loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Point%20Light.lua"), true))() -- Point Light Lua
+
+-- game:GetService("Workspace").Map.BredMakurz.Register_B_10.Values.Broken.Value
 -- game:GetService("Workspace").Map.Shopz:GetChildren()[13].MainPart
 -- game:GetService("Workspace").Map.Security.Alarms:GetChildren()[6].AlarmMain.Value
 -- game:GetService("Workspace").Map.ATMz:GetChildren()[10].Values.Busy.Value
