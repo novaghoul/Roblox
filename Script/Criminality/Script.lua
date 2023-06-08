@@ -142,24 +142,28 @@ mouse.KeyDown:connect(
 	end
 )
 
-while wait(.5) do
+while wait(.2) do
     for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
         if v.Parts:FindFirstChild("Door") then
             if v.Values:FindFirstChild("BountV") then
+                wait(.2)
                 if not v.MainPart:FindFirstChild("nameEGUI") then
                     createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
                 end
             else
+                wait(.2)
                 if v.MainPart:FindFirstChild("nameEGUI") then
                     v.MainPart.nameEGUI:Destroy()
                 end
             end
         else
             if v.Values:FindFirstChild("BountV") then
+                wait(.2)
                 if not v.MainPart:FindFirstChild("nameEGUI") then
                     createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
                 end
             else
+                wait(.2)
                 if v.MainPart:FindFirstChild("nameEGUI") then
                     v.MainPart.nameEGUI:Destroy()
                 end
