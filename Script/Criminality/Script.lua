@@ -88,7 +88,7 @@ for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
         )
         v.Values.ChildRemoved:connect(
             function(m)
-                wait(.5)
+                wait(.2)
                 if v.MainPart:FindFirstChild("nameEGUI") then
                     v.MainPart.nameEGUI:Destroy()
                 end
@@ -108,7 +108,7 @@ for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
         )
         v.Values.ChildRemoved:connect(
             function(m)
-                wait(.5)
+                wait(.2)
                 if v.MainPart:FindFirstChild("nameEGUI") then
                     v.MainPart.nameEGUI:Destroy()
                 end
