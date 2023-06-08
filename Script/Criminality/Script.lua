@@ -134,12 +134,12 @@ end
 
 for _,v in pairs(wp.Map.ATMz:GetChildren()) do
     if tostring(v.Values.Busy.Value) == "false" then
-        createESPItem(v.MainPart, 245, 205, 48, 14, "🏧", 0)
+        createESPItem(v.MainPart, 245, 205, 48, 14, "🏦", 0)
     end
     v.Values.Busy:GetPropertyChangedSignal("Value"):connect(
         function()
             if tostring(v.Values.Busy.Value) == "false" then
-                createESPItem(v.MainPart, 245, 205, 48, 14, "🏧", 0)
+                createESPItem(v.MainPart, 245, 205, 48, 14, "🏦", 0)
             else
                 v.MainPart.nameEGUI:Destroy()
             end
