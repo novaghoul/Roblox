@@ -61,71 +61,44 @@ wp.Filter.SpawnedBread.ChildAdded:connect(
     end
 )
 
--- for _,v in pairs(wp.Filter.SpawnedTools:GetChildren()) do
---     createESPItem(v.Handle, 245, 205, 48, 14, "⚙️", 0)
--- end
+for _,v in pairs(wp.Map.MysteryBoxes:GetChildren()) do
+    createESPItem(v.MainPart, 245, 205, 48, 14, "🎁", 0)
+end
 
--- wp.Filter.SpawnedTools.ChildAdded:connect(
---     function(m)
---         wait(.5)
---         createESPItem(m.Handle, 245, 205, 48, 14, "⚙️", 0)
---     end
--- )
+wp.Map.MysteryBoxes.ChildAdded:connect(
+    function(m)
+        wait(.5)
+        createESPItem(m.MainPart, 245, 205, 48, 14, "🎁", 0)
+    end
+)
 
 for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
     if v.Parts:FindFirstChild("Drawer") then
-        if v.Values.Broken.Value == false then
-            if v.MainPart:FindFirstChild("nameEGUI") then
-            else
-                createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
-            end
-        else
-            if v.MainPart:FindFirstChild("nameEGUI") then
-                v.MainPart.nameEGUI:Destroy()
+        if tostring(v.Values.Broken.Value) == "false" then
+            if v:FindFirstChild("MainPart") then
+                if v.MainPart:FindFirstChild("nameEGUI") then
+                else
+                    print("1" .. tostring(v.Values.Broken.Value))
+                    createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
+                end
             end
         end
         v.Values.Broken:GetPropertyChangedSignal("Value"):connect(
             function()
-                wait(.2)
-                if v.Values.Broken.Value == false then
-                    if v.MainPart:FindFirstChild("nameEGUI") then
-                    else
+                wait(.5)
+                if tostring(v.Values.Broken.Value) == "false" then
+                    if v:WaitForChild("MainPart") then
+                        print("3" .. tostring(v.Values.Broken.Value))
                         createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
                     end
                 else
-                    if v.MainPart:FindFirstChild("nameEGUI") then
-                        v.MainPart.nameEGUI:Destroy()
-                    end
-                end
-            end
-        )
-        v.Values.ChildAdded:connect(
-            function(m)
-                if v.Values.Broken.Value == false then
-                    if v.MainPart:FindFirstChild("nameEGUI") then
-                    else
-                        createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
-                    end
-                else
-                    if v.MainPart:FindFirstChild("nameEGUI") then
-                        v.MainPart.nameEGUI:Destroy()
-                    end
-                end
-                v.Values.Broken:GetPropertyChangedSignal("Value"):connect(
-                    function()
-                        wait(.2)
-                        if v.Values.Broken.Value == false then
-                            if v.MainPart:FindFirstChild("nameEGUI") then
-                            else
-                                createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
-                            end
-                        else
-                            if v.MainPart:FindFirstChild("nameEGUI") then
-                                v.MainPart.nameEGUI:Destroy()
-                            end
+                    if v:WaitForChild("MainPart") then
+                        if v.MainPart:FindFirstChild("nameEGUI") then
+                            print("4 nameEGUI")
+                            v.MainPart.nameEGUI:Destroy()
                         end
                     end
-                )
+                end
             end
         )
     else
@@ -133,13 +106,46 @@ for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
     end
 end
 
+wp.Map.BredMakurz.ChildAdded:connect(
+    function(m)
+        wait(.5)
+        if m.Parts:FindFirstChild("Drawer") then
+            if tostring(m.Values.Broken.Value) == "false" then
+                if m:FindFirstChild("MainPart") then
+                    if m.MainPart:FindFirstChild("nameEGUI") then
+                    else
+                        print("1" .. tostring(m.Values.Broken.Value))
+                        createESPItem(m.MainPart, 245, 205, 48, 14, "🏪", 0)
+                    end
+                end
+            end
+            m.Values.Broken:GetPropertyChangedSignal("Value"):connect(
+                function()
+                    wait(.5)
+                    if tostring(m.Values.Broken.Value) == "false" then
+                        if m:WaitForChild("MainPart") then
+                            print("3" .. tostring(m.Values.Broken.Value))
+                            createESPItem(m.MainPart, 245, 205, 48, 14, "🏪", 0)
+                        end
+                    else
+                        if m:WaitForChild("MainPart") then
+                            if m.MainPart:FindFirstChild("nameEGUI") then
+                                print("4 nameEGUI")
+                                m.MainPart.nameEGUI:Destroy()
+                            end
+                        end
+                    end
+                end
+            )
+        else
+            createESPItem(m.MainPart, 245, 205, 48, 14, "🔒", 0)
+        end
+    end
+)
+
 for _,v in pairs(wp.Map.VendingMachines:GetChildren()) do
     createESPItem(v.MainPart, 245, 205, 48, 14, "🍫", 0)
 end
-
--- for _,v in pairs(wp.Map.MysteryBoxSpawns:GetChildren()) do
---     createESPItem(v.SpawnPart, 245, 205, 48, 14, "📦", 0)
--- end
 
 for _,v in pairs(wp.Map.ATMz:GetChildren()) do
     createESPItem(v.MainPart, 245, 205, 48, 14, "🏦", 0)
@@ -150,26 +156,23 @@ for _,v in pairs(wp.Map.Shopz:GetChildren()) do
 end
 
 for _,v in pairs(wp.Filter.SpawnedPiles:GetChildren()) do
-    if tostring(v.Name) == "C1" then
+    if tostring(v.Name) == "C1" or tostring(v.Name) == "C2" then
         createESPItem(v.MeshPart, 245, 205, 48, 14, "📦", 0)
     else
         createESPItem(v.MeshPart, 245, 205, 48, 14, "💩", 0)
     end
 end
+
 wp.Filter.SpawnedPiles.ChildAdded:connect(
     function(m)
         wait(.5)
-        if tostring(m.Name) == "C1" then
+        if tostring(m.Name) == "C1" or tostring(m.Name) == "C2" then
             createESPItem(m.MeshPart, 245, 205, 48, 14, "📦", 0)
         else
             createESPItem(m.MeshPart, 245, 205, 48, 14, "💩", 0)
         end
     end
 )
-
--- for _,v in pairs(wp.Filter.ToolSpawns:GetChildren()) do
---     createESPItem(v.MeshPart, 245, 205, 48, 14, "⚒️", 0)
--- end
 
 mouse.KeyDown:connect(
 	function(keyDown)
@@ -179,8 +182,7 @@ mouse.KeyDown:connect(
 	end
 )
 
--- loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Point%20Light.lua"), true))() -- Point Light Lua
-
+-- game:GetService("Workspace").Map.MysteryBoxes.MysteryBox.MainPart
 -- workspace.Filter.SpawnedPiles.C1.MeshPart
 -- game:GetService("Workspace").Map.BredMakurz.Register_B_10.Values.Broken.Value
 -- game:GetService("Workspace").Map.Shopz:GetChildren()[13].MainPart
