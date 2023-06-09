@@ -199,7 +199,7 @@ end
 
 for _,v in pairs(wp.Filter.SpawnedPiles:GetChildren()) do
     if tostring(v.Name) == "C1" or tostring(v.Name) == "C2" then
-        createESPItem(v.MeshPart, 245, 205, 48, 14, "📦", 0)
+        createESPItem(v.MeshPart, 245, 205, 48, 14, "⚔️", 0)
     else
         createESPItem(v.MeshPart, 245, 205, 48, 14, "💩", 0)
     end
@@ -209,7 +209,7 @@ wp.Filter.SpawnedPiles.ChildAdded:connect(
     function(m)
         wait(.5)
         if tostring(m.Name) == "C1" or tostring(m.Name) == "C2" then
-            createESPItem(m.MeshPart, 245, 205, 48, 14, "📦", 0)
+            createESPItem(v.MeshPart, 245, 205, 48, 14, "⚔️", 0)
         else
             createESPItem(m.MeshPart, 245, 205, 48, 14, "💩", 0)
         end
