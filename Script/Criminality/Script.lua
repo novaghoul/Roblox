@@ -72,46 +72,6 @@ wp.Filter.SpawnedBread.ChildAdded:connect(
 --     end
 -- )
 
-for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
-    if v.Parts:FindFirstChild("Door") then
-        if v.Values:FindFirstChild("BountV") then
-            createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
-        end
-        v.Values.ChildAdded:connect(
-            function(m)
-                wait(1)
-                if v.Values:WaitForChild("BountV") then
-                    createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
-                end
-            end
-        )
-        v.Values.ChildRemoved:connect(
-            function(m)
-                wait(1)
-                v.MainPart:FindFirstChild("nameEGUI"):Destroy()
-            end
-        )
-    else
-        if v.Values:FindFirstChild("BountV") then
-            createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
-        end
-        v.Values.ChildAdded:connect(
-            function(m)
-                wait(1)
-                if v.Values:WaitForChild("BountV") then
-                    createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
-                end
-            end
-        )
-        v.Values.ChildRemoved:connect(
-            function(m)
-                wait(1)
-                v.MainPart:FindFirstChild("nameEGUI"):Destroy()
-            end
-        )
-    end
-end
-
 for _,v in pairs(wp.Map.VendingMachines:GetChildren()) do
     createESPItem(v.MainPart, 245, 205, 48, 14, "🍫", 0)
 end
@@ -126,6 +86,48 @@ end
 
 for _,v in pairs(wp.Map.Shopz:GetChildren()) do
     createESPItem(v.MainPart, 245, 205, 48, 14, "🔫", 0)
+end
+
+for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
+    if v.Parts:FindFirstChild("Door") then
+        if tostring(v.Values.Broken.Value) == "false" then
+            if not v.MainPart:FindFirstChild("nameEGUI") then
+                createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
+            end
+        else
+            v.MainPart:FindFirstChild("nameEGUI"):Destroy()
+        end
+        v.Values.Broken:GetPropertyChangedSignal("Value"):connect(
+            function()
+                if tostring(v.Values.Broken.Value) == "false" then
+                    if not v.MainPart:FindFirstChild("nameEGUI") then
+                        createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
+                    end
+                else
+                    v.MainPart:FindFirstChild("nameEGUI"):Destroy()
+                end
+            end
+        )
+    else
+        if tostring(v.Values.Broken.Value) == "false" then
+            if not v.MainPart:FindFirstChild("nameEGUI") then
+                createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
+            end
+        else
+            v.MainPart:FindFirstChild("nameEGUI"):Destroy()
+        end
+        v.Values.Broken:GetPropertyChangedSignal("Value"):connect(
+            function()
+                if tostring(v.Values.Broken.Value) == "false" then
+                    if not v.MainPart:FindFirstChild("nameEGUI") then
+                        createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
+                    end
+                else
+                    v.MainPart:FindFirstChild("nameEGUI"):Destroy()
+                end
+            end
+        )
+    end
 end
 
 for _,v in pairs(wp.Filter.SpawnedPiles:GetChildren()) do
