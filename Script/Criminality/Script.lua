@@ -88,7 +88,6 @@ for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
                 wait(.5)
                 if tostring(v.Values.Broken.Value) == "false" then
                     if v:WaitForChild("MainPart") then
-                        print("3" .. tostring(v.Values.Broken.Value))
                         createESPItem(v.MainPart, 245, 205, 48, 14, "🏪", 0)
                     end
                 else
@@ -102,7 +101,30 @@ for _,v in pairs(wp.Map.BredMakurz:GetChildren()) do
             end
         )
     else
-        createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
+        if tostring(v.Values.Broken.Value) == "false" then
+            if v:FindFirstChild("MainPart") then
+                if v.MainPart:FindFirstChild("nameEGUI") then
+                else
+                    createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
+                end
+            end
+        end
+        v.Values.Broken:GetPropertyChangedSignal("Value"):connect(
+            function()
+                wait(.5)
+                if tostring(v.Values.Broken.Value) == "false" then
+                    if v:WaitForChild("MainPart") then
+                        createESPItem(v.MainPart, 245, 205, 48, 14, "🔒", 0)
+                    end
+                else
+                    if v:WaitForChild("MainPart") then
+                        if v.MainPart:FindFirstChild("nameEGUI") then
+                            v.MainPart.nameEGUI:Destroy()
+                        end
+                    end
+                end
+            end
+        )
     end
 end
 
@@ -114,7 +136,6 @@ wp.Map.BredMakurz.ChildAdded:connect(
                 if m:FindFirstChild("MainPart") then
                     if m.MainPart:FindFirstChild("nameEGUI") then
                     else
-                        print("1" .. tostring(m.Values.Broken.Value))
                         createESPItem(m.MainPart, 245, 205, 48, 14, "🏪", 0)
                     end
                 end
@@ -124,13 +145,11 @@ wp.Map.BredMakurz.ChildAdded:connect(
                     wait(.5)
                     if tostring(m.Values.Broken.Value) == "false" then
                         if m:WaitForChild("MainPart") then
-                            print("3" .. tostring(m.Values.Broken.Value))
                             createESPItem(m.MainPart, 245, 205, 48, 14, "🏪", 0)
                         end
                     else
                         if m:WaitForChild("MainPart") then
                             if m.MainPart:FindFirstChild("nameEGUI") then
-                                print("4 nameEGUI")
                                 m.MainPart.nameEGUI:Destroy()
                             end
                         end
@@ -138,7 +157,30 @@ wp.Map.BredMakurz.ChildAdded:connect(
                 end
             )
         else
-            createESPItem(m.MainPart, 245, 205, 48, 14, "🔒", 0)
+            if tostring(m.Values.Broken.Value) == "false" then
+                if m:FindFirstChild("MainPart") then
+                    if m.MainPart:FindFirstChild("nameEGUI") then
+                    else
+                        createESPItem(m.MainPart, 245, 205, 48, 14, "🔒", 0)
+                    end
+                end
+            end
+            m.Values.Broken:GetPropertyChangedSignal("Value"):connect(
+                function()
+                    wait(.5)
+                    if tostring(m.Values.Broken.Value) == "false" then
+                        if m:WaitForChild("MainPart") then
+                            createESPItem(m.MainPart, 245, 205, 48, 14, "🔒", 0)
+                        end
+                    else
+                        if m:WaitForChild("MainPart") then
+                            if m.MainPart:FindFirstChild("nameEGUI") then
+                                m.MainPart.nameEGUI:Destroy()
+                            end
+                        end
+                    end
+                end
+            )
         end
     end
 )
