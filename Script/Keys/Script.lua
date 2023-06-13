@@ -50,9 +50,9 @@ wp.Game.GamePlayers.ChildAdded:connect(
 )
 
 for _,v in pairs(wp.Maps:GetChildren()) do
-    for _,l in pairs(v.InvisParts:GetChildren()) do
-        l:Destroy()
-    end
+    -- for _,l in pairs(v.InvisParts:GetChildren()) do
+    --     l:Destroy()
+    -- end
     for _,l in pairs(v.HideCabinet:GetChildren()) do
         l:Destroy()
     end
