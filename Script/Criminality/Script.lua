@@ -1,7 +1,5 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-disTeleport = -5
-
 function createESP(parent)
     createESPItem(parent.Head, 196, 40, 28, 14, parent.Name)
     for _, p in pairs(parent:GetChildren()) do

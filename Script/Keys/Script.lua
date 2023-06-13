@@ -156,6 +156,9 @@ mouse.KeyDown:connect(
                 NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
             end
         end
+		if keyDown == "v" then
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, disTeleport)
+		end
     end
 )
 
