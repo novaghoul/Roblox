@@ -148,12 +148,12 @@ wp.Maps.IceCave.Parts.ChildAdded:connect(
 mouse.KeyDown:connect(
     function(keyDown)
         if keyDown == "x" then
-            if ws_g == 30 then
+            if ws_g == 40 then
                 ws_g = 16
                 lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
                 NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
             else
-                ws_g = 30
+                ws_g = 40
                 lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
                 NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
             end
