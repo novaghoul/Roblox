@@ -159,7 +159,7 @@ mouse.KeyDown:connect(
             end
         end
 		if keyDown == "v" then
-			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 2, disTeleport)
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, .5, disTeleport)
 		end
     end
 )
