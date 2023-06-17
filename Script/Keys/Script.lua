@@ -3,6 +3,8 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
+disTeleport = -10
+
 function createESP(parent)
     createESPItem(parent.Head, 196, 40, 28, 14, parent.Name)
     for _, p in pairs(parent:GetChildren()) do
@@ -157,7 +159,7 @@ mouse.KeyDown:connect(
             end
         end
 		if keyDown == "v" then
-			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, disTeleport)
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 2, disTeleport)
 		end
     end
 )
