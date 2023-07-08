@@ -1,7 +1,3 @@
-st:GetPropertyChangedSignal(""):connect(
-    function()
-    end
-)
 st:FindFirstChildOfClass("")
 st:WaitForChild("")
 st:GetPlayers()
