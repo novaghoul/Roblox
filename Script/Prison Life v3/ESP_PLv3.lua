@@ -1,26 +1,18 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
-_G.arresttoolRemote = wp.Remote["arrest"]
-_G.meleetoolRemote = rs["meleeEvent"]
+_G.meleetoolRemote = rs.GunRemotes["meleeEvent"]
 _G.plrCurrent = nil
+ws_g = 30
+jp_g = 30
+disTeleport = 10
 hitBoxSize = {7, 7, 7}
 hitBoxBody = "HumanoidRootPart"
 -- HumanoidRootPart
 
 function createESP(parent)
-    parent.Character.Head.CanCollide = false
-    local bgui = Instance.new("BillboardGui", parent.Character.Head)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-    bgui.Size = UDim2.new(0, 200, 0, 50)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = parent.Name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 14
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(205, 205, 205)
-    nam.Size = UDim2.new(0, 200, 0, 50)
+    -- parent.Character.Head.CanCollide = false
+    createESPItem(parent.Character.Head, 205, 205, 205, 14, parent.Name)
     for _, v in pairs(parent.Character:GetChildren()) do
         if checkPart(v) then
             actualESP(v)
@@ -32,20 +24,20 @@ function createESP(parent)
     parent:GetPropertyChangedSignal("Team"):connect(
         function()
             if tostring(parent.Team) == "Criminals" then
-                nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+                parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
             elseif tostring(parent.Team) == "Guards" then
-                nam.TextColor3 = Color3.fromRGB(13, 105, 172)
+                parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(13, 105, 172)
             elseif tostring(parent.Team) == "Inmates" then
-                nam.TextColor3 = Color3.fromRGB(75, 151, 75)
+                parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(218, 133, 65)
             end
         end
     )
     if tostring(parent.Team) == "Criminals" then
-        nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+        parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
     elseif tostring(parent.Team) == "Guards" then
-        nam.TextColor3 = Color3.fromRGB(13, 105, 172)
+        parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(13, 105, 172)
     elseif tostring(parent.Team) == "Inmates" then
-        nam.TextColor3 = Color3.fromRGB(75, 151, 75)
+        parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(218, 133, 65)
     end
 end
 
@@ -95,43 +87,55 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 --------------------------CMDS-------------------------------
 
 function tpPlayer(choose)
-    if tostring(choose) == "all" then
-        eventTP(plrs:GetPlayers())
-    elseif tostring(choose) == "g" then
-        local players = game:GetService("Teams")[tostring("Guards")]:GetPlayers()
-        eventTP(players)
-    elseif tostring(choose) == "i" then
-        local players = game:GetService("Teams")[tostring("Inmates")]:GetPlayers()
-        eventTP(players)
-    elseif tostring(choose) == "c" then
-        local players = game:GetService("Teams")[tostring("Criminals")]:GetPlayers()
-        eventTP(players)
-    else
-        local players = {plrlist(tostring(choose))}
-        eventTP(players)
-    end
+    -- if tostring(choose) == "all" then
+    --     eventTP(plrs:GetPlayers())
+    -- elseif tostring(choose) == "g" then
+    --     local players = game:GetService("Teams")[tostring("Guards")]:GetPlayers()
+    --     eventTP(players)
+    -- elseif tostring(choose) == "i" then
+    --     local players = game:GetService("Teams")[tostring("Inmates")]:GetPlayers()
+    --     eventTP(players)
+    -- elseif tostring(choose) == "c" then
+    --     local players = game:GetService("Teams")[tostring("Criminals")]:GetPlayers()
+    --     eventTP(players)
+    -- else
+    --     local players = {plrlist(tostring(choose))}
+    --     eventTP(players)
+    -- end
 end
 
-function takeWeapon()
-    for _, v in pairs(wp.Prison_ITEMS.giver:GetChildren()) do
-        wp.Remote.ItemHandler:InvokeServer(v.ITEMPICKUP)
-    end
-end
+-- function takeWeapon()
+--     for _, v in pairs(wp.Prison_ITEMS.giver:GetChildren()) do
+--         if tostring(v) == "Shovel" then
+--         else
+--             rs.Events.ItemHandler:InvokeServer(v.ITEMPICKUP)
+--         end
+--     end
+-- end
 
-function arrestPlayer()
-    if not mouse.Target then
-        return
-    end
-    local tp = mouse.Target
+-- function arrestPlayer()
+--     if not mouse.Target then
+--         return
+--     end
+--     local tp = mouse.Target
 
-    while not tp.Parent:FindFirstChild("Humanoid") and tostring(tp.Parent) ~= "Workspace" do
-        tp = tp.Parent
-    end
+--     while not tp.Parent:FindFirstChild("Humanoid") and tostring(tp.Parent) ~= "Workspace" do
+--         tp = tp.Parent
+--     end
 
-    if tp.Parent:FindFirstChild("Humanoid") and plrs:FindFirstChild(tp.Parent.Name) then
-        _G.arresttoolRemote:InvokeServer(tp)
-    end
-end
+--     if tp.Parent:FindFirstChild("Humanoid") and plrs:FindFirstChild(tp.Parent.Name) then
+--         for i=1,10 do
+--             function getNil(name,class) for _,v in next, getnilinstances() do if v.ClassName==class and v.Name==name then return v;end end end
+            
+--             local args = {
+--                 [1] = getNil(tostring(tp.Parent.Name), "Model"):WaitForChild("Head")
+--             }
+            
+--             rs:WaitForChild("Events"):WaitForChild("arrest"):InvokeServer(unpack(args))
+--             wait(.5)
+--         end
+--     end
+-- end
 
 function killPlayer()
     if not mouse.Target then
@@ -160,7 +164,10 @@ function killPlayer()
             if lplr.Character.Humanoid.Health == 0 or tp.Humanoid.Health == 0 then
                 _G.killtoolEnable = false
             end
-            _G.meleetoolRemote:FireServer(plrs:FindFirstChild(tp.Name))
+            for i=1,10 do
+                _G.meleetoolRemote:FireServer(plrs:FindFirstChild(tp.Name))
+                wait(.1)
+            end
         end
     end
 end
@@ -183,7 +190,7 @@ function toolEvent(name)
         function(mouse)
             function toolPlayer()
                 if string.lower(name) == "arrest" then
-                    arrestPlayer()
+                    -- arrestPlayer()
                 elseif string.lower(name) == "kill" then
                     _G.killtoolEnable = true
                     killPlayer()
@@ -198,30 +205,12 @@ function toolEvent(name)
     )
 end
 
-function changeTeam(team)
-    if tostring(team) == "g" then
-        wp.Remote.TeamEvent:FireServer("Bright blue")
-        takeWeapon()
-        toolEvent("Arrest")
-        toolEvent("Kill")
-    elseif tostring(team) == "i" then
-        wp.Remote.TeamEvent:FireServer("Bright orange")
-        takeWeapon()
-        toolEvent("Arrest")
-        toolEvent("Kill")
-        lplr.Character.HumanoidRootPart.CFrame = CFrame.new(875, 100, 2280)
-    elseif tostring(team) == "c" then
-        local lplrCurrent = lplr.Character.HumanoidRootPart.CFrame
-        lplr.Character.HumanoidRootPart.CFrame = CFrame.new(-976.125183, 109.123924, 2059.99536)
-        wait(.01)
-        lplr.Character.HumanoidRootPart.CFrame = lplrCurrent
-        takeWeapon()
-        toolEvent("Arrest")
-        toolEvent("Kill")
-    elseif tostring(team) == "n" then
-        wp.Remote.TeamEvent:FireServer("Medium stone grey")
-    end
+function changeWS(team)
+    ws_g = tonumber(team)
+    lplr.Character.Humanoid.WalkSpeed = ws_g
+    NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
 end
+
 
 local function executeChat(code)
     if string.lower(string.sub(code, 1, 2)) == "/e" then
@@ -242,13 +231,13 @@ local function executeChat(code)
         elseif string.find("rstp", command) then
             resetTP()
         elseif string.find("wp", command) then
-            takeWeapon()
+            -- takeWeapon()
         elseif string.find("atool", command) then
-            toolEvent("Arrest")
+            -- toolEvent("Arrest")
         elseif string.find("ktool", command) then
             toolEvent("Kill")
-        elseif string.find("team", command) then
-            changeTeam(first)
+        elseif string.find("ws", command) then
+            changeWS(first)
         end
     end
 end
@@ -258,39 +247,45 @@ lplr.Chatted:Connect(executeChat)
 --------------------------Other------------------------------
 function funcGun(m)
     if m:FindFirstChild("GunStates") then
-        local module = require(m.GunStates);
-        module.Damage = math.huge;
-        -- module.MaxAmmo = 99999999;
-        -- module.CurrentAmmo = 99999999;
-        module.StoredAmmo = math.huge; 
-        module.FireRate = 0.08;
-        -- module.AutoFire = true;
-        module.Range = math.huge;
-        module.Spread = 20;
-        -- module.ReloadTime = 0;
+        local module = require(m.GunStates)
+        module.Damage = math.huge
+        module.HeadDamage = math.huge
+        -- module.MaxAmmo = 99999999
+        -- module.CurrentAmmo = 99999999
+        module.StoredAmmo = math.huge
+        module.FireRate = 0.1
+        -- module.AutoFire = true
+        module.Range = math.huge
+        module.Spread = 20
+        module.ReloadTime = 0.1
         -- module.Bullets = 5
     end
 end
 
+
 function firstScript()
-    wp.Prison_Cellblock.a_front.glass:Destroy()
-    wp.Prison_Cellblock.b_front.glass:Destroy()
-
-    takeWeapon()
-    toolEvent("Arrest")
-    toolEvent("Kill")
-
-    lplr.Character:WaitForChild("Humanoid").Died:Connect(
-        function()
-            wp.Remote["loadchar"]:InvokeServer(lplr.Name)
+    wp.Prison.Prison_Cellblock.a_front.glass:Destroy()
+    wp.Prison.Prison_Cellblock.b_front.glass:Destroy()
+    for _,v in pairs(wp.Prison_Fences:GetChildren()) do
+        if tostring(v) == "fence" then
+            for _,l in pairs(v:GetChildren()) do
+                if tostring(l) == "fence" or tostring(l) == "hitbox" then
+                    l:Destroy()
+                end
+            end
         end
-    )
+    end
+    -- game:GetService("Workspace").Prison_Fences:GetChildren()[2].fence
+    -- game:GetService("Workspace").Prison_Fences.fence.hitbox
+    -- takeWeapon()
+    -- toolEvent("Arrest")
+    toolEvent("Kill")
 
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait(0.5)
-            takeWeapon()
-            toolEvent("Arrest")
+            -- takeWeapon()
+            -- toolEvent("Arrest")
             toolEvent("Kill")
             characterModel.ChildAdded:connect(
                 function(m)
@@ -298,18 +293,6 @@ function firstScript()
                     funcGun(m)
                 end
             )
-            characterModel:WaitForChild("Humanoid").Died:Connect(
-                function()
-                    wp.Remote["loadchar"]:InvokeServer(lplr.Name)
-                end
-            )
-            for _,v in pairs(getgc()) do
-                if type(v) == "function" and getfenv(v).script == lplr.Character.ClientInputHandler then
-                    if debug.getinfo(v).name == "taze" then
-                        hookfunction(v, function(...) end)
-                    end
-                end
-            end
         end
     )
 
@@ -319,42 +302,9 @@ function firstScript()
             funcGun(m)
         end
     )
-    
-    -- local player = game:GetService("Players").LocalPlayer;
-    -- for i,v in pairs(player.Character:GetDescendants()) do
-    --     if v.Name == "GunStates" then
-    --         local module = require(v);
-    --         module.Damage = 99999999;
-    --         module.MaxAmmo = 99999999;
-    --         module.CurrentAmmo = 99999999;
-    --         module.StoredAmmo = 99999999; 
-    --         module.FireRate = 1;
-    --         module.AutoFire = true; 
-    --         module.Range = 99999999;
-    --         module.Spread = 20;
-    --         module.ReloadTime = 1;
-    --     end
-    -- end
 
-    -- return {
-    --     Damage = 15,
-    --     MaxAmmo = 6, 
-    --     CurrentAmmo = 6, 
-    --     StoredAmmo = 600, 
-    --     FireRate = 0.8, 
-    --     AutoFire = false, 
-    --     Range = 400, 
-    --     Spread = 3, 
-    --     ReloadTime = 4, 
-    --     Bullets = 5
-    -- };
 end
 firstScript()
-
-function infJump()
-    lplr.Character.Humanoid.JumpPower = jp_g
-    lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-end
 
 function statsPlayerWs()
     lplr.Character.Humanoid.WalkSpeed = ws_g
@@ -385,42 +335,17 @@ function statsPlayerWs()
 end
 statsPlayerWs()
 
-function changeWS(typeWS)
-    if typeWS == 0 then
-        ws_g = ws_g + 5
-        lplr.Character.Humanoid.WalkSpeed = ws_g
-    elseif typeWS == 1 then
-        if ws_g >= 0 then
-            ws_g = ws_g - 5
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-        if ws_g < 16 then
-            ws_g = 16
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-    end
-end
-
 mouse.KeyDown:connect(
     function(keyDown)
-        if keyDown == " " then
-            infJump()
-        end
-
-        if keyDown == "[" then
-            changeWS(0)
-            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
-        end
-
-        if keyDown == "]" then
-            changeWS(1)
-            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
-        end
 
         if keyDown == "e" then
             noclipAll = not noclipAll
             NotifyG("NoClip", noclipAll)
         end
+
+		if keyDown == "v" then
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
+		end
     end
 )
 

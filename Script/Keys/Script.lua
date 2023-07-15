@@ -1,8 +1,11 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
+toggleJP = false
+toggleWS = false
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
+local exitD = nil
 disTeleport = -10
 
 function createESP(parent)
@@ -145,6 +148,57 @@ wp.Maps.IceCave.Parts.ChildAdded:connect(
     end
 )
 
+function buyItems(name, sl)
+    if sl then
+        sl = sl
+    else
+        sl = 1
+    end
+    for i=1,sl do
+        local args = {
+            [1] = {
+                ["IsExtend"] = "Extend",
+                ["ItemId"] = name
+            }
+        }
+        rs.Remotes.ExchangeShopRE:FireServer(unpack(args))
+        wait(.2)
+    end
+end
+
+function exitMap()
+    if exitD then
+        lplr.Character.HumanoidRootPart.CFrame = exitD.CFrame
+    else
+        NotifyG("Exit Door", "Appear Yet")
+    end
+end
+
+local function executeChat(code)
+    if string.lower(string.sub(code, 1, 2)) == "/e" then
+        local split = {}
+
+        for part in code:gmatch("%S+") do
+            table.insert(split, part)
+        end
+
+        table.remove(split, 1)
+
+        local command = string.lower(string.sub(split[1], 1))
+
+        local first = split[2]
+
+        if string.find("lp", command) then
+            buyItems("PickLock", first)
+        elseif string.find("ip", command) then
+            buyItems("InvisibityPotion", first)
+        elseif string.find("ex", command) then
+            exitMap()
+        end
+    end
+end
+lplr.Chatted:Connect(executeChat)
+
 mouse.KeyDown:connect(
     function(keyDown)
         if keyDown == "x" then
@@ -166,11 +220,15 @@ mouse.KeyDown:connect(
 
 wp.Maps.School.Parts.BUILD.build["1F"].door:Destroy()
 wp.Maps.School.Parts.BUILD.build["2F"].door:Destroy()
+
 while wait(1) do
     wp.Gravity = 150
     for _,v in pairs(wp.Maps:GetChildren()) do
         for _,l in pairs(v.ItemHuntFolder.ItemPlace:GetChildren()) do
             if l:FindFirstChild("ControlPart") then
+                if l.ExitRoot:FindFirstChild("BillBoard_Exit") then
+                    exitD = l.ExitRoot
+                end
                 if l["ControlPart"]:FindFirstChild("InteractPrompt") then
                     -- l.ControlPart.InteractPrompt.ClientInteractLimit:Destroy()
                     local doorModel = l:FindFirstChildOfClass("Model")
@@ -192,6 +250,7 @@ while wait(1) do
     end
 end
 
+-- game:GetService("Workspace").Maps.MagicCube.ItemHuntFolder.ItemPlace:GetChildren()[15].ExitRoot.BillBoard_Exit
 -- game:GetService("Workspace").Maps.Castle.InvisParts.Walls
 -- game:GetService("Workspace").Maps.Castle.HideCabinet
 -- game:GetService("Workspace").Maps.IceCave.Parts.ground
