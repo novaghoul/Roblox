@@ -1,6 +1,7 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
+_G.killtoolEnable = false
 _G.meleetoolRemote = rs.GunRemotes["meleeEvent"]
 _G.plrCurrent = nil
 ws_g = 30

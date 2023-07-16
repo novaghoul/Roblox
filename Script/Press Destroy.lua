@@ -9,10 +9,10 @@ local lplr = plrs.LocalPlayer
 local mouse = lplr:GetMouse()
 
 mouse.KeyDown:connect(function(key)
-		if key == "b" then
+	if key == "b" then
 		if mouse.Target then
-		mouse.Target:Destroy()
+			mouse.Target:Destroy()
+		end
 	end
-	end
-	end
+end
 )

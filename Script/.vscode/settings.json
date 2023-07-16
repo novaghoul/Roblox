@@ -6,5 +6,12 @@
     ],
     "Lua.diagnostics.disable": [
         "deprecated"
+    ],
+    "robloxLsp.diagnostics.disable": [
+        "deprecated",
+        "undefined-global"
+    ],
+    "robloxLsp.diagnostics.globals": [
+        "fireclickdetector"
     ]
 }
