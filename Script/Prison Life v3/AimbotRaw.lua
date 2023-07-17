@@ -1,3 +1,4 @@
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 --// Cache
 
 local select = select
@@ -112,7 +113,8 @@ local function Load()
 			Environment.FOVCircle.Color = Environment.FOVSettings.Color
 			Environment.FOVCircle.Transparency = Environment.FOVSettings.Transparency
 			Environment.FOVCircle.Visible = Environment.FOVSettings.Visible
-			Environment.FOVCircle.Position = Vector2(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
+			-- Environment.FOVCircle.Position = Vector2(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
+			Environment.FOVCircle.Position = Vector2(mouse.Hit.Position.X, mouse.Hit.Position.Y)
 		else
 			Environment.FOVCircle.Visible = false
 		end
