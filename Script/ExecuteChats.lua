@@ -18,6 +18,8 @@ local function executeChatD(code)
             loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/DarkDex.lua"), true))()
         elseif string.find("spy", command) then
             loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/SimpleSpy.lua"), true))()
+        elseif string.find("rj", command) then
+            loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Rejoin.lua"), true))()
         end
     end
 end
