@@ -7,7 +7,7 @@ _G.plrCurrent = nil
 ws_g = 25
 jp_g = 30
 disTeleport = 10
-hitBoxSize = {5, 5, 5}
+hitBoxSize = {3, 3, 3}
 hitBoxBody = "Head"
 -- HumanoidRootPart
 
@@ -88,21 +88,21 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 --------------------------CMDS-------------------------------
 
 function tpPlayer(choose)
-    -- if tostring(choose) == "all" then
-    --     eventTP(plrs:GetPlayers())
-    -- elseif tostring(choose) == "g" then
-    --     local players = game:GetService("Teams")[tostring("Guards")]:GetPlayers()
-    --     eventTP(players)
-    -- elseif tostring(choose) == "i" then
-    --     local players = game:GetService("Teams")[tostring("Inmates")]:GetPlayers()
-    --     eventTP(players)
-    -- elseif tostring(choose) == "c" then
-    --     local players = game:GetService("Teams")[tostring("Criminals")]:GetPlayers()
-    --     eventTP(players)
-    -- else
-    --     local players = {plrlist(tostring(choose))}
-    --     eventTP(players)
-    -- end
+    if tostring(choose) == "all" then
+        eventTP(plrs:GetPlayers())
+    elseif tostring(choose) == "g" then
+        local players = game:GetService("Teams")[tostring("Guards")]:GetPlayers()
+        eventTP(players)
+    elseif tostring(choose) == "i" then
+        local players = game:GetService("Teams")[tostring("Inmates")]:GetPlayers()
+        eventTP(players)
+    elseif tostring(choose) == "c" then
+        local players = game:GetService("Teams")[tostring("Criminals")]:GetPlayers()
+        eventTP(players)
+    else
+        local players = {plrlist(tostring(choose))}
+        eventTP(players)
+    end
 end
 
 -- function takeWeapon()
