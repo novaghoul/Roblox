@@ -13,12 +13,12 @@ hitBoxBody = "Head"
 
 function createESP(parent)
     -- parent.Character.Head.CanCollide = false
-    createESPItem(parent.Character.Head, 205, 205, 205, 14, parent.Name)
-    for _, v in pairs(parent.Character:GetChildren()) do
-        if checkPart(v) then
-            actualESP(v)
-        end
-    end
+    createESPItem(parent.Character.Head, 205, 205, 205, 14, parent.Name, 1)
+    -- for _, v in pairs(parent.Character:GetChildren()) do
+    --     if checkPart(v) then
+    --         actualESP(v)
+    --     end
+    -- end
     if HEALTHBAR_ACTIVATED then --//If the user decided to
         createHealthbar(parent.Character:WaitForChild("HumanoidRootPart")) --//Calls the function of the creation
     end
@@ -267,15 +267,15 @@ end
 function firstScript()
     wp.Prison.Prison_Cellblock.a_front.glass:Destroy()
     wp.Prison.Prison_Cellblock.b_front.glass:Destroy()
-    for _,v in pairs(wp.Prison_Fences:GetChildren()) do
-        if tostring(v) == "fence" then
-            for _,l in pairs(v:GetChildren()) do
-                if tostring(l) == "fence" or tostring(l) == "hitbox" then
-                    l:Destroy()
-                end
-            end
-        end
-    end
+    -- for _,v in pairs(wp.Prison_Fences:GetChildren()) do
+    --     if tostring(v) == "fence" then
+    --         for _,l in pairs(v:GetChildren()) do
+    --             if tostring(l) == "fence" or tostring(l) == "hitbox" then
+    --                 l:Destroy()
+    --             end
+    --         end
+    --     end
+    -- end
     -- game:GetService("Workspace").Prison_Fences:GetChildren()[2].fence
     -- game:GetService("Workspace").Prison_Fences.fence.hitbox
     -- takeWeapon()
