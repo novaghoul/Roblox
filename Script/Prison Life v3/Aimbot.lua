@@ -1,3 +1,4 @@
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 --// Cache
 
 local loadstring, game, getgenv, setclipboard = loadstring, game, getgenv, setclipboard
@@ -17,7 +18,7 @@ local Settings, FOVSettings, Functions = Aimbot.Settings, Aimbot.FOVSettings, Ai
 
 local Library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)() -- Pepsi's UI Library
 
-local Parts = {"Head", "HumanoidRootPart", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg", "LeftHand", "RightHand", "LeftLowerArm", "RightLowerArm", "LeftUpperArm", "RightUpperArm", "LeftFoot", "LeftLowerLeg", "UpperTorso", "LeftUpperLeg", "RightFoot", "RightLowerLeg", "LowerTorso", "RightUpperLeg"}
+local Parts = checkRigType()
 
 --// Frame
 
