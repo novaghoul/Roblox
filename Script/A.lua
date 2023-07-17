@@ -1,4 +1,5 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ExecuteChats.lua"), true))()
 
 for i, v in pairs(getgc(true)) do
     if type(v) == 'table' and rawget(v, 'MaxAmmo') then
