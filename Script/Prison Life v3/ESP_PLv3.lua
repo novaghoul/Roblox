@@ -4,7 +4,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 _G.killtoolEnable = false
 _G.meleetoolRemote = rs.GunRemotes["meleeEvent"]
 _G.plrCurrent = nil
-ws_g = 30
+ws_g = 25
 jp_g = 30
 disTeleport = 10
 hitBoxSize = {5, 5, 5}
