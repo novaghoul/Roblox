@@ -112,7 +112,7 @@ local function Load()
 			Environment.FOVCircle.Color = Environment.FOVSettings.Color
 			Environment.FOVCircle.Transparency = Environment.FOVSettings.Transparency
 			Environment.FOVCircle.Visible = Environment.FOVSettings.Visible
-			Environment.FOVCircle.Position = Vector2(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
+			Environment.FOVCircle.Position = UDim2.fromOffset(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
 		else
 			Environment.FOVCircle.Visible = false
 		end
