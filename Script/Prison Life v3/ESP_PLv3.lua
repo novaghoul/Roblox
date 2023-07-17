@@ -8,7 +8,7 @@ ws_g = 30
 jp_g = 30
 disTeleport = 10
 hitBoxSize = {5, 5, 5}
-hitBoxBody = "HumanoidRootPart"
+hitBoxBody = "Head"
 -- HumanoidRootPart
 
 function createESP(parent)
