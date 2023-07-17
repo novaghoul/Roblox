@@ -100,7 +100,7 @@ ServiceConnections.TypingEndedConnection = UserInputService.TextBoxFocusReleased
 	Typing = false
 end)
 
---// Mains
+--// Main
 
 local function Load()
 	ServiceConnections.RenderSteppedConnection = RunService.RenderStepped:Connect(function()
