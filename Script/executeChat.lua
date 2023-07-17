@@ -15,11 +15,9 @@ local function executeChatD(code)
         local first = split[2]
 
         if string.find("dex", command) then
-            loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Dark Dex.lua"), true))()
-        elseif string.find("ip", command) then
-            buyItems("InvisibityPotion", first)
-        elseif string.find("ex", command) then
-            exitMap()
+            loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/DarkDex.lua"), true))()
+        elseif string.find("spy", command) then
+            loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/SimpleSpy.lua"), true))()
         end
     end
 end
