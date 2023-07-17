@@ -24,7 +24,7 @@ if init == nil then
 
     getgenv().durTime = 3
 
-    getgenv().disTeleport = -5
+    getgenv().disTeleport = 5
 
     getgenv().noclipAll = false
     getgenv().noclipAllKey = "f"
@@ -217,7 +217,7 @@ if init == nil then
                 if charplayer ~= nil then
                     charplayer.HumanoidRootPart.Anchored = false
                     charplayer.HumanoidRootPart.CanCollide = false
-                    charplayer.HumanoidRootPart.CFrame = pos * CFrame.new(0, 2, disTeleport)
+                    charplayer.HumanoidRootPart.CFrame = pos * CFrame.new(0, 2, -disTeleport)
                     charplayer.HumanoidRootPart.Anchored = true
                 end
             end
