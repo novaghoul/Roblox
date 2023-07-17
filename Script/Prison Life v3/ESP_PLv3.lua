@@ -350,6 +350,7 @@ mouse.KeyDown:connect(
     end
 )
 
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ExecuteChat.lua"), true))()
 game:GetService("RunService").Stepped:connect(
     function()
         if noclipAll then
