@@ -114,7 +114,8 @@ local function Load()
 			Environment.FOVCircle.Transparency = Environment.FOVSettings.Transparency
 			Environment.FOVCircle.Visible = Environment.FOVSettings.Visible
 			-- Environment.FOVCircle.Position = Vector2(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
-			Environment.FOVCircle.Position = Vector2(mouse.Hit.Position.X, mouse.Hit.Position.Y)
+			-- Environment.FOVCircle.Position = Vector2(mouse.Hit.Position.X, mouse.Hit.Position.Y)
+			Environment.FOVCircle.Position = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y)
 		else
 			Environment.FOVCircle.Visible = false
 		end
