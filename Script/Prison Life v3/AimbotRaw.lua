@@ -1,4 +1,3 @@
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 --// Cache
 
 local select = select
