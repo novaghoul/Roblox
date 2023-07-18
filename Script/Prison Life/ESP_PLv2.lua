@@ -283,6 +283,12 @@ function firstScript()
         if v:FindFirstChild("block") then
             v:Destroy()
         end
+        v.ChildAdded:connect(
+            function(m)
+                wait(.5)
+                m:Destroy()
+            end
+        )
     end
     for _,v in pairs(wp.Prison_Fences:GetChildren()) do
         if tostring(v) == "fence" then
