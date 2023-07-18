@@ -72,7 +72,7 @@ local function GetClosestPlayer()
 		for _, v in next, Players:GetPlayers() do
 			if v ~= LocalPlayer then
 				if v.Character and v.Character:FindFirstChild(Environment.Settings.LockPart) and v.Character:FindFirstChildOfClass("Humanoid") then
-					if Environment.Settings.TeamCheck and v.Team ~= lplr.Team then continue end
+					if Environment.Settings.TeamCheck and (((tostring(v.Team)  == "Criminals" or tostring(v.Team)  == "Inmates") and (tostring(lplr.Team)  == "Criminals" or tostring(lplr.Team)  == "Inmates")) or (tostring(v.Team)  == "Guards" and tostring(lplr.Team)  == "Guards")) then continue end
 					if Environment.Settings.AliveCheck and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then continue end
 					if Environment.Settings.WallCheck and #Camera:GetPartsObscuringTarget({v.Character[Environment.Settings.LockPart].Position}, v.Character:GetDescendants()) > 0 then continue end
 
