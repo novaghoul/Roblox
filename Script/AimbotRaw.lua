@@ -14,7 +14,6 @@ end)
 
 getgenv().Aimbot = {}
 local Environment = getgenv().Aimbot
-getgenv().AimbotTeamCheck = "false"
 
 --// Services
 
