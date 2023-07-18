@@ -188,18 +188,6 @@ function toolEvent(name)
     )
 end
 
-function changeTeam(team)
-    if tostring(team) == "i" then
-        wp.Remote.TeamEvent:FireServer("Bright orange")
-    elseif tostring(team) == "g" then
-        wp.Remote.TeamEvent:FireServer("Bright blue")
-    elseif tostring(team) == "c" then
-        wp.Remote.TeamEvent:FireServer("Really red")
-    else
-        wp.Remote.TeamEvent:FireServer("Medium stone grey")
-    end
-end
-
 function changeWS(team)
     ws_g = tonumber(team)
     lplr.Character.Humanoid.WalkSpeed = ws_g
@@ -230,8 +218,6 @@ local function executeChat(code)
             toolEvent("Kill")
         elseif string.find("ws", command) then
             changeWS(first)
-        elseif string.find("team", command) then
-            changeTeam(first)
         end
     end
 end
