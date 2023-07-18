@@ -1,11 +1,11 @@
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-game:GetService("Workspace").Tycoons["Lemon Gum"].Upgraders.PlacementGB3["Flavor Booster"].Upgrader.Upgrader.TouchInterest
-game:GetService("Workspace").Tycoons["Lemon Gum"].Interact.Furnace.Income.TouchInterest
-game:GetService("Workspace").Tycoons["Lemon Gum"].Gumballs.FinalGum
-game:GetService("Workspace").Tycoons["Lemon Gum"].Owner
-game:GetService("Workspace").Tycoons["Lemon Gum"].Upgraders.PlacementGS3["Chance Upgrader"].ChanceUpgrader.Upgrader
+-- game:GetService("Workspace").Tycoons["Lemon Gum"].Upgraders.PlacementGB3["Flavor Booster"].Upgrader.Upgrader.TouchInterest
+-- game:GetService("Workspace").Tycoons["Lemon Gum"].Interact.Furnace.Income.TouchInterest
+-- game:GetService("Workspace").Tycoons["Lemon Gum"].Gumballs.FinalGum
+-- game:GetService("Workspace").Tycoons["Lemon Gum"].Owner
+-- game:GetService("Workspace").Tycoons["Lemon Gum"].Upgraders.PlacementGS3["Chance Upgrader"].ChanceUpgrader.Upgrader
 
 for _,v in pairs(game:GetService("Workspace").Tycoons["Lemon Gum"].Gumballs:GetChildren()) do
     if tostring(v.Name) == "FinalGum" then

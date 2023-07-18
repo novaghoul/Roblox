@@ -248,4 +248,5 @@ if init == nil then
             VirtualUser:ClickButton2(Vector2.new())
         end
     )
+    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ExecuteChats.lua"), true))()
 end
