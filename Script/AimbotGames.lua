@@ -1,4 +1,4 @@
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"),true))() -- 1st Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 getgenv().nameGame = function(name, char)
     if tostring(name) == "Prison Life v2" then
