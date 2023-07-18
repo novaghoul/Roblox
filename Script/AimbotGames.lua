@@ -8,8 +8,6 @@ getgenv().nameGame = function(name, char)
             return true else return false
         end
     else
-        if tostring(char.Team) == tostring(lplr.Team) then
-            return true else return false
-        end
+        return true
     end
 end
