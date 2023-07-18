@@ -9,7 +9,7 @@ if getgenv().Aimbot then return end
 
 --// Load Aimbot V2 (Raw)
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Prison%20Life%20v3/AimbotRaw.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/AimbotRaw.lua"))()
 
 --// Variables
 
