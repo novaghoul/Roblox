@@ -217,7 +217,7 @@ wp.Filter.SpawnedPiles.ChildAdded:connect(
 mouse.KeyDown:connect(
 	function(keyDown)
 		if keyDown == "v" then
-			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, disTeleport)
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
 		end
 	end
 )
