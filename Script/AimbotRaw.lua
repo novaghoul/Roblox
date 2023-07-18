@@ -76,7 +76,7 @@ local function GetClosestPlayer()
 			if v ~= LocalPlayer then
 				if v.Character and v.Character:FindFirstChild(Environment.Settings.LockPart) and v.Character:FindFirstChildOfClass("Humanoid") then
 					print("--------------")
-					if tostring(nameGame()) == "true" then
+					if tostring(nameGame("Prison Life v2", v)) == "true" then
 						AimbotTeamCheck = "true"
 					end
 					print(AimbotTeamCheck)
