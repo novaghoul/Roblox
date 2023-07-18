@@ -14,7 +14,7 @@ end)
 
 getgenv().Aimbot = {}
 local Environment = getgenv().Aimbot
-getgenv().AimbotTeamCheck = "true"
+getgenv().AimbotTeamCheck = "false"
 
 --// Services
 
@@ -60,6 +60,8 @@ Environment.FOVCircle = Drawing.new("Circle")
 
 --// Functions
 
+
+
 local function CancelLock()
 	Environment.Locked = nil
 	if Animation then Animation:Cancel() end
@@ -74,6 +76,10 @@ local function GetClosestPlayer()
 			if v ~= LocalPlayer then
 				if v.Character and v.Character:FindFirstChild(Environment.Settings.LockPart) and v.Character:FindFirstChildOfClass("Humanoid") then
 					print("--------------")
+					if tostring(nameGame()) == "true" then
+						AimbotTeamCheck = "true"
+					end
+					print(AimbotTeamCheck)
 					if Environment.Settings.TeamCheck then print("1") continue end
 					if Environment.Settings.AliveCheck and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then continue end
 					if Environment.Settings.WallCheck and #Camera:GetPartsObscuringTarget({v.Character[Environment.Settings.LockPart].Position}, v.Character:GetDescendants()) > 0 then continue end
