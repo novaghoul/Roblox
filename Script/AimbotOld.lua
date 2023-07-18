@@ -320,23 +320,29 @@ end
 local function GetNearest(Mode)
 	local lowest,nearest,gui = math.huge,nil,nil
 	if Mode==1 then
-	for _,plr in next,Players:GetPlayers() do 
-		if plr.Name~=Player.Name and plr.Character~=nil and plr.Character:FindFirstChild(targetpart) then
-			local dist = Player:DistanceFromCharacter(plr.Character[targetpart].Position)
-			local ray = Ray.new(Player.Character.Head.Position,(plr.Character[targetpart].Position-Player.Character.Head.Position).unit*5000)
-			local part,point = workspace:FindPartOnRayWithIgnoreList(ray,{Camera,Player.Character,unpack(windows)})
-			local Z = Camera:WorldToScreenPoint(plr.Character[targetpart].Position).Z
-			if part and part:IsDescendantOf(plr.Character) and Z>0 and dist < lowest and (ffa or plr.TeamColor~=Player.TeamColor) then lowest = dist nearest = plr.Character end
+		for _,plr in next,Players:GetPlayers() do 
+			if plr.Name~=Player.Name and plr.Character~=nil and plr.Character:FindFirstChild(targetpart) then
+				local dist = Player:DistanceFromCharacter(plr.Character[targetpart].Position)
+				local ray = Ray.new(Player.Character.Head.Position,(plr.Character[targetpart].Position-Player.Character.Head.Position).unit*5000)
+				local part = workspace:FindPartOnRayWithIgnoreList(ray,{Camera,Player.Character,unpack(windows)})
+				local Z = Camera:WorldToScreenPoint(plr.Character[targetpart].Position).Z
+				if part and part:IsDescendantOf(plr.Character) and Z>0 and dist < lowest and (ffa or plr.TeamColor~=Player.TeamColor) then
+					lowest = dist
+					nearest = plr.Character
+				end
+			end
 		end
-	end
 	elseif Mode==2 then
 		for _,plr in next,Players:GetPlayers() do
 			if plr.Name~=Player.Name and plr.Character~=nil and plr.Character:FindFirstChild(targetpart) then
 				local pos = Camera:WorldToScreenPoint(plr.Character[targetpart].Position)
 				local ray = Ray.new(Player.Character[targetpart].Position,(plr.Character[targetpart].Position-Player.Character[targetpart].Position).unit*2048)
-				local part,point = workspace:FindPartOnRayWithIgnoreList(ray,{Camera,Player.Character,unpack(windows)})
+				local part = workspace:FindPartOnRayWithIgnoreList(ray,{Camera,Player.Character,unpack(windows)})
 				local dist = (Vector2.new(Mouse.X,Mouse.Y)-Vector2.new(pos.X,pos.Y)).magnitude
-				if part and part:IsDescendantOf(plr.Character) and pos.Z>0 and dist <= Camera.ViewportSize.X/(90/fov) and dist < lowest and (ffa or plr.TeamColor~=Player.TeamColor) then lowest = dist nearest = plr.Character end
+				if part and part:IsDescendantOf(plr.Character) and pos.Z>0 and dist <= Camera.ViewportSize.X/(90/fov) and dist < lowest and (ffa or plr.TeamColor~=Player.TeamColor) then
+					lowest = dist
+					nearest = plr.Character
+				end
 			end
 		end
 	end

@@ -6,7 +6,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
 local exitD = nil
-disTeleport = -10
+disTeleport = 10
 
 function createESP(parent)
     createESPItem(parent.Head, 196, 40, 28, 14, parent.Name)
@@ -213,7 +213,7 @@ mouse.KeyDown:connect(
             end
         end
 		if keyDown == "v" then
-			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, .5, disTeleport)
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, .5, -disTeleport)
 		end
     end
 )

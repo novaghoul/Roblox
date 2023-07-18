@@ -2,12 +2,11 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
 _G.killtoolEnable = false
-_G.meleetoolRemote = rs.GunRemotes["meleeEvent"]
 _G.plrCurrent = nil
 ws_g = 25
 jp_g = 30
 disTeleport = 10
-hitBoxSize = {3, 3, 3}
+hitBoxSize = {5, 5, 5}
 hitBoxBody = "Head"
 -- HumanoidRootPart
 
@@ -105,38 +104,24 @@ function tpPlayer(choose)
     end
 end
 
--- function takeWeapon()
---     for _, v in pairs(wp.Prison_ITEMS.giver:GetChildren()) do
---         if tostring(v) == "Shovel" then
---         else
---             rs.Events.ItemHandler:InvokeServer(v.ITEMPICKUP)
---         end
---     end
--- end
+function arrestPlayer()
+    if not mouse.Target then
+        return
+    end
+    local tp = mouse.Target
 
--- function arrestPlayer()
---     if not mouse.Target then
---         return
---     end
---     local tp = mouse.Target
+    while not tp.Parent:FindFirstChild("Humanoid") and tostring(tp.Parent) ~= "Workspace" do
+        tp = tp.Parent
+    end
 
---     while not tp.Parent:FindFirstChild("Humanoid") and tostring(tp.Parent) ~= "Workspace" do
---         tp = tp.Parent
---     end
+    if tp.Parent:FindFirstChild("Humanoid") and plrs:FindFirstChild(tp.Parent.Name) then
+        local args = {
+            [1] = plrs:FindFirstChild(tp.Parent.Name).Character.Head
+        }
 
---     if tp.Parent:FindFirstChild("Humanoid") and plrs:FindFirstChild(tp.Parent.Name) then
---         for i=1,10 do
---             function getNil(name,class) for _,v in next, getnilinstances() do if v.ClassName==class and v.Name==name then return v;end end end
-            
---             local args = {
---                 [1] = getNil(tostring(tp.Parent.Name), "Model"):WaitForChild("Head")
---             }
-            
---             rs:WaitForChild("Events"):WaitForChild("arrest"):InvokeServer(unpack(args))
---             wait(.5)
---         end
---     end
--- end
+        wp.Remote.arrest:InvokeServer(unpack(args))
+    end
+end
 
 function killPlayer()
     if not mouse.Target then
@@ -165,10 +150,7 @@ function killPlayer()
             if lplr.Character.Humanoid.Health == 0 or tp.Humanoid.Health == 0 then
                 _G.killtoolEnable = false
             end
-            for i=1,10 do
-                _G.meleetoolRemote:FireServer(plrs:FindFirstChild(tp.Name))
-                wait(.1)
-            end
+            rs["meleeEvent"]:FireServer(plrs:FindFirstChild(tp.Name))
         end
     end
 end
@@ -191,7 +173,7 @@ function toolEvent(name)
         function(mouse)
             function toolPlayer()
                 if string.lower(name) == "arrest" then
-                    -- arrestPlayer()
+                    arrestPlayer()
                 elseif string.lower(name) == "kill" then
                     _G.killtoolEnable = true
                     killPlayer()
@@ -206,12 +188,23 @@ function toolEvent(name)
     )
 end
 
+function changeTeam(team)
+    if tostring(team) == "i" then
+        wp.Remote.TeamEvent:FireServer("Bright orange")
+    elseif tostring(team) == "g" then
+        wp.Remote.TeamEvent:FireServer("Bright blue")
+    elseif tostring(team) == "c" then
+        wp.Remote.TeamEvent:FireServer("Really red")
+    else
+        wp.Remote.TeamEvent:FireServer("Medium stone grey")
+    end
+end
+
 function changeWS(team)
     ws_g = tonumber(team)
     lplr.Character.Humanoid.WalkSpeed = ws_g
     NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
 end
-
 
 local function executeChat(code)
     if string.lower(string.sub(code, 1, 2)) == "/e" then
@@ -231,14 +224,14 @@ local function executeChat(code)
             tpPlayer(first)
         elseif string.find("rstp", command) then
             resetTP()
-        elseif string.find("wp", command) then
-            -- takeWeapon()
         elseif string.find("atool", command) then
-            -- toolEvent("Arrest")
+            toolEvent("Arrest")
         elseif string.find("ktool", command) then
             toolEvent("Kill")
         elseif string.find("ws", command) then
             changeWS(first)
+        elseif string.find("team", command) then
+            changeTeam(first)
         end
     end
 end
@@ -253,7 +246,7 @@ function funcGun(m)
         module.HeadDamage = math.huge
         -- module.MaxAmmo = 99999999
         -- module.CurrentAmmo = 99999999
-        module.StoredAmmo = math.huge
+        -- module.StoredAmmo = math.huge
         module.FireRate = 0.1
         -- module.AutoFire = true
         module.Range = math.huge
@@ -265,28 +258,49 @@ end
 
 
 function firstScript()
-    wp.Prison.Prison_Cellblock.a_front.glass:Destroy()
-    wp.Prison.Prison_Cellblock.b_front.glass:Destroy()
-    for _,v in pairs(wp.Prison_Fences:GetChildren()) do
-        if tostring(v) == "fence" then
+    wp.Prison_Cellblock.a_front.glass:Destroy()
+    wp.Prison_Cellblock.b_front.glass:Destroy()
+    wp.Prison_Guard_Outpost.wall:Destroy()
+    wp.Prison_Guard_Outpost.furniture_armory["Gun racks"]:Destroy()
+    wp.Prison_Administration.front.DOORWAY:Destroy()
+    wp.Prison_Fences.Prison_Gate.damagePart:Destroy()
+    wp.Prison_Cafeteria.glass:Destroy()
+    for _,v in pairs(wp.Prison_Guard_Outpost:GetChildren()) do
+        if tostring(v) == "wallsegment" then
+            v:Destroy()
+        end
+    end
+    for _,v in pairs(wp.Prison_OuterWall:GetChildren()) do
+        if tostring(v) == "Prison_guardtower" then
             for _,l in pairs(v:GetChildren()) do
-                if tostring(l) == "fence" or tostring(l) == "hitbox" then
+                if tostring(l) == "Stonewall" and tostring(l.BrickColor) == "Electric blue" then
                     l:Destroy()
                 end
             end
         end
     end
-    -- game:GetService("Workspace").Prison_Fences:GetChildren()[2].fence
-    -- game:GetService("Workspace").Prison_Fences.fence.hitbox
-    -- takeWeapon()
-    -- toolEvent("Arrest")
+    for _,v in pairs(wp.Doors:GetChildren()) do
+        if v:FindFirstChild("block") then
+            v:Destroy()
+        end
+    end
+    for _,v in pairs(wp.Prison_Fences:GetChildren()) do
+        if tostring(v) == "fence" then
+            for _,l in pairs(v:GetChildren()) do
+                if tostring(l) == "fence" or tostring(l) == "hitbox" or tostring(l) == "damagePart" then
+                    l:Destroy()
+                end
+            end
+        end
+    end
+
+    toolEvent("Arrest")
     toolEvent("Kill")
 
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait(0.5)
-            -- takeWeapon()
-            -- toolEvent("Arrest")
+            toolEvent("Arrest")
             toolEvent("Kill")
             characterModel.ChildAdded:connect(
                 function(m)
