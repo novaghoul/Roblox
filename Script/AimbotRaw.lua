@@ -14,6 +14,7 @@ end)
 
 getgenv().Aimbot = {}
 local Environment = getgenv().Aimbot
+getgenv().AimbotTeamCheck = "true"
 
 --// Services
 
@@ -72,9 +73,8 @@ local function GetClosestPlayer()
 		for _, v in next, Players:GetPlayers() do
 			if v ~= LocalPlayer then
 				if v.Character and v.Character:FindFirstChild(Environment.Settings.LockPart) and v.Character:FindFirstChildOfClass("Humanoid") then
-					print(tostring(nameGame(nGame, v)))
 					print("--------------")
-					if Environment.Settings.TeamCheck and nameGame(nGame, v) == true then continue end
+					if Environment.Settings.TeamCheck then print("1") continue end
 					if Environment.Settings.AliveCheck and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then continue end
 					if Environment.Settings.WallCheck and #Camera:GetPartsObscuringTarget({v.Character[Environment.Settings.LockPart].Position}, v.Character:GetDescendants()) > 0 then continue end
 
