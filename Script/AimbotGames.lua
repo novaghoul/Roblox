@@ -2,6 +2,10 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 getgenv().nameGame = function(name, char)
     if tostring(name) == "Prison Life v2" then
+        if tostring(lplr.Team) ~= tostring(char.Team) then
+            return true
+        end
+    elseif tostring(name) == "Prison Life v3" then
         if (((tostring(char.Team)  == "Criminals" or tostring(char.Team)  == "Inmates") and (tostring(lplr.Team)  == "Criminals" or tostring(lplr.Team)  == "Inmates")) or (tostring(char.Team)  == "Guards" and tostring(lplr.Team)  == "Guards")) then
             return true
         end
