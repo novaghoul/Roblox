@@ -2,9 +2,6 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 getgenv().nameGame = function(name, char)
     if name == "Prison Life v2" then
-        print("-----------------------------------")
-        print("-----------------------------------")
-        print("-----------------------------------")
         if tostring(char.Team) == tostring(lplr.Team) then
             return true
         else
