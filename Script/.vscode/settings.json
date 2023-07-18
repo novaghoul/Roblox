@@ -9,7 +9,8 @@
     ],
     "robloxLsp.diagnostics.disable": [
         "deprecated",
-        "undefined-global"
+        "undefined-global",
+        "duplicate-index"
     ],
     "robloxLsp.diagnostics.globals": [
         "fireclickdetector"

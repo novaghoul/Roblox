@@ -24,6 +24,8 @@ if init == nil then
 
     getgenv().durTime = 3
 
+    getgenv().nGame = "Prison Life v2"
+    
     getgenv().disTeleport = 5
 
     getgenv().noclipAll = false
