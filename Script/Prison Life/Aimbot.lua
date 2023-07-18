@@ -1,7 +1,7 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 --// Cache
 
-local nGame = "Prison Life v2"
+getgenv().nGame = "Prison Life v2"
 local loadstring, game, getgenv, setclipboard = loadstring, game, getgenv, setclipboard
 
 --// Loaded check
