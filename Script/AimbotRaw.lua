@@ -80,7 +80,7 @@ local function GetClosestPlayer()
 						AimbotTeamCheck = "true"
 					end
 					print(AimbotTeamCheck)
-					if Environment.Settings.TeamCheck then print("1") continue end
+					if Environment.Settings.TeamCheck then continue end
 					if Environment.Settings.AliveCheck and v.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then continue end
 					if Environment.Settings.WallCheck and #Camera:GetPartsObscuringTarget({v.Character[Environment.Settings.LockPart].Position}, v.Character:GetDescendants()) > 0 then continue end
 
