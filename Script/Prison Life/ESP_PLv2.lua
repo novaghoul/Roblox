@@ -237,7 +237,7 @@ function funcGun(m)
         -- module.AutoFire = true
         module.Range = math.huge
         module.Spread = 20
-        module.ReloadTime = 0.1
+        -- module.ReloadTime = 0.1
         -- module.Bullets = 5
     end
 end
