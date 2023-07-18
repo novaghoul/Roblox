@@ -5,6 +5,7 @@ getgenv().nameGame = function(name, char)
         print("-----------------------------------")
         print("-----------------------------------")
         print("-----------------------------------")
+        print("-----------------------------------")
         if tostring(char.Team) == tostring(lplr.Team) then
             return true
         end
