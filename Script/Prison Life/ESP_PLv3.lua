@@ -1,6 +1,10 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
+nGame = "Prison Life v3"
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Aimbot.lua"), true))()
+
 _G.killtoolEnable = false
 _G.plrCurrent = nil
 ws_g = 25
@@ -228,15 +232,30 @@ function firstScript()
     wp.Prison.Prison_Cellblock.a_front.glass:Destroy()
     wp.Prison.Prison_Cellblock.b_front.glass:Destroy()
     for _,v in pairs(wp.Prison_Fences:GetChildren()) do
-        if tostring(v) == "fence" then
+        for _,l in pairs(v:GetChildren()) do
+            if tostring(l) == "fence" or tostring(l) == "hitbox" or  tostring(l) == "Fence" or  tostring(l) == "damagePart" then
+                l:Destroy()
+            end
+        end
+    end
+    for _,v in pairs(wp.Prison.Prison_Guard_Outpost:GetChildren()) do
+        if tostring(v) == "wallsegment" or tostring(v) == "wall"  then
+            v:Destroy()
+        end
+    end
+    wp.Prison.Prison_Guard_Outpost.furniture_armory["SWAT rack"]:Destroy()
+    wp.Prison.Prison_Guard_Outpost.furniture_armory["Gun racks"]:Destroy()
+    wp.Prison.Prison_Administration.front.DOORWAY:Destroy()
+    wp.Prison.Prison_Administration.Door.Model:Destroy()
+    for _,v in pairs(wp.Prison.Prison_OuterWall:GetChildren()) do
+        if tostring(v) == "Prison_guardtower" then
             for _,l in pairs(v:GetChildren()) do
-                if tostring(l) == "fence" or tostring(l) == "hitbox" then
+                if tostring(l) == "Stonewall" and tostring(l.BrickColor) == "Electric blue" then
                     l:Destroy()
                 end
             end
         end
     end
-
     toolEvent("Kill")
 
     lplr.CharacterAdded:Connect(
