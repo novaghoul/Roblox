@@ -231,15 +231,16 @@ end
 function firstScript()
     wp.Prison.Prison_Cellblock.a_front.glass:Destroy()
     wp.Prison.Prison_Cellblock.b_front.glass:Destroy()
+    wp.Prison.Prison_Halls.glass:Destroy()
     for _,v in pairs(wp.Prison_Fences:GetChildren()) do
         for _,l in pairs(v:GetChildren()) do
-            if tostring(l) == "fence" or tostring(l) == "hitbox" or  tostring(l) == "Fence" or  tostring(l) == "damagePart" then
+            if tostring(l) == "fence" or tostring(l) == "hitbox" or tostring(l) == "damagePart" then
                 l:Destroy()
             end
         end
     end
     for _,v in pairs(wp.Prison.Prison_Guard_Outpost:GetChildren()) do
-        if tostring(v) == "wallsegment" or tostring(v) == "wall"  then
+        if tostring(v) == "wallsegment" or tostring(v) == "wall" or tostring(v) == "window"  then
             v:Destroy()
         end
     end
