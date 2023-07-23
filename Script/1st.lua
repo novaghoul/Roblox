@@ -244,11 +244,11 @@ if init == nil then
         lplr.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
     end
 
-    lplr.Idled:connect(
-        function()
-            VirtualUser:CaptureController()
-            VirtualUser:ClickButton2(Vector2.new())
-        end
-    )
+    local vu = game:GetService("VirtualUser")
+	lplr.Idled:connect(function()
+		vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		wait(1)
+		vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	end)
     loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ExecuteChats.lua"), true))()
 end
