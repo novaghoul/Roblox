@@ -192,8 +192,8 @@ local function executeChat(code)
             buyItems("PickLock", first)
         elseif string.find("ip", command) then
             buyItems("InvisibityPotion", first)
-        elseif string.find("ex", command) then
-            exitMap()
+        elseif string.find("exit", command) then
+            -- exitMap()
         end
     end
 end
