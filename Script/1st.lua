@@ -5,6 +5,7 @@ if init == nil then
     getgenv().uis = game:GetService("UserInputService")
     getgenv().cg = game:GetService("CoreGui")
     getgenv().sg = game:GetService("StarterGui")
+    getgenv().gi = game.GameId
     getgenv().wp = game:GetService("Workspace")
     getgenv().cmr = wp.Camera
     getgenv().rs = game:GetService("ReplicatedStorage")
