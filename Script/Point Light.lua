@@ -1,14 +1,4 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 for _, v in pairs(plrs:GetPlayers()) do
     if not v.Character.Head:FindFirstChild("PLADD") then

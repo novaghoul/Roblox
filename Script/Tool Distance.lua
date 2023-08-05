@@ -1,12 +1,4 @@
-uis = game:GetService("UserInputService")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-rs =  game:GetService("ReplicatedStorage")
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-bp = lplr:WaitForChild("Backpack")
-mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 pcall(function()
 	if sg:GetCoreGuiEnabled(2) == false then

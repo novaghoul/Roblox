@@ -1,7 +1,4 @@
-local uis = game:GetService("UserInputService")
-local plrs = game:GetService("Players")
-local lplr = plrs.LocalPlayer
-local mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 print("Left Control + Click is to Save Tools, Left Alt is to Load Tools, and Right Alt is to Drop Tools.")
 print("Right Control is to Kill Yourself")

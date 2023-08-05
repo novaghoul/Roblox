@@ -1,1 +1,1 @@
-game:GetService("Workspace").Gravity = 150
+wp.Gravity = 150

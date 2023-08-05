@@ -1,12 +1,4 @@
-local uis = game:GetService("UserInputService")
-local sg = game:GetService("StarterGui")
-local wp = game:GetService("Workspace")
-local cmr = wp.Camera
-local rs = game:GetService("ReplicatedStorage")
-local lgt = game:GetService("Lighting")
-local plrs = game:GetService("Players")
-local lplr = plrs.LocalPlayer
-local mouse = lplr:GetMouse()
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 mouse.Button1Down:connect(
 	function()

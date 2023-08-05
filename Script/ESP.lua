@@ -1,18 +1,7 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 function createESP(parent)
-    local bgui = Instance.new("BillboardGui", parent.Character.Head)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-    bgui.Size = UDim2.new(0, 200, 0, 50)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = plrs:FindFirstChild(parent.Name).DisplayName
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 14
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(196, 40, 28)
-    nam.Size = UDim2.new(0, 200, 0, 50)
+    createESPItem(parent.Character.Head, 196, 40, 28, 14, plrs:FindFirstChild(parent.Name).DisplayName)
     for _, p in pairs(parent.Character:GetChildren()) do
         if p.Name == ("Head") then
             for _, f in pairs(faces) do
@@ -75,10 +64,3 @@ function espFirst()
     end
 end
 espFirst()
-
-lplr.Idled:connect(
-    function()
-        VirtualUser:CaptureController()
-        VirtualUser:ClickButton2(Vector2.new())
-    end
-)

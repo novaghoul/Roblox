@@ -1,11 +1,4 @@
-local uis = game:GetService("UserInputService")
-local wp = game:GetService("Workspace")
-local rs =  game:GetService("ReplicatedStorage")
-local lgt = game:GetService("Lighting")
-local plrs = game:GetService("Players")
-local lplr = plrs.LocalPlayer
-local mouse = lplr:GetMouse()
-local backpack = lplr:WaitForChild("Backpack")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 function round(num,range)
 	return (((num%range)*2)+num)-((((num%range)*2)+num)%range)

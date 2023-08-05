@@ -2,18 +2,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 -- -----------------------------------------------------------------------------------
 function createESP(c) --//Checks and calls the proper function
-    local bgui = Instance.new("BillboardGui", c.Head)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-    bgui.Size = UDim2.new(0, 200, 0, 50)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = plrs:FindFirstChild(c.Name).DisplayName
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 14
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(196, 40, 28)
-    nam.Size = UDim2.new(0, 200, 0, 50)
+    createESPItem(c.Head, 196, 40, 28, 14, plrs:FindFirstChild(c.Name).DisplayName)
     for _, v in pairs(c:GetChildren()) do
         if checkPart(v) then
             actualESP(v)

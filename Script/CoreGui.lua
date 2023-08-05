@@ -1,5 +1,6 @@
-if game.StarterGui:GetCoreGuiEnabled(2) == false then
-    game.StarterGui:SetCoreGuiEnabled(2, true)
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
+if sg:GetCoreGuiEnabled(2) == false then
+    sg:SetCoreGuiEnabled(2, true)
 end
 
 
