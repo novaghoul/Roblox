@@ -31,8 +31,11 @@ if init == nil then
     getgenv().noclipAll = false
     getgenv().noclipAllKey = "f"
 
-    getgenv().r6 = {"Head", "Torso"}
-    getgenv().r15 = {"Head", "UpperTorso", "LowerTorso"}
+    getgenv().r6 = {"Head", "Torso", "Left Arm", "Right Arm", "Left Leg", "Right Leg"}
+    getgenv().r15 = {"Head", "UpperTorso", "LowerTorso", "LeftUpperArm", "LeftLowerArm", "LeftHand",
+        "RightUpperArm", "RightLowerArm", "RightHand", "LeftUpperLeg", "LeftLowerLeg", "LeftFoot",
+        "RightUpperLeg", "RightLowerLeg", "RightFoot"
+    }
 
     if faces == nil then
         getgenv().faces = {"Back", "Bottom", "Front", "Left", "Right", "Top"}
