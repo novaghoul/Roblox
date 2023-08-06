@@ -8,7 +8,7 @@ getgenv().nameGame = function(name, char)
             return true else return false
         end
     elseif gi == 4348829796 then
-        if not tostring(char.Team) == tostring(lplr.Team) then
+        if tostring(char.Team) == tostring(lplr.Team) then
             return true else return false
         end
     else
