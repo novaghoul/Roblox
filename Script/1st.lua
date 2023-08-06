@@ -24,9 +24,6 @@ if init == nil then
     getgenv().speedDash = 20
 
     getgenv().durTime = 3
-
-    getgenv().nGame = ""
-
     getgenv().disTeleport = 5
 
     getgenv().noclipAll = false
