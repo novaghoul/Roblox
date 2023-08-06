@@ -13,13 +13,7 @@ hitBoxBody = "Head"
 -- HumanoidRootPart
 
 function createESP(parent)
-    -- parent.Character.Head.CanCollide = false
     createESPItem(parent.Character.Head, 205, 205, 205, 14, parent.Name, 1)
-    -- for _, v in pairs(parent.Character:GetChildren()) do
-    --     if checkPart(v) then
-    --         actualESP(v)
-    --     end
-    -- end
     if HEALTHBAR_ACTIVATED then --//If the user decided to
         createHealthbar(parent.Character:WaitForChild("HumanoidRootPart")) --//Calls the function of the creation
     end
@@ -141,37 +135,6 @@ function killPlayer()
     end
 end
 
-function toolEvent(name)
-    bp = lplr:WaitForChild("Backpack")
-    if sg:GetCoreGuiEnabled(2) == false then
-        sg:SetCoreGuiEnabled(2, true)
-    end
-    if bp:FindFirstChild(name .. " Tool") then
-        bp:FindFirstChild(name .. " Tool"):Destroy()
-    end
-
-    local tool = Instance.new("Tool")
-    tool.RequiresHandle = false
-    tool.Name = name .. " Tool"
-    tool.CanBeDropped = false
-    tool.Parent = bp
-    tool.Equipped:connect(
-        function(mouse)
-            function toolPlayer()
-                if string.lower(name) == "kill" then
-                    _G.killtoolEnable = true
-                    killPlayer()
-                end
-            end
-        end
-    )
-    tool.Activated:connect(
-        function()
-            toolPlayer()
-        end
-    )
-end
-
 function changeWS(team)
     ws_g = tonumber(team)
     lplr.Character.Humanoid.WalkSpeed = ws_g
@@ -197,8 +160,6 @@ local function executeChat(code)
             tpPlayer(first)
         elseif string.find("rstp", command) then
             resetTP()
-        elseif string.find("ktool", command) then
-            toolEvent("Kill")
         elseif string.find("ws", command) then
             changeWS(first)
         end
@@ -209,6 +170,8 @@ lplr.Chatted:Connect(executeChat)
 -------------------------------------------------------------
 --------------------------Other------------------------------
 function funcGun(m)
+-- return {Damage = 70, HeadDamage = 90, Description = "Sniper Rifle", MaxAmmo = 6, CurrentAmmo = 6, StoredAmmo = 600, FireRate = 1.5, AutoFire = false, Range = 1000, ShieldDamage = 60, Spread = 50, ReloadTime = 4, Bullets = 1, ReloadAnim = "ReloadShells", ShootAnim = "ShootShell", HoldAnim = "Hold", FireSoundId = "http://www.roblox.com/asset/?id=3742310026", SecondarySoundId = nil, ReloadSoundId = "http://www.roblox.com/asset/?id=2934887229", Scope = true}
+
     if m:FindFirstChild("GunStates") then
         local module = require(m.GunStates)
         module.Damage = math.huge
@@ -227,40 +190,9 @@ end
 
 
 function firstScript()
-    wp.Prison.Prison_Cellblock.a_front.glass:Destroy()
-    wp.Prison.Prison_Cellblock.b_front.glass:Destroy()
-    wp.Prison.Prison_Halls.glass:Destroy()
-    for _,v in pairs(wp.Prison_Fences:GetChildren()) do
-        for _,l in pairs(v:GetChildren()) do
-            if tostring(l) == "fence" or tostring(l) == "hitbox" or tostring(l) == "damagePart" then
-                l:Destroy()
-            end
-        end
-    end
-    for _,v in pairs(wp.Prison.Prison_Guard_Outpost:GetChildren()) do
-        if tostring(v) == "wallsegment" or tostring(v) == "wall" or tostring(v) == "window"  then
-            v:Destroy()
-        end
-    end
-    wp.Prison.Prison_Guard_Outpost.furniture_armory["SWAT rack"]:Destroy()
-    wp.Prison.Prison_Guard_Outpost.furniture_armory["Gun racks"]:Destroy()
-    wp.Prison.Prison_Administration.front.DOORWAY:Destroy()
-    wp.Prison.Prison_Administration.Door.Model:Destroy()
-    for _,v in pairs(wp.Prison.Prison_OuterWall:GetChildren()) do
-        if tostring(v) == "Prison_guardtower" then
-            for _,l in pairs(v:GetChildren()) do
-                if tostring(l) == "Stonewall" and tostring(l.BrickColor) == "Electric blue" then
-                    l:Destroy()
-                end
-            end
-        end
-    end
-    toolEvent("Kill")
-
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait(0.5)
-            toolEvent("Kill")
             characterModel.ChildAdded:connect(
                 function(m)
                     wait(0.1)
@@ -311,25 +243,8 @@ statsPlayerWs()
 
 mouse.KeyDown:connect(
     function(keyDown)
-
-        if keyDown == "e" then
-            noclipAll = not noclipAll
-            NotifyG("NoClip", noclipAll)
-        end
-
 		if keyDown == "v" then
 			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
 		end
-    end
-)
-
-game:GetService("RunService").Stepped:connect(
-    function()
-        if noclipAll then
-            for i = 1, #checkRigType() do
-                lplr.Character[checkRigType()[i]].CanCollide = false
-            end
-            lplr.Character.HumanoidRootPart.CanCollide = false
-        end
     end
 )
