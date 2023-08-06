@@ -174,17 +174,26 @@ function funcGun(m)
 
     if m:FindFirstChild("GunStates") then
         local module = require(m.GunStates)
-        module.Damage = math.huge
-        module.HeadDamage = math.huge
-        -- module.MaxAmmo = 99999999
-        -- module.CurrentAmmo = 99999999
-        module.StoredAmmo = math.huge
+        module.Damage = 200
+        module.HeadDamage = 200
+        module.StoredAmmo = 1000
         module.FireRate = 0.1
-        -- module.AutoFire = true
-        module.Range = math.huge
-        module.Spread = 20
-        module.ReloadTime = 0.1
-        -- module.Bullets = 5
+        module.Range = 10000
+        module.ShieldDamage = 200
+        module.Spread = 100
+        module.ReloadTime = 0.5
+    end
+    for i,v in pairs(getgc(true)) do
+        if type(v) == 'table' and rawget(v, 'HeadDamage') then
+            v.Damage = 200
+            v.HeadDamage = 200
+            v.StoredAmmo = 1000
+            v.FireRate = 0.1
+            v.Range = 10000
+            v.ShieldDamage = 200
+            v.Spread = 100
+            v.ReloadTime = 0.5
+        end
     end
 end
 
