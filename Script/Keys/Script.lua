@@ -94,6 +94,7 @@ for _,v in pairs(wp.Maps:GetChildren()) do
                 end
             )
         end
+        -- workspace.Maps.Forest.ItemHuntFolder.ItemSpawn:GetChildren()[68].Point_1.InteractPrompt
         l.ChildAdded:connect(
             function(n)
                 wait(.5)
@@ -148,6 +149,16 @@ wp.Maps.IceCave.Parts.ChildAdded:connect(
     end
 )
 
+for _,v in pairs(wp.Game.TeleportFolder:GetChildren()) do
+    v:Destroy()
+end
+wp.Game.TeleportFolder.ChildAdded:connect(
+    function(m)
+        wait()
+        m:Destroy()
+    end
+)
+
 function buyItems(name, sl)
     if sl then
         sl = sl
@@ -169,6 +180,7 @@ end
 function exitMap()
     if exitD then
         lplr.Character.HumanoidRootPart.CFrame = exitD.CFrame
+        exitD = nil
     else
         NotifyG("Exit Door", "Appear Yet")
     end
@@ -192,8 +204,6 @@ local function executeChat(code)
             buyItems("PickLock", first)
         elseif string.find("ip", command) then
             buyItems("InvisibityPotion", first)
-        elseif string.find("exit", command) then
-            -- exitMap()
         end
     end
 end
@@ -215,6 +225,9 @@ mouse.KeyDown:connect(
 		if keyDown == "v" then
 			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, .5, -disTeleport)
 		end
+		if keyDown == "z" then
+			exitMap()
+		end
     end
 )
 
@@ -223,40 +236,40 @@ wp.Maps.School.Parts.BUILD.build["2F"].door:Destroy()
 
 while wait(1) do
     wp.Gravity = 150
-    for _,v in pairs(wp.Maps:GetChildren()) do
-        for _,l in pairs(v.ItemHuntFolder.ItemPlace:GetChildren()) do
-            if l:FindFirstChild("ControlPart") then
-                if l.ExitRoot:FindFirstChild("BillBoard_Exit") then
-                    exitD = l.ExitRoot
-                end
-                if l["ControlPart"]:FindFirstChild("InteractPrompt") then
-                    -- l.ControlPart.InteractPrompt.ClientInteractLimit:Destroy()
-                    local doorModel = l:FindFirstChildOfClass("Model")
-                    for _,k in pairs(doorModel:GetChildren()) do
-                        if tostring(k.Name) == "door1" and not k:FindFirstChild("BS") then
-                            for _, f in pairs(faces) do
-                                createESPCharm(k, f, 75, 151, 75)
-                            end
+    if wp:FindFirstChild("Maps") then
+        for _,v in pairs(wp.Maps:GetChildren()) do
+            if v:FindFirstChild("ItemHuntFolder") then
+                if v.ItemHuntFolder:FindFirstChild("ItemPlace") then
+                    for _,l in pairs(v.ItemHuntFolder.ItemPlace:GetChildren()) do
+                        if l:FindFirstChild("ControlPart") then
+                            spawn(function()
+                                if l:FindFirstChild("ExitRoot") then
+                                    if l.ExitRoot:FindFirstChild("BillBoard_Exit") then
+                                        exitD = l.ExitRoot
+                                    end
+                                end
+                                if l["ControlPart"]:FindFirstChild("InteractPrompt") then
+                                    l.ControlPart.InteractPrompt.HoldDuration = 0
+                                    l.ControlPart.InteractPrompt.MaxActivationDistance = 15
+                                    local doorModel = l:FindFirstChildOfClass("Model")
+                                    for _,k in pairs(doorModel:GetChildren()) do
+                                        if tostring(k.Name) == "door1" and not k:FindFirstChild("BS") then
+                                            for _, f in pairs(faces) do
+                                                createESPCharm(k, f, 75, 151, 75)
+                                            end
+                                        end
+                                    end
+                                else
+                                    local doorModel = l:FindFirstChildOfClass("Model")
+                                    for _,k in pairs(doorModel:GetChildren()) do
+                                        k:ClearAllChildren()
+                                    end
+                                end
+                            end)
                         end
-                    end
-                else
-                    local doorModel = l:FindFirstChildOfClass("Model")
-                    for _,k in pairs(doorModel:GetChildren()) do
-                        k:ClearAllChildren()
                     end
                 end
             end
         end
     end
 end
-
--- game:GetService("Workspace").Maps.MagicCube.ItemHuntFolder.ItemPlace:GetChildren()[15].ExitRoot.BillBoard_Exit
--- game:GetService("Workspace").Maps.Castle.InvisParts.Walls
--- game:GetService("Workspace").Maps.Castle.HideCabinet
--- game:GetService("Workspace").Maps.IceCave.Parts.ground
--- game:GetService("Workspace").Game.GamePlayers.SugarCamilia.PlayerStateControl
--- game:GetService("Workspace").Maps.IceCave.ItemHuntFolder.ItemSpawn.DrawerContainer["SpawnPoint_1"].ToolModel.Handle
--- game:GetService("Workspace").Maps.IceCave.ItemHuntFolder.ItemPlace.LockDoor["door_IceCave"].door1
--- game:GetService("Workspace").Maps.MagicCube.ItemHuntFolder.ItemPlace["LockDoor_3"]["door_mk1"]
--- game:GetService("Workspace").Maps.IceCave.ItemHuntFolder.ItemPlace.LockDoor.ControlPart.LocalItemHuntPlace
--- game:GetService("Workspace").Maps.MagicCube.ItemHuntFolder.ItemSpawn["SpawnPoint_1"]["Point_1"].ToolModel.Handle
