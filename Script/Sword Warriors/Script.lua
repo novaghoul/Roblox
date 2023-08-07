@@ -407,26 +407,33 @@ if gi == 4540494160 then
         
         rs:WaitForChild("CurRemotes"):WaitForChild("DataChange_Points"):FireServer(unpack(args))        
     end
-lplr.PlayerGui.PetGui.Petname.ChildAdded:connect(
-    function(m)
-        m:Destroy()
-    end
-)
-    -- for i=1,30 do
-    --     local args = {
-    --         [1] = "Egg",
-    --         [2] = 11,
-    --         [3] = false,
-    --         [4] = {
-    --             ["Eternity"] = false,
-    --             ["Common"] = false,
-    --             ["Mysterious"] = false,
-    --             ["Legend"] = false,
-    --             ["Epic"] = false,
-    --             ["Rare"] = false
-    --         }
-    --     }
-        
-    --     rs:WaitForChild("CurrentModule"):WaitForChild("RangeCheck"):WaitForChild("RangeEvent"):FireServer(unpack(args))
-    -- end
+    
+    getgenv().eNum = 8
+    getgenv().cD = true
+    getgenv().lD = true
+    getgenv().eD = true
+    getgenv().rD = true
+    mouse.KeyDown:connect(
+        function(keyDown)
+            if keyDown == "z" then
+                for i=1,75 do
+                    local args = {
+                        [1] = "Egg",
+                        [2] = eNum,
+                        [3] = false,
+                        [4] = {
+                            ["Eternity"] = false,
+                            ["Common"] = cD,
+                            ["Mysterious"] = false,
+                            ["Legend"] = lD,
+                            ["Epic"] = eD,
+                            ["Rare"] = rD
+                        }
+                    }
+                    
+                    rs:WaitForChild("CurrentModule"):WaitForChild("RangeCheck"):WaitForChild("RangeEvent"):FireServer(unpack(args))
+                end
+            end
+        end
+    )
 end
