@@ -15,7 +15,9 @@ if init == nil then
     getgenv().lplr = plrs.LocalPlayer
     getgenv().bp = lplr.Backpack
     getgenv().mouse = lplr:GetMouse()
-    getgenv().virtualUser = game:GetService("VirtualUser")
+    if not gi == 3490661993 then
+        getgenv().virtualUser = game:GetService("VirtualUser")
+    end
 
     getgenv().ws_g = 20
     getgenv().jp_g = 50
