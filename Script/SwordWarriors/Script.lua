@@ -191,7 +191,7 @@ if gi == 4540494160 then
                 while n do
                     wait()
                     if n:FindFirstChild("HumanoidRootPart") then
-                        if (n.HumanoidRootPart.Position - lplr.Character.HumanoidRootPart.Position).Magnitude < 30 then
+                        if (n.HumanoidRootPart.Position - lplr.Character.HumanoidRootPart.Position).Magnitude < 20 then
                             local args = {
                                 [1] = "DamToMonster",
                                 [2] = n,
@@ -378,7 +378,8 @@ if gi == 4540494160 then
             )
         end
     end)
-    
+
+    local PartMap = nil
     local aPlayer = "false"
     mouse.KeyDown:connect(
         function(keyDown)
@@ -391,49 +392,64 @@ if gi == 4540494160 then
                     lplr.Character.HumanoidRootPart.Anchored = false
                 end
             end
+            if keyDown == "v" then
+                if PartMap then
+                    PartMap:Destroy()
+                end
+                local Part = Instance.new("Part")
+                Part.Name = "PartKillBoss"
+                Part.Parent = wp
+                Part.Size = Vector3.new(0.5, 100, 100)
+                Part.Transparency = 0.7
+                Part.Shape = "Cylinder"
+                Part.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -5, 0)  * CFrame.Angles(math.rad(90),math.rad(90), 0)
+                Part.Anchored = true
+                PartMap = Part
+            end
         end
     )
     
     getgenv().pD = true
-    while pD do
-        wait(1)
-        local args = {
-            [1] = "ClickPoints",
-            [2] = {
-                ["Obj"] = "GDamage",
-                ["Points"] = 100
+    while wait(1) do
+        if pD then
+            local args = {
+                [1] = "ClickPoints",
+                [2] = {
+                    ["Obj"] = "GDamage",
+                    ["Points"] = 100
+                }
             }
-        }
-        
-        rs:WaitForChild("CurRemotes"):WaitForChild("DataChange_Points"):FireServer(unpack(args))        
-    end
-    
-    getgenv().eNum = 8
-    getgenv().cD = true
-    getgenv().lD = true
-    getgenv().eD = true
-    getgenv().rD = true
-    mouse.KeyDown:connect(
-        function(keyDown)
-            if keyDown == "z" then
-                for i=1,75 do
-                    local args = {
-                        [1] = "Egg",
-                        [2] = eNum,
-                        [3] = false,
-                        [4] = {
-                            ["Eternity"] = false,
-                            ["Common"] = cD,
-                            ["Mysterious"] = false,
-                            ["Legend"] = lD,
-                            ["Epic"] = eD,
-                            ["Rare"] = rD
-                        }
-                    }
-                    
-                    rs:WaitForChild("CurrentModule"):WaitForChild("RangeCheck"):WaitForChild("RangeEvent"):FireServer(unpack(args))
-                end
-            end
+            
+            rs:WaitForChild("CurRemotes"):WaitForChild("DataChange_Points"):FireServer(unpack(args))
         end
-    )
+    end
+    -- getgenv().pD = true
+    -- getgenv().eNum = 11
+    -- getgenv().cD = false
+    -- getgenv().lD = false
+    -- getgenv().eD = false
+    -- getgenv().rD = false
+    -- mouse.KeyDown:connect(
+    --     function(keyDown)
+    --         if keyDown == "z" then
+    --             for i=1,75 do
+    --                 local args = {
+    --                     [1] = "Egg",
+    --                     [2] = eNum,
+    --                     [3] = false,
+    --                     [4] = {
+    --                         ["Eternity"] = false,
+    --                         ["Common"] = cD,
+    --                         ["Mysterious"] = false,
+    --                         ["Legend"] = lD,
+    --                         ["Epic"] = eD,
+    --                         ["Rare"] = rD
+    --                     }
+    --                 }
+                    
+    --                 rs:WaitForChild("CurrentModule"):WaitForChild("RangeCheck"):WaitForChild("RangeEvent"):FireServer(unpack(args))
+    --             end
+    --         end
+    --     end
+    -- )
 end

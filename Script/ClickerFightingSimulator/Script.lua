@@ -1,4 +1,5 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
+if gi == 4540070253 then
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
 ws_g = 100
@@ -80,6 +81,7 @@ spawn(function()
             if v:FindFirstChild("Info") then
                 if v.Info.BG.UIStroke:FindFirstChild("UIGradient-BG-Rare") 
                 or v.Info.BG.UIStroke:FindFirstChild("UIGradient-BG-Epic") 
+                -- or v.Info.BG.UIStroke:FindFirstChild("UIGradient-BG-Legendary") 
                 then
                     local A_1 = { [1] = tostring(v.Name) }
                     local Event = rs.Remotes["RE_PetDelete"]
@@ -100,19 +102,20 @@ mouse.KeyDown:connect(
         end
     end
 )
--- getgenv().aPet = true
--- while aPet do
---     local args = {
---         [1] = "World032"
---     }
+getgenv().aPet = true
+while aPet do
+    local args = {
+        [1] = "World036"
+    }
     
---     rs.Remotes.RE_Enter:FireServer(unpack(args))
---     local args = {
---         [1] = "Hatch",
---         [2] = "Draw034",
---         [3] = {}
---     }
+    rs.Remotes.RE_Enter:FireServer(unpack(args))
+    local args = {
+        [1] = "Hatch",
+        [2] = "Draw038",
+        [3] = {}
+    }
 
---     rs.Remotes.RE_Draw:FireServer(unpack(args))
---     wait()
--- end
+    rs.Remotes.RE_Draw:FireServer(unpack(args))
+    wait()
+end
+end

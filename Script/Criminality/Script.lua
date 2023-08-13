@@ -50,15 +50,57 @@ wp.Characters.ChildAdded:connect(
 
 for _,v in pairs(wp.Filter.SpawnedBread:GetChildren()) do
     createESPItem(v, 245, 205, 48, 14, "💵 " .. v.A.GUI.TextLabel.Text, 0)
+    v.ChildAdded:connect(
+        function(n)
+            if tostring(n) == "ProximityPrompt" then
+                n.HoldDuration = 0
+                n.MaxActivationDistance = 15
+            end
+        end
+    )
 end
 
 wp.Filter.SpawnedBread.ChildAdded:connect(
     function(m)
-        wait(.5)
         createESPItem(m, 245, 205, 48, 14, "💵 " .. m.A.GUI.TextLabel.Text, 0)
+        m.ChildAdded:connect(
+            function(n)
+                if tostring(n) == "ProximityPrompt" then
+                    n.HoldDuration = 0
+                    n.MaxActivationDistance = 15
+                end
+            end
+        )
     end
 )
 
+-- workspace.Filter.SpawnedBread:GetChildren()[2].ProximityPrompt
+-- workspace.Filter.SpawnedTools.Model.Handle.ProximityPrompt
+for _,v in pairs(wp.Filter.SpawnedTools:GetChildren()) do
+    v.Handle.ChildAdded:connect(
+        function(n)
+            if tostring(n) == "ProximityPrompt" then
+                n.HoldDuration = 0
+                n.MaxActivationDistance = 15
+            end
+        end
+    )
+end
+
+wp.Map.MysteryBoxes.ChildAdded:connect(
+    function(m)
+        if m:WaitForChild("Handle") then
+            m.Handle.ChildAdded:connect(
+                function(n)
+                    if tostring(n) == "ProximityPrompt" then
+                        n.HoldDuration = 0
+                        n.MaxActivationDistance = 15
+                    end
+                end
+            )
+        end
+    end
+)
 for _,v in pairs(wp.Map.MysteryBoxes:GetChildren()) do
     createESPItem(v.MainPart, 245, 205, 48, 14, "🎁", 0)
 end
@@ -201,15 +243,34 @@ for _,v in pairs(wp.Filter.SpawnedPiles:GetChildren()) do
     else
         createESPItem(v.MeshPart, 245, 205, 48, 14, "💩", 0)
     end
+    v.MeshPart.ChildAdded:connect(
+        function(n)
+            wait(.5)
+            if tostring(n) == "ProximityPrompt" then
+                n.HoldDuration = 0
+                n.MaxActivationDistance = 15
+            end
+        end
+    )
 end
 
 wp.Filter.SpawnedPiles.ChildAdded:connect(
     function(m)
-        wait(.5)
         if tostring(m.Name) == "C1" or tostring(m.Name) == "C2" then
-            createESPItem(v.MeshPart, 245, 205, 48, 14, "⚔️", 0)
+            createESPItem(m.MeshPart, 245, 205, 48, 14, "⚔️", 0)
         else
             createESPItem(m.MeshPart, 245, 205, 48, 14, "💩", 0)
+        end
+        
+        if m:WaitForChild("MeshPart") then
+            m.MeshPart.ChildAdded:connect(
+                function(n)
+                    if tostring(n) == "ProximityPrompt" then
+                        n.HoldDuration = 0
+                        n.MaxActivationDistance = 15
+                    end
+                end
+            )
         end
     end
 )

@@ -248,9 +248,11 @@ if init == nil then
     end
 
 	lplr.Idled:connect(function()
-		virtualUser:Button2Down(Vector2.new(0,0),wp.CurrentCamera.CFrame)
-		wait(1)
-		virtualUser:Button2Up(Vector2.new(0,0),wp.CurrentCamera.CFrame)
+        if virtualUser then
+            virtualUser:Button2Down(Vector2.new(0,0),wp.CurrentCamera.CFrame)
+            wait(1)
+            virtualUser:Button2Up(Vector2.new(0,0),wp.CurrentCamera.CFrame)
+        end
 	end)
     loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ExecuteChats.lua"), true))()
 end

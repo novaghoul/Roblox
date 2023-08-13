@@ -70,26 +70,26 @@ for _,v in pairs(wp.Maps:GetChildren()) do
     for _,l in pairs(v.ItemHuntFolder.ItemSpawn:GetChildren()) do
         if l:FindFirstChild("Point_1") then
             if l["Point_1"]:FindFirstChild("ToolModel") then
-                createESPItem(l["Point_1"].ToolModel.Handle, 245, 205, 48, 14, "Key", 0)
+                createESPItem(l["Point_1"].ToolModel.Handle, 245, 205, 48, 14, "🔐", 0)
             end
             l["Point_1"].ChildAdded:connect(
                 function(m)
                     wait(.5)
                     if tostring(m.Name) == "ToolModel" then
-                        createESPItem(m.Handle, 245, 205, 48, 14, "Key", 0)
+                        createESPItem(m.Handle, 245, 205, 48, 14, "🔐", 0)
                     end
                 end
             )
         end
         if l:FindFirstChild("SpawnPoint_1") then
             if l["SpawnPoint_1"]:FindFirstChild("ToolModel") then
-                createESPItem(l["SpawnPoint_1"].ToolModel.Handle, 245, 205, 48, 14, "Key", 0)
+                createESPItem(l["SpawnPoint_1"].ToolModel.Handle, 245, 205, 48, 14, "🔐", 0)
             end
             l["SpawnPoint_1"].ChildAdded:connect(
                 function(m)
                     wait(.5)
                     if tostring(m.Name) == "ToolModel" then
-                        createESPItem(m.Handle, 245, 205, 48, 14, "Key", 0)
+                        createESPItem(m.Handle, 245, 205, 48, 14, "🔐", 0)
                     end
                 end
             )
@@ -100,26 +100,26 @@ for _,v in pairs(wp.Maps:GetChildren()) do
                 wait(.5)
                 if tostring(n) == "Point_1" then
                     if n:FindFirstChild("ToolModel") then
-                        createESPItem(n.ToolModel.Handle, 245, 205, 48, 14, "Key", 0)
+                        createESPItem(n.ToolModel.Handle, 245, 205, 48, 14, "🔐", 0)
                     end
                     n.ChildAdded:connect(
                         function(m)
                             wait(.5)
                             if tostring(m.Name) == "ToolModel" then
-                                createESPItem(m.Handle, 245, 205, 48, 14, "Key", 0)
+                                createESPItem(m.Handle, 245, 205, 48, 14, "🔐", 0)
                             end
                         end
                     )
                 end
                 if tostring(n) == "SpawnPoint_1" then
                     if n:FindFirstChild("ToolModel") then
-                        createESPItem(n.ToolModel.Handle, 245, 205, 48, 14, "Key", 0)
+                        createESPItem(n.ToolModel.Handle, 245, 205, 48, 14, "🔐", 0)
                     end
                     n.ChildAdded:connect(
                         function(m)
                             wait(.5)
                             if tostring(m.Name) == "ToolModel" then
-                                createESPItem(m.Handle, 245, 205, 48, 14, "Key", 0)
+                                createESPItem(m.Handle, 245, 205, 48, 14, "🔐", 0)
                             end
                         end
                     )
