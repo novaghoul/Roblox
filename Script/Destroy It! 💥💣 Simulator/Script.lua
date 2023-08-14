@@ -17,12 +17,14 @@ mouse.KeyDown:connect(
 		if keyDown == "z" then
             for _,v in pairs(wp.Map.Zones:GetChildren()) do
                 for _,l in pairs(v:GetChildren()) do
-                    local args = {
-                        [1] = l.BlockSell,
-                        [2] = true
-                    }
-                    
-                    rs.Remotes.Game.Stat.ClientToggleUseBlockSell:FireServer(unpack(args))
+                    if l:FindFirstChild("BlockSell") then
+                        local args = {
+                            [1] = l.BlockSell,
+                            [2] = true
+                        }
+                        
+                        rs.Remotes.Game.Stat.ClientToggleUseBlockSell:FireServer(unpack(args))
+                    end
                 end
             end
 		end

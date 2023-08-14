@@ -24,9 +24,10 @@ firetouchinterest(game:GetService("Workspace").Tycoon.Tycoons.Lima.Essentials.Ca
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
 toggleJP = false
-ws_g = 50
+ws_g = 20
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/ESPTestTeam.lua"), true))() -- 1st Lua
 for _,v in pairs(wp.Maps.Realm1:GetChildren()) do
     for _,l in pairs(v.Gameplay.SlashableObjects:GetChildren()) do
         if l:IsA("Folder") then
@@ -50,4 +51,3 @@ local args = {
 }
 
 rs.Postie.Remotes.PlayerRemotes.WAOHoukaShu.SlashableTrigger:FireServer(unpack(args))
-
