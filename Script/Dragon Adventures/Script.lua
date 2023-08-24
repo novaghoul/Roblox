@@ -4,7 +4,7 @@ getgenv().aBreath = true
 toggleWS = false
 toggleJP = false
 ws_g = 50
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS Other.lua"), true))() -- WS Other Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS_Other.lua"), true))() -- WS_Other Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
 spawn(function()
@@ -79,21 +79,23 @@ wp.Interactions.Boss.ActiveModels.ChildAdded:connect(
 					if not lplr.Character.Dragons:GetChildren()[1] then
 						return
 					end
-					local aDragon = lplr.Character.Dragons:GetChildren()[1]
-					if aDragon:WaitForChild("Remotes") then
-						local args = {
-							[1] = "Breath",
-							[2] = "Bosses",
-							[3] = m.HumanoidRootPart
-						}
-						-- local args1 = {
-						-- 	[1] = "Bite",
-						-- 	[2] = "Bosses",
-						-- 	[3] = m.HumanoidRootPart
-						-- }
-						
-						aDragon.Remotes.PlaySoundRemote:FireServer(unpack(args))
-						-- aDragon.Remotes.PlaySoundRemote:FireServer(unpack(args1))
+					if (m.HumanoidRootPart.Position - lplr.Character.HumanoidRootPart.Position).Magnitude < 150 then
+						local aDragon = lplr.Character.Dragons:GetChildren()[1]
+						if aDragon:WaitForChild("Remotes") then
+							local args = {
+								[1] = "Breath",
+								[2] = "Bosses",
+								[3] = m.HumanoidRootPart
+							}
+							-- local args1 = {
+							-- 	[1] = "Bite",
+							-- 	[2] = "Bosses",
+							-- 	[3] = m.HumanoidRootPart
+							-- }
+							
+							aDragon.Remotes.PlaySoundRemote:FireServer(unpack(args))
+							-- aDragon.Remotes.PlaySoundRemote:FireServer(unpack(args1))
+						end
 					end
 				end
 			end)
