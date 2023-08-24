@@ -36,6 +36,15 @@ spawn(function()
 								if v.Data.MovementStats:FindFirstChild("FlyTurnSpeed") then
 									v.Data.MovementStats.FlyTurnSpeed.Value = 0.1
 								end
+								if v.Data.MovementStats:FindFirstChild("TurnSpeed") then
+									v.Data.MovementStats.TurnSpeed.Value = 0.1
+								end
+								if v.Data.MovementStats:FindFirstChild("WalkSpeed") then
+									v.Data.MovementStats.WalkSpeed.Value = 100
+								end
+								if v.Data.MovementStats:FindFirstChild("WalkSpeedMultiplier") then
+									v.Data.MovementStats.WalkSpeedMultiplier.Value = 1
+								end
 							end
 						end
 					end
@@ -46,22 +55,27 @@ spawn(function()
 end)
 spawn(function()
 	while wait() do
-		for _,v in pairs(wp.Interactions.Nodes.Mobs.ActiveMobs.Global:GetChildren()) do
-			if (v.Position - lplr.Character.HumanoidRootPart.Position).Magnitude < 150 then
-				if lplr.Character.Dragons:GetChildren()[1] then
-					-- local args = {
-					-- 	[1] = "Breath",
-					-- 	[2] = "Mobs",
-					-- 	[3] = v
-					-- }
-					local args1 = {
-						[1] = "Bite",
-						[2] = "Mobs",
-						[3] = v
-					}
-					
-					-- lplr.Character.Dragons:GetChildren()[1].Remotes.PlaySoundRemote:FireServer(unpack(args))
-					lplr.Character.Dragons:GetChildren()[1].Remotes.PlaySoundRemote:FireServer(unpack(args1))
+		local aDragon = lplr.Character.Dragons:GetChildren()[1]
+		if aDragon then
+			if aDragon:FindFirstChild("Remotes") then
+				if aDragon.Remotes:FindFirstChild("PlaySoundRemote") then
+					for _,v in pairs(wp.Interactions.Nodes.Mobs.ActiveMobs.Global:GetChildren()) do
+						if (v.Position - lplr.Character.HumanoidRootPart.Position).Magnitude < 150 then
+							-- local args = {
+							-- 	[1] = "Breath",
+							-- 	[2] = "Mobs",
+							-- 	[3] = v
+							-- }
+							local args1 = {
+								[1] = "Bite",
+								[2] = "Mobs",
+								[3] = v
+							}
+							
+							-- lplr.Character.Dragons:GetChildren()[1].Remotes.PlaySoundRemote:FireServer(unpack(args))
+							lplr.Character.Dragons:GetChildren()[1].Remotes.PlaySoundRemote:FireServer(unpack(args1))
+						end
+					end
 				end
 			end
 		end
@@ -106,41 +120,15 @@ wp.Interactions.Boss.ActiveModels.ChildAdded:connect(
 for _,v in pairs(wp.Interactions.Nodes.Harvest:GetChildren()) do
 	for _,l in pairs(v.ActiveNodes:GetChildren()) do
 		if tostring(v.Name) == "Eggs" then
-			createESPItem(l.EggModel.Egg, 245, 205, 48, 14, "Egg", 0)
+			if l then
+				createESPItem(l.EggModel.Egg, 245, 205, 48, 14, "Egg", 0)
+			end
 		else
 			createESPItem(l:FindFirstChildOfClass("MeshPart"), 245, 205, 48, 14, v.Name, 0)
 			spawn(function()
-				while l.BoostRemote do
+				while l do
 					wait()
-					local args = {
-						[1] = true,
-						[2] = "Magic0"
-					}
-					local args1 = {
-						[1] = true,
-						[2] = "Resources0"
-					}
-					local args2 = {
-						[1] = true,
-						[2] = "Food0"
-					}
-					l.BoostRemote:InvokeServer(unpack(args))
-					l.BoostRemote:InvokeServer(unpack(args1))
-					l.BoostRemote:InvokeServer(unpack(args2))
-				end
-			end)
-		end
-	end
-	v.ActiveNodes.ChildAdded:connect(
-		function(m)
-			wait(1)
-			if tostring(v.Name) == "Eggs" then
-				createESPItem(m.EggModel.Egg, 245, 205, 48, 14, "Egg", 0)
-			else
-				createESPItem(m:FindFirstChildOfClass("MeshPart"), 245, 205, 48, 14, v.Name, 0)
-				spawn(function()
-					while m.BoostRemote do
-						wait()
+					if l:FindFirstChild("BoostRemote") then
 						local args = {
 							[1] = true,
 							[2] = "Magic0"
@@ -153,9 +141,43 @@ for _,v in pairs(wp.Interactions.Nodes.Harvest:GetChildren()) do
 							[1] = true,
 							[2] = "Food0"
 						}
-						m.BoostRemote:InvokeServer(unpack(args))
-						m.BoostRemote:InvokeServer(unpack(args1))
-						m.BoostRemote:InvokeServer(unpack(args2))
+						l.BoostRemote:InvokeServer(unpack(args))
+						l.BoostRemote:InvokeServer(unpack(args1))
+						l.BoostRemote:InvokeServer(unpack(args2))
+					end
+				end
+			end)
+		end
+	end
+	v.ActiveNodes.ChildAdded:connect(
+		function(m)
+			wait(1)
+			if tostring(v.Name) == "Eggs" then
+				if m then
+					createESPItem(m.EggModel.Egg, 245, 205, 48, 14, "Egg", 0)
+				end
+			else
+				createESPItem(m:FindFirstChildOfClass("MeshPart"), 245, 205, 48, 14, v.Name, 0)
+				spawn(function()
+					while m do
+						wait()
+						if m:FindFirstChild("BoostRemote") then
+							local args = {
+								[1] = true,
+								[2] = "Magic0"
+							}
+							local args1 = {
+								[1] = true,
+								[2] = "Resources0"
+							}
+							local args2 = {
+								[1] = true,
+								[2] = "Food0"
+							}
+							m.BoostRemote:InvokeServer(unpack(args))
+							m.BoostRemote:InvokeServer(unpack(args1))
+							m.BoostRemote:InvokeServer(unpack(args2))
+						end
 					end
 				end)
 			end
