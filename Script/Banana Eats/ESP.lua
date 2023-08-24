@@ -1,48 +1,22 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
+toggleJP = false
+ws_g = 20
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
 function createESP(parent)
-    local bgui = Instance.new("BillboardGui", parent.Character.Head)
-    bgui.Name = ("EGUI")
-    bgui.AlwaysOnTop = true
-    bgui.ExtentsOffset = Vector3.new(0, 3, 0)
-    bgui.Size = UDim2.new(0, 200, 0, 50)
-    local nam = Instance.new("TextLabel", bgui)
-    nam.Text = parent.Name
-    nam.BackgroundTransparency = 1
-    nam.TextSize = 14
-    nam.Font = ("Arial")
-    nam.TextColor3 = Color3.fromRGB(75, 151, 75)
-    nam.Size = UDim2.new(0, 200, 0, 50)
-    for _, p in pairs(parent.Character:GetChildren()) do
-        if p.Name == ("Head") then
-            for _, f in pairs(faces) do
-                local m = Instance.new("SurfaceGui", p)
-                m.Name = ("EGUI")
-                m.Face = f
-                m.Active = true
-                m.AlwaysOnTop = true
-                local mf = Instance.new("Frame", m)
-                mf.Size = UDim2.new(1, 0, 1, 0)
-                mf.BorderSizePixel = 0
-                mf.BackgroundTransparency = 0.5
-                mf.BackgroundColor3 = Color3.fromRGB(75, 151, 75)
-                if parent.Character:FindFirstChild("BananaPackage") then
-                    mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                end
-                parent.Character.ChildAdded:connect(function(m)
-                    if m.Name == "BananaPackage" then
-                        mf.BackgroundColor3 = Color3.fromRGB(196, 40, 28)
-                    end
-                end)
-            end
+    createESPItem(parent.Character.Head, 75, 151, 75, 14, parent.Name)
+    for _, v in pairs(parent.Character:GetChildren()) do
+        if checkPart(v) then
+            actualESP(v)
         end
     end
     if parent.Character:FindFirstChild("BananaPackage") then
-        nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+        parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
     end
     parent.Character.ChildAdded:connect(function(m)
         if m.Name == "BananaPackage" then
-            nam.TextColor3 = Color3.fromRGB(196, 40, 28)
+            parent.Character.Head.nameEGUI.nameESP.TextColor3 = Color3.fromRGB(196, 40, 28)
         end
     end)
 end
@@ -114,6 +88,12 @@ function firstScript()
                 createESPItem(v.Model.CakePlate.Model.Cake, 245, 205, 48, 14, "Cake Plate")
             end
         end
+        wp.GameKeeper.Map.Items.ChildAdded:connect(function(n)
+            wait(0.5)
+            if n.Model:WaitForChild("CakePlate") then
+                createESPItem(n.Model.CakePlate.Model.Cake, 245, 205, 48, 14, "Cake Plate")
+            end
+        end)
     end
 
     if wp.GameKeeper.Map:FindFirstChild("Tokens") then
@@ -161,47 +141,6 @@ end
 
 -------------------------------------------------------------
 --------------------------Other------------------------------
-function infJump()
-    -- lplr.Character.Humanoid.JumpPower = _G.jp_g
-    lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-end
-
-function statsPlayerWs()
-    lplr.Character.Humanoid.WalkSpeed = ws_g
-
-    lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
-        if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-    end)
-    lplr.CharacterAdded:Connect(function(characterModel)
-        wait(0.5)
-        lplr.Character.Humanoid.WalkSpeed = ws_g
-        lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(function()
-            if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
-                lplr.Character.Humanoid.WalkSpeed = ws_g
-            end
-        end)
-    end)
-end
-statsPlayerWs()
-
-function changeWS(typeWS)
-    if typeWS == 0 then
-        ws_g = ws_g + 5
-        lplr.Character.Humanoid.WalkSpeed = ws_g
-    elseif typeWS == 1 then
-        if ws_g >= 0 then
-            ws_g = ws_g - 5
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-        if ws_g < 16 then
-            ws_g = 16
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-    end
-end
-
 mouse.KeyDown:connect(function(keyDown)
     if keyDown == "q" then
         tpCoin()
@@ -210,36 +149,12 @@ mouse.KeyDown:connect(function(keyDown)
     if keyDown == "e" then
         rs.Events.DropPeel:InvokeServer()
     end
-
-    if keyDown == " " then
-        infJump()
-    end
-
-    if keyDown == "c" then
-        changeWS(0)
-        SendChat("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
-    end
-
-    if keyDown == "v" then
-        changeWS(1)
-        SendChat("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
-    end
-
-    if keyDown == "f" then
-        noclipAll = not noclipAll
-    end
-end)
-
-lplr.Idled:connect(function()
-    VirtualUser:CaptureController()
-    VirtualUser:ClickButton2(Vector2.new())
-end)
-
-game:GetService("RunService").Stepped:connect(function()
-    if noclipAll then
-        for i = 1, #checkRigType() do
-            lplr.Character[checkRigType()[i]].CanCollide = false
+    if keyDown == "z" then
+        if wp.GameKeeper.Exits:GetChildren()[1] then
+            local eDoor = wp.GameKeeper.Exits:GetChildren()[1]
+            firetouchinterest(eDoor.Root,  lplr.Character.UpperTorso, 0)
+            firetouchinterest(eDoor.Root,  lplr.Character.UpperTorso, 1)
         end
-        lplr.Character.HumanoidRootPart.CanCollide = false
     end
 end)
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/NoClip.lua"), true))() -- Noclip Lua

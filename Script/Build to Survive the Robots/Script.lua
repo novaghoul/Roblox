@@ -95,6 +95,17 @@ mouse.KeyDown:connect(
                 rs.Remotes.Robot.Explode:InvokeServer()
             end
         end
+        if keyDown == "x" then
+            if ws_g == 30 then
+                ws_g = 20
+                lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
+                NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
+            else
+                ws_g = 30
+                lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
+                NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
+            end
+        end
         if keyDown == "v" then
 			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
         end

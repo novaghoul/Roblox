@@ -1,5 +1,6 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
+getgenv().toggleWS = false
 hitBoxBody = "HumanoidRootPart"
 
 function createHeadCharm(parent, r, g, b)
@@ -143,7 +144,7 @@ function funcEffect(parent)
 end
 
 function firstScript()
-    wp.Gravity = 150
+    wp.Gravity = 50
 
     for _, v in pairs(wp.EffectsBin:GetChildren()) do
         funcEffect(v)
@@ -164,68 +165,21 @@ function takeWeapon()
     end
 end
 
-function statsPlayerWs()
-    if wp:FindFirstChild(lplr.Name) then
-        lplr.Character.Humanoid.WalkSpeed = ws_g
-
-        lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
-            function()
-                if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
-                    lplr.Character.Humanoid.WalkSpeed = ws_g
-                end
-            end
-        )
-    end
-    lplr.CharacterAdded:Connect(
-        function(characterModel)
-            wait(1)
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-            lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
-                function()
-                    if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
-                        lplr.Character.Humanoid.WalkSpeed = ws_g
-                    end
-                end
-            )
-        end
-    )
-end
-statsPlayerWs()
-
-function changeWS(typeWS)
-    if typeWS == 0 then
-        ws_g = ws_g + 2
-        lplr.Character.Humanoid.WalkSpeed = ws_g
-    elseif typeWS == 1 then
-        if ws_g >= 0 then
-            ws_g = ws_g - 2
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-        if ws_g < 16 then
-            ws_g = 16
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-    end
-end
-
 mouse.KeyDown:connect(
     function(keyDown)
-        if keyDown == " " then
-            infJump()
-        end
-
         if keyDown == "f" then
             takeWeapon()
         end
-
-        if keyDown == "c" then
-            changeWS(0)
-            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
-        end
-
-        if keyDown == "v" then
-            changeWS(1)
-            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
-        end
     end
 )
+function function_name()
+        loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Aimbot.lua"), true))()
+        getgenv().Aimbot.Settings.WallCheck = true
+        getgenv().Aimbot.FOVSettings.Enabled = true
+        getgenv().Aimbot.FOVSettings.Visible = false
+end
+function function_name2()
+    loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
+end
+function_name()
+function_name2()

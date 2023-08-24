@@ -1,18 +1,18 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
+toggleJP = false
+ws_g = 30
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
 hitBoxSize = {7, 7, 7}
 
 _G.arrayNameButton = {
-    "addSpeed",
-    "subSpeed",
     "infJump",
     "killAllZom",
     "noclipToggle"
 }
 
 _G.arrayTextButton = {
-    "Press C to + Speed",
-    "Press V to - Speed",
     "Press Space to Inf Jump",
     "Press E to Kill All Zombie",
     "Press F to Noclip"
@@ -97,50 +97,8 @@ hitBox()
 for i,v in pairs(getgc(true)) do
     if type(v) == 'table' and rawget(v, 'Damage') then
         v.Damage = 500
-        v.FireRate = 0.01
+        v.FireRate = 0.1
         v.Range = 500
-    end
-end
-
-function statsPlayerWs()
-    lplr.Character.Humanoid.WalkSpeed = ws_g
-
-    lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
-        function()
-            if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
-                lplr.Character.Humanoid.WalkSpeed = ws_g
-            end
-        end
-    )
-    lplr.CharacterAdded:Connect(
-        function(characterModel)
-            wait(1)
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-            lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
-                function()
-                    if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
-                        lplr.Character.Humanoid.WalkSpeed = ws_g
-                    end
-                end
-            )
-        end
-    )
-end
-statsPlayerWs()
-
-function changeWS(typeWS)
-    if typeWS == 0 then
-        ws_g = ws_g + 2
-        lplr.Character.Humanoid.WalkSpeed = ws_g
-    elseif typeWS == 1 then
-        if ws_g >= 0 then
-            ws_g = ws_g - 2
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-        if ws_g < 16 then
-            ws_g = 16
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
     end
 end
 
@@ -148,22 +106,6 @@ local killZom = false
 
 mouse.KeyDown:connect(
     function(keyDown)
-		
-        if keyDown == "c" then
-            changeWS(0)
-            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
-        end
-
-        if keyDown == "v" then
-            changeWS(1)
-            NotifyG("Walk Speed", lplr.Character.Humanoid.WalkSpeed)
-        end
-
-        if keyDown == "f" then
-            noclipAll = not noclipAll
-            NotifyG("Noclip", noclipAll)
-        end
-
         if keyDown == "e" then
             killZom = not killZom
             NotifyG("Kill Zombie", killZom)
@@ -181,6 +123,9 @@ mouse.KeyDown:connect(
                 end
             end
         end
+        if keyDown == "v" then
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
+        end
 
         if keyDown == " " then
             infJump()
@@ -188,14 +133,4 @@ mouse.KeyDown:connect(
     end
 )
 
-
-game:GetService("RunService").Stepped:connect(
-    function()
-        if noclipAll then
-            for i = 1, #checkRigType() do
-                lplr.Character[checkRigType()[i]].CanCollide = false
-            end
-            lplr.Character.HumanoidRootPart.CanCollide = false
-        end
-    end
-)
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/NoClip.lua"), true))() -- WS Lua

@@ -69,27 +69,18 @@ function changeDA(typeDA)
     end
 end
 
-mouse.KeyDown:connect(function(keyDown)
-    if keyDown == "c" then
-        changeDA(0)
-        NotifyG("Dash", ws_g)
-    end
-    if keyDown == "v" then
-        changeDA(1)
-        NotifyG("Dash", ws_g)
-    end
-    if keyDown == "x" then
-        if ws_g == 20 then
-            ws_g = 17
-            NotifyG("Dash", ws_g)
-        else
-            ws_g = 20
+if toggleWS then
+    mouse.KeyDown:connect(function(keyDown)
+        if keyDown == "k" then
+            changeDA(0)
             NotifyG("Dash", ws_g)
         end
-    end
-    if keyDown == "q" then
-    end
-end)
+        if keyDown == "l" then
+            changeDA(1)
+            NotifyG("Dash", ws_g)
+        end
+    end)
+end
 
 spawn(
 	function()

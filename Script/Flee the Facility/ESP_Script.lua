@@ -1,5 +1,10 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
+disTeleport = 10
+toggleWS = false
+toggleJP = false
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 _G.map = nil
 _G.children = nil
 
@@ -173,26 +178,9 @@ end
 firstScript()
 
 function changeSpeed()
-    lplr.Character.Humanoid.WalkSpeed = ws_g
-    lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
-        function()
-            if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
-                lplr.Character.Humanoid.WalkSpeed = ws_g
-            end
-        end
-    )
-
     lplr.CharacterAdded:Connect(
         function(characterModel)
             wait(0.5)
-            characterModel.Humanoid.WalkSpeed = ws_g
-            characterModel.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
-                function()
-                    if characterModel.Humanoid.WalkSpeed ~= ws_g then
-                        characterModel.Humanoid.WalkSpeed = ws_g
-                    end
-                end
-            )
             characterModel.ChildAdded:connect(
                 function(m)
                     wait(0.5)
@@ -237,41 +225,10 @@ function changeSpeed()
         lplr.Character:FindFirstChild("TestLocalScript"):Destroy()
     end
 end
-
-function changeWS(typeWS)
-    if typeWS == 0 then
-        ws_g = ws_g + 2
-        lplr.Character.Humanoid.WalkSpeed = ws_g
-    elseif typeWS == 1 then
-        if ws_g >= 0 then
-            ws_g = ws_g - 2
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-        if ws_g < 16 then
-            ws_g = 16
-            lplr.Character.Humanoid.WalkSpeed = ws_g
-        end
-    end
-end
 changeSpeed()
-
-function infJump()
-    if lplr.Character.Humanoid ~= nil then
-        lplr.Character.Humanoid.JumpPower = jp_g
-        lplr.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
-    end
-end
 
 mouse.KeyDown:connect(
     function(keyDown)
-        if keyDown == " " then
-            infJump()
-        end
-
-        if keyDown == "c" then
-            changeWS(0)
-            NotifyG("Walk Speed", tostring(ws_g))
-        end
 
         if keyDown == "x" then
             if ws_g == 20 then
@@ -286,13 +243,7 @@ mouse.KeyDown:connect(
         end
 
         if keyDown == "v" then
-            changeWS(1)
-            NotifyG("Walk Speed", tostring(ws_g))
-        end
-
-        if keyDown == "f" then
-            noclipAll = not noclipAll
-            NotifyG("No Clip", tostring(noclipAll))
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
         end
     end
 )
@@ -305,19 +256,23 @@ spawn(
         end
     end
 )
-
--- game:GetService("RunService").Stepped:connect(
---     function()
---         if noclipAll then
---             for i = 1, #checkRigType() do
---                 lplr.Character[checkRigType()[i]].CanCollide = false
---             end
---             lplr.Character.HumanoidRootPart.CanCollide = false
---         else
---             for i = 1, #checkRigType() do
---                 lplr.Character[checkRigType()[i]].CanCollide = true
---             end
---             lplr.Character.HumanoidRootPart.CanCollide = true
---         end
---     end
--- )
+mouse.Button1Down:connect(
+	function()
+        for _, o in pairs(plrs:GetPlayers()) do
+            if o.Name ~= lplr.Name then
+                if o.Character then
+                    if (o.Character.HumanoidRootPart.Position - lplr.Character.HumanoidRootPart.Position).Magnitude < 10 then
+                        if lplr.Character:FindFirstChild("Hammer") then
+                            local args = {
+                                [1] = "HammerHit",
+                                [2] = o.Character.HumanoidRootPart
+                            }
+                            
+                            lplr.Character.Hammer.HammerEvent:FireServer(unpack(args))
+                        end
+                    end
+                end
+            end
+        end
+	end
+)

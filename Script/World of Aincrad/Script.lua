@@ -1,10 +1,70 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
-
+toggleWS = false
 toggleJP = false
-ws_g = 30
+ws_g = 25
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
+function createESP(c) --//Checks and calls the proper function
+    -- createESPItem(c.Head, 196, 40, 28, 14, plrs:FindFirstChild(c.Name).DisplayName)
+    -- for _, v in pairs(c:GetChildren()) do
+    --     if checkPart(v) then
+    --         actualESP(v)
+    --     end
+    -- end
+    if HEALTHBAR_ACTIVATED then --//If the user decided to
+        createHealthbar(c:WaitForChild("HumanoidRootPart")) --//Calls the function of the creation
+    end
+end
 
+function enableESPCode()
+    for _, o in pairs(plrs:GetPlayers()) do
+        if o.Name ~= lplr.Name then
+            o.CharacterAdded:Connect(
+                function(characterModel)
+                    spawn(function()
+                        if characterModel:WaitForChild("HumanoidRootPart") then
+                            wait(0.5)
+                            createESP(characterModel)
+                        end
+                    end)
+                end
+            )
+        end
+    end
+
+    plrs.PlayerAdded:Connect(
+        function(newPlayer)
+            newPlayer.CharacterAdded:Connect(
+                function(characterModel)
+                    spawn(function()
+                        if characterModel:WaitForChild("HumanoidRootPart") then
+                            wait(0.5)
+                            createESP(characterModel)
+                        end
+                    end)
+                end
+            )
+        end
+    )
+end
+
+enableESPCode()
+
+function espFirst()
+    for _, o in pairs(plrs:GetPlayers()) do
+        if o.Name ~= lplr.Name then
+            spawn(
+                function()
+                    if o.Character:WaitForChild("HumanoidRootPart") then
+                        wait(0.1)
+                        createESP(o.Character)
+                    end
+                end
+            )
+        end
+    end
+end
+espFirst()
 spawn(function()
     while wait() do
         local args = {
@@ -19,21 +79,109 @@ spawn(function()
         end
         args[2] = args1
         rs.RemoteEvents.Hit:FireServer(unpack(args))
+        args = {
+            [1] = "Attack",
+            [2] = {}
+        }
+        args1 = {}
+        for _,v in pairs(plrs:GetChildren()) do
+            if tostring(v.Name) ~= tostring(lplr.Name) then
+                if v.Character then
+                    if v.Character:FindFirstChild("Humanoid") then
+                        table.insert(args1, v.Character.Humanoid)
+                    end
+                end
+            end
+        end
+        args[2] = args1
+        rs.RemoteEvents.Hit:FireServer(unpack(args))
     end
 end)
-
-    local m = require(rs.WeaponMastery)
-    m.WeaponMastery = function(a1, a2)
-        if a2.Value == "StraightSword" then
-            local v1 = a1.Stats.StraightswordExp
-            v1.Value = v1.Value + 1000
-            return
-        elseif v1 == "GreatSword" then
-            local v2 = a1.Stats.GreatswordExp
-            v2.Value = v2.Value + 1000
-            return
-        elseif v2 == "Rapier" then
-            local v3 = a1.Stats.RapierExp
-            v3.Value = v3.Value + 1000
+local nameSki = {"Charging Blade", "Diagonal Strike", "Catastrophic Slam", "Rising Strike", "Rapid Fire", "Pierce"}
+spawn(function()
+    while wait() do
+        for i=1,#nameSki do
+            local args = {
+                [1] = "Attack",
+                [2] = {},
+                [3] = nameSki[i]
+            }
+            local args1 = {}
+            for _,v in pairs(wp.Attackable:GetChildren()) do
+                if v:FindFirstChild("Mob") then
+                    table.insert(args1, v.Mob)
+                end
+            end
+            args[2] = args1
+            rs.RemoteEvents.Hit:FireServer(unpack(args))
+            args = {
+                [1] = "Attack",
+                [2] = {},
+                [3] = nameSki[i]
+            }
+            args1 = {}
+            for _,v in pairs(plrs:GetChildren()) do
+                if tostring(v.Name) ~= tostring(lplr.Name) then
+                    if v.Character then
+                        if v.Character:FindFirstChild("Humanoid") then
+                            table.insert(args1, v.Character.Humanoid)
+                        end
+                    end
+                end
+            end
+            args[2] = args1
+            rs.RemoteEvents.Hit:FireServer(unpack(args))
         end
     end
+end)
+spawn(function()
+    while wait() do
+        local args = {
+            [1] = true
+        }
+        
+        rs.RemoteEvents.NoClipMobs:FireServer(unpack(args))
+        
+    end
+end)
+for _,v in pairs(wp.Attackable:GetChildren()) do
+    if v:FindFirstChild("HumanoidRootPart") then
+        createESPItem(v.HumanoidRootPart, 196, 40, 28, 12, v.Name, 1)
+    end
+    v.ChildAdded:connect(
+        function(m)
+            if tostring(m.Name) == "HumanoidRootPart" then
+                createESPItem(m, 196, 40, 28, 12, v.Name, 1)
+            end
+        end
+    )
+end
+wp.Attackable.ChildAdded:connect(
+    function(m)
+        spawn(function()
+            if m:WaitForChild("HumanoidRootPart") then
+                createESPItem(m.HumanoidRootPart, 196, 40, 28, 12, m.Name, 1)
+            end
+        end)
+    end
+)
+local aPlayer = "false"
+mouse.KeyDown:connect(
+    function(keyDown)
+        if keyDown == "z" then
+            if tostring(aPlayer) == "false" then
+                aPlayer = "true"
+                lplr.Character.HumanoidRootPart.Anchored = true
+            else
+                aPlayer = "false"
+                lplr.Character.HumanoidRootPart.Anchored = false
+            end
+        end
+        if keyDown == "v" then
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
+        end
+    end
+)
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/NoClip.lua"), true))() -- Inf_Jump Lua

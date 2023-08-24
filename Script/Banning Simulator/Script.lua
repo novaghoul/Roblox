@@ -1,29 +1,34 @@
-uis = game:GetService("UserInputService")
-cg = game:GetService("CoreGui")
-sg = game:GetService("StarterGui")
-wp = game:GetService("Workspace")
-cmr = wp.Camera
-rs = game:GetService("ReplicatedStorage")
-rsd = game:GetService("RunService").RenderStepped
-lgt = game:GetService("Lighting")
-plrs = game:GetService("Players")
-lplr = plrs.LocalPlayer
-mouse = lplr:GetMouse()
-virtualUser = game:GetService("VirtualUser")
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-_G.toolPlayer = lplr.Character:FindFirstChildOfClass("Tool")
+toggleJP = false
+ws_g = 100
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 
-while wait() do
-    _G.toolPlayer = lplr.Character:FindFirstChildOfClass("Tool")
-    for _, v in pairs(wp.Zones:GetChildren()) do
-        for _, l in pairs(v[v.Name]:GetChildren()) do
-            local A_1 = l.UpperTorso
-            if _G.toolPlayer then
-                local Event = _G.toolPlayer.RemoteEvent
-                Event:FireServer(A_1)
-            else
-                _G.toolPlayer = lplr.Character:FindFirstChildOfClass("Tool")
+spawn(function()
+    while wait() do
+        for _, v in pairs(wp.npcs:GetChildren()) do
+            if (v.Position - lplr.Character.HumanoidRootPart.Position).Magnitude < 100 then
+                local args = {
+                    [1] = v,
+                    [2] = false
+                }
+                
+                rs["rbxts_include"]["node_modules"]["@rbxts"].net.out["_NetManaged"].damageNPC:FireServer(unpack(args))
             end
         end
     end
-end
+end)
+
+spawn(function()
+    while wait() do
+        rs["rbxts_include"]["node_modules"]["@rbxts"].net.out["_NetManaged"]["rebirth/rebirth"]:FireServer()
+    end
+end)
+
+spawn(function()
+    while wait() do
+        rs["rbxts_include"]["node_modules"]["@rbxts"].net.out["_NetManaged"]["unlockRank"]:FireServer()
+    end
+end)
+

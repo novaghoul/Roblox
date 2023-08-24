@@ -1,4 +1,5 @@
 st:FindFirstChildOfClass("")
+st:WaitForChildOfClass("")
 st:WaitForChild("")
 st:GetPlayers()
 st:GetChildren()
@@ -52,6 +53,12 @@ filetest.CheckOwnsPassAsync = function() return true end
 local filetest = require(game:GetService("Workspace").Plots["4"].Buttons.QuickSell.Button.QuickSell)
 filetest.Init = function() return; end
 
+mouse.KeyDown:connect(
+    function(keyDown)
+        if keyDown == "z" then
+        end
+    end
+)
 
 _G.arrayNameButton = {
     "addSpeed",
