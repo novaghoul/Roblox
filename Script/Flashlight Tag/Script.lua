@@ -7,11 +7,11 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 print("1")
 function createESP(c) --//Checks and calls the proper function
-    -- if tostring(c.Humanoid.WalkSpeed) == "22" then
+    if tostring(c.Humanoid.WalkSpeed) == "22" then
         createESPItem(c.Head, 196, 40, 28, 14, plrs:FindFirstChild(c.Name).DisplayName)
-    -- else
-    --     createESPItem(c.Head, 75, 151, 75, 14, plrs:FindFirstChild(c.Name).DisplayName)
-    -- end
+    else
+        createESPItem(c.Head, 75, 151, 75, 14, plrs:FindFirstChild(c.Name).DisplayName)
+    end
     -- for _, v in pairs(c:GetChildren()) do
     --     if checkPart(v) then
     --         actualESP(v)

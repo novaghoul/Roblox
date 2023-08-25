@@ -19,7 +19,6 @@ function statsPlayerJp()
         end)
     end)
 end
-
 statsPlayerJp()
 
 function infJump()
@@ -52,10 +51,10 @@ function changeJP(typeJP)
 	end
 end
 
-if toggleJP then
-	uis.InputBegan:Connect(function(input, gameProcessed)
-		if input.UserInputType.Value == 8 then
-			if lplr.Character then
+uis.InputBegan:Connect(function(input, gameProcessed)
+	if input.UserInputType.Value == 8 then
+		if lplr.Character then
+			if toggleJP then
 				if input.KeyCode.Value == 91 then
 					changeJP(0)
 					checkReturn("Jump Power", lplr.Character:FindFirstChildOfClass("Humanoid").JumpPower)
@@ -67,5 +66,5 @@ if toggleJP then
 				end
 			end
 		end
-	end)
-end
+	end
+end)

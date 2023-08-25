@@ -1,27 +1,24 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 
-local humanoidP = lplr.Character:FindFirstChildOfClass("Humanoid")
-
 function statsPlayerJp()
-	humanoidP.JumpPower = jp_g
-	humanoidP:GetPropertyChangedSignal("JumpPower"):connect(function()
-		if humanoidP.JumpPower ~= jp_g then
-			humanoidP.JumpPower = jp_g
-		end
-	end)
-
+	if lplr.Character then
+		lplr.Character:FindFirstChildOfClass("Humanoid").JumpPower = jp_g
+		lplr.Character:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("JumpPower"):connect(function()
+			if lplr.Character:FindFirstChildOfClass("Humanoid").JumpPower ~= jp_g then
+				lplr.Character:FindFirstChildOfClass("Humanoid").JumpPower = jp_g
+			end
+		end)
+	end
 	lplr.CharacterAdded:Connect(function(characterModel)
 		wait(1)
-		humanoidP = characterModel:FindFirstChildOfClass("Humanoid")
-		humanoidP.JumpPower = jp_g
-        humanoidP:GetPropertyChangedSignal("JumpPower"):connect(function()
-            if humanoidP.JumpPower ~= jp_g then
-                humanoidP.JumpPower = jp_g
+		characterModel:FindFirstChildOfClass("Humanoid").JumpPower = jp_g
+        characterModel:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("JumpPower"):connect(function()
+            if characterModel:FindFirstChildOfClass("Humanoid").JumpPower ~= jp_g then
+                characterModel:FindFirstChildOfClass("Humanoid").JumpPower = jp_g
             end
         end)
     end)
 end
-
 statsPlayerJp()
 
 function changeJP(typeJP)
@@ -47,18 +44,21 @@ end
 
 mouse.KeyDown:connect(
     function(keyDown)
-        if keyDown == " " then
-            infJump()
-        end
-
-        if keyDown == "k" then
-			changeJP(0)
-			checkReturn("Jump Power", humanoidP.JumpPower)
-		end
-		
-		if keyDown == "l" then
-			changeJP(1)
-			checkReturn("Jump Power", humanoidP.JumpPower)
+		if lplr.Character then
+			if keyDown == " " then
+				infJump()
+			end
+			if toggleJP then
+				if keyDown == "k" then
+					changeJP(0)
+					checkReturn("Jump Power", humanoidP.JumpPower)
+				end
+				
+				if keyDown == "l" then
+					changeJP(1)
+					checkReturn("Jump Power", humanoidP.JumpPower)
+				end
+			end
 		end
     end
 )

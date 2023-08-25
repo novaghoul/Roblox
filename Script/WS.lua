@@ -47,10 +47,10 @@ function changeWS(typeWS)
 	end
 end
 
-if toggleWS then
-	uis.InputBegan:Connect(
-		function(input, gameProcessed)
-			if lplr.Character then
+uis.InputBegan:Connect(
+	function(input, gameProcessed)
+		if lplr.Character then
+			if toggleWS then
 				if input.UserInputType.Value == 8 then
 					if input.KeyCode.Value == 107 then
 						changeWS(0)
@@ -64,5 +64,5 @@ if toggleWS then
 				end
 			end
 		end
-	)
-end
+	end
+)
