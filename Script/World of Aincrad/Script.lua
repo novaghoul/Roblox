@@ -1,8 +1,8 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 toggleWS = false
 toggleJP = false
-ws_g = 25
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
+ws_g = 40
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS_Other.lua"), true))() -- WS_Other Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
 function createESP(c) --//Checks and calls the proper function
     -- createESPItem(c.Head, 196, 40, 28, 14, plrs:FindFirstChild(c.Name).DisplayName)
@@ -11,11 +11,14 @@ function createESP(c) --//Checks and calls the proper function
     --         actualESP(v)
     --     end
     -- end
+    c.HealthBar.AlwaysOnTop = true
+    c.HealthBar.MaxDistance = inf
+    c.NameTag.AlwaysOnTop = true
+    c.NameTag.MaxDistance = inf
     if HEALTHBAR_ACTIVATED then --//If the user decided to
         createHealthbar(c:WaitForChild("HumanoidRootPart")) --//Calls the function of the creation
     end
 end
-
 function enableESPCode()
     for _, o in pairs(plrs:GetPlayers()) do
         if o.Name ~= lplr.Name then
@@ -73,22 +76,30 @@ spawn(function()
         }
         local args1 = {}
         for _,v in pairs(wp.Attackable:GetChildren()) do
-            if v:FindFirstChild("Mob") then
-                table.insert(args1, v.Mob)
+            if v:FindFirstChild("Mob") and lplr.Character then
+                if (v.Mob.WalkToPoint - lplr.Character.HumanoidRootPart.Position).Magnitude < 100 then
+                    table.insert(args1, v.Mob)
+                end
             end
         end
         args[2] = args1
         rs.RemoteEvents.Hit:FireServer(unpack(args))
-        args = {
+    end
+end)
+spawn(function()
+    while wait() do
+        local args = {
             [1] = "Attack",
             [2] = {}
         }
-        args1 = {}
+        local args1 = {}
         for _,v in pairs(plrs:GetChildren()) do
             if tostring(v.Name) ~= tostring(lplr.Name) then
-                if v.Character then
+                if wp:FindFirstChild(v.Name) then
                     if v.Character:FindFirstChild("Humanoid") then
-                        table.insert(args1, v.Character.Humanoid)
+                        if (v.HumanoidRootPart.Position - lplr.Character.HumanoidRootPart.Position).Magnitude < 52 then
+                            table.insert(args1, v.Character.Humanoid)
+                        end
                     end
                 end
             end
@@ -97,6 +108,7 @@ spawn(function()
         rs.RemoteEvents.Hit:FireServer(unpack(args))
     end
 end)
+
 local nameSki = {"Charging Blade", "Diagonal Strike", "Catastrophic Slam", "Rising Strike", "Rapid Fire", "Pierce"}
 spawn(function()
     while wait() do
@@ -108,29 +120,31 @@ spawn(function()
             }
             local args1 = {}
             for _,v in pairs(wp.Attackable:GetChildren()) do
-                if v:FindFirstChild("Mob") then
-                    table.insert(args1, v.Mob)
-                end
-            end
-            args[2] = args1
-            rs.RemoteEvents.Hit:FireServer(unpack(args))
-            args = {
-                [1] = "Attack",
-                [2] = {},
-                [3] = nameSki[i]
-            }
-            args1 = {}
-            for _,v in pairs(plrs:GetChildren()) do
-                if tostring(v.Name) ~= tostring(lplr.Name) then
-                    if v.Character then
-                        if v.Character:FindFirstChild("Humanoid") then
-                            table.insert(args1, v.Character.Humanoid)
-                        end
+                if v:FindFirstChild("Mob") and lplr.Character then
+                    if (v.Mob.WalkToPoint - lplr.Character.HumanoidRootPart.Position).Magnitude < 100 then
+                        table.insert(args1, v.Mob)
                     end
                 end
             end
             args[2] = args1
             rs.RemoteEvents.Hit:FireServer(unpack(args))
+            -- args = {
+            --     [1] = "Attack",
+            --     [2] = {},
+            --     [3] = nameSki[i]
+            -- }
+            -- args1 = {}
+            -- for _,v in pairs(plrs:GetChildren()) do
+            --     if tostring(v.Name) ~= tostring(lplr.Name) then
+            --         if v.Character then
+            --             if v.Character:FindFirstChild("Humanoid") then
+            --                 table.insert(args1, v.Character.Humanoid)
+            --             end
+            --         end
+            --     end
+            -- end
+            -- args[2] = args1
+            -- rs.RemoteEvents.Hit:FireServer(unpack(args))
         end
     end
 end)
@@ -180,6 +194,10 @@ mouse.KeyDown:connect(
         if keyDown == "v" then
 			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
 			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
+        end
+        if keyDown == "p" then
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -disTeleport, 0)
+			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -disTeleport, 0)
         end
     end
 )
