@@ -75,36 +75,36 @@ spawn(function()
                 }
                 rs.Modules.Network.RemoteEvent:FireServer(unpack(args2))
             end
-            wait(.3)
-            args = {
-                [1] = "LoadSpell",
-                [2] = "diffindo"
-            }
-            rs.Modules.Network.RemoteEvent:FireServer(unpack(args))
-            for i=1,5 do
-                wait(.1)
-                local args1 = {
-                    [1] = "ReplicateCast",
-                    [2] = {
-                        ["TargetPart"] = aMon,
-                        ["TargetPosition"] = Vector3.new(0, 0, 0),
-                        ["AutoTargetCharacter"] = true,
-                        ["LookDirection"] = Vector3.new(0, 0, 0),
-                        ["Perfect"] = true,
-                        ["Spam"] = true,
-                        ["TargetNormal"] = Vector3.new(0, 0, 0)
-                    }
-                }
+            -- wait(.3)
+            -- args = {
+            --     [1] = "LoadSpell",
+            --     [2] = "diffindo"
+            -- }
+            -- rs.Modules.Network.RemoteEvent:FireServer(unpack(args))
+            -- for i=1,5 do
+            --     wait(.1)
+            --     local args1 = {
+            --         [1] = "ReplicateCast",
+            --         [2] = {
+            --             ["TargetPart"] = aMon,
+            --             ["TargetPosition"] = Vector3.new(0, 0, 0),
+            --             ["AutoTargetCharacter"] = true,
+            --             ["LookDirection"] = Vector3.new(0, 0, 0),
+            --             ["Perfect"] = true,
+            --             ["Spam"] = true,
+            --             ["TargetNormal"] = Vector3.new(0, 0, 0)
+            --         }
+            --     }
                 
-                rs.Modules.Network.RemoteEvent:FireServer(unpack(args1))
-                local args2 = {
-                        [1] = "DiffindoHit",
-                        [2] = aMon
-                }
+            --     rs.Modules.Network.RemoteEvent:FireServer(unpack(args1))
+            --     local args2 = {
+            --             [1] = "DiffindoHit",
+            --             [2] = aMon
+            --     }
                 
-                rs.Modules.Network.RemoteEvent:FireServer(unpack(args2))
-            end
-            wait(.3)
+            --     rs.Modules.Network.RemoteEvent:FireServer(unpack(args2))
+            -- end
+            -- wait(.3)
             -- args = {
             --     [1] = "LoadSpell",
             --     [2] = "persector"
@@ -199,3 +199,5 @@ mouse.KeyDown:connect(
         end
     end
 )
+
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/NoClip.lua"), true))() -- NoClip Lua
