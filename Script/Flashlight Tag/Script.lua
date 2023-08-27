@@ -4,10 +4,10 @@ toggleWS = false
 toggleJP = false
 ws_g = 25
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump_Other.lua"), true))() -- Inf_Jump_Other Lua
 print("1")
 function createESP(c) --//Checks and calls the proper function
-    if tostring(c.Humanoid.WalkSpeed) == "22" then
+    if c.Humanoid.WalkSpeed > 21 then
         createESPItem(c.Head, 196, 40, 28, 14, plrs:FindFirstChild(c.Name).DisplayName)
     else
         createESPItem(c.Head, 75, 151, 75, 14, plrs:FindFirstChild(c.Name).DisplayName)
@@ -29,7 +29,7 @@ function enableESPCode()
                 function(characterModel)
                     spawn(function()
                         if characterModel:WaitForChild("HumanoidRootPart") then
-                            wait(0.5)
+                            wait(1)
                             createESP(characterModel)
                         end
                     end)
@@ -44,7 +44,7 @@ function enableESPCode()
                 function(characterModel)
                     spawn(function()
                         if characterModel:WaitForChild("HumanoidRootPart") then
-                            wait(0.5)
+                            wait(1)
                             createESP(characterModel)
                         end
                     end)

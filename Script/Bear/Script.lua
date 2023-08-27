@@ -4,5 +4,11 @@ toggleJP = false
 ws_g = 20
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS.lua"), true))() -- WS Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump_Other.lua"), true))() -- Inf_Jump Lua
-loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/NoClip.lua"), true))() -- Noclip Lua
+mouse.KeyDown:connect(
+    function(keyDown)
+        if keyDown == "z" then
+            firetouchinterest(wp.Obby.Quidz,  lplr.Character.HumanoidRootPart, 0)
+            firetouchinterest(wp.Obby.Quidz,  lplr.Character.HumanoidRootPart, 1)
+        end
+    end
+)
