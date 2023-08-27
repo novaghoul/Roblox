@@ -48,7 +48,7 @@ function espFirst()
         if o.Name ~= lplr.Name then
             spawn(
                 function()
-                    if o.Character:FindFirstChild("Head") then
+                    if o.Character:WaitForChild("Head") then
                         wait(0.1)
                         createESP(o.Character)
                     end
