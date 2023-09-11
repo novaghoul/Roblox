@@ -187,9 +187,12 @@ if init == nil then
         )
     end
 
-    getgenv().createHitBox = function(parent)
-        local sizeBody = parent[hitBoxBody].Size.x
-        parent[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+    getgenv().createHitBox = function(parent, sparent)
+        if sparent then
+            parent[hitBoxBody].Size = Vector3.new(sparent, sparent, sparent)
+        else
+            parent[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+        end
         parent[hitBoxBody].Transparency = hitBoxTransparency
         parent[hitBoxBody].BrickColor = BrickColor.new(hitBoxColor)
         parent[hitBoxBody].Material = "Neon"
@@ -199,7 +202,11 @@ if init == nil then
             function(property)
                 wait(0.1)
                 if property == "Size" or property == "CanCollide" then
-                    parent[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+                    if sparent then
+                        parent[hitBoxBody].Size = Vector3.new(sparent, sparent, sparent)
+                    else
+                        parent[hitBoxBody].Size = Vector3.new(hitBoxSize[1], hitBoxSize[2], hitBoxSize[3])
+                    end
                     parent[hitBoxBody].CanCollide = false
                 end
             end

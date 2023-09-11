@@ -14,5 +14,6 @@ for i,v in pairs(getgc(true)) do
         v.spread = spread1
         v.recoil = recoil1
         v.mode = "Auto"
+        table.foreach(v, print)
     end
 end
