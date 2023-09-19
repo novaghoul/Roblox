@@ -9,7 +9,6 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 -------------------------------------------------------------
 --------------------------Other------------------------------
 
-
 mouse.KeyDown:connect(
     function(keyDown)
         if keyDown == "x" then
