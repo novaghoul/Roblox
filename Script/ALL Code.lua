@@ -34,7 +34,7 @@ st:GetPropertyChangedSignal("WalkSpeed"):connect(
     function()
     end
 )
-
+repeat task.wait(30) until game:IsLoaded()
 spawn(function()
     
 end)

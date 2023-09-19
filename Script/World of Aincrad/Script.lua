@@ -1,7 +1,7 @@
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/1st.lua"), true))() -- 1st Lua
 toggleWS = false
 toggleJP = false
-ws_g = 40
+ws_g = 30
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/WS_Other.lua"), true))() -- WS_Other Lua
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/Inf_Jump.lua"), true))() -- Inf_Jump Lua
@@ -148,8 +148,8 @@ spawn(function()
     )
     -- wp.Dungeon.BossDoorModel.Queue.Attach.ProximityPrompt.HoldDuration = 0
     -- wp.Buildings.NextFloorTeleportPad.Base.Attachment.ProximityPrompt.HoldDuration = 0
-    wp.TpTown.TpTown.Attachment.ProximityPrompt.HoldDuration = 0
-    wp.DungeonDoor.DungeonDoor.Attachment.ProximityPrompt.HoldDuration = 0
+    -- wp.TpTown.TpTown.Attachment.ProximityPrompt.HoldDuration = 0
+    -- wp.DungeonDoor.DungeonDoor.Attachment.ProximityPrompt.HoldDuration = 0
 end)
 
 function aOn()
@@ -243,17 +243,15 @@ lplr.CharacterAdded:Connect(
 )
 spawn(function()
     while wait() do
-        local args = {
-            [1] = true
-        }
+        -- local args = {
+        --     [1] = true
+        -- }
+        -- lplr.Backpack.WeaponMain.NoClipMobs:FireServer(unpack(args))
         
-        rs.RemoteEvents.NoClipMobs:FireServer(unpack(args))
         local args1 = {
             [1] = true
         }
-        
         rs.RemoteEvents.Sit:FireServer(unpack(args1))
-        
     end
 end)
 for _,v in pairs(wp.Attackable:GetChildren()) do
@@ -277,34 +275,38 @@ wp.Attackable.ChildAdded:connect(
         end)
     end
 )
+
 local aPlayer = "false"
-mouse.KeyDown:connect(
-    function(keyDown)
-        if keyDown == "z" then
-            if tostring(aPlayer) == "false" then
-                aPlayer = "true"
-                lplr.Character.HumanoidRootPart.Anchored = true
-            else
-                aPlayer = "false"
-                lplr.Character.HumanoidRootPart.Anchored = false
-            end
-        end
-        if keyDown == "v" then
-			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
-			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -disTeleport)
-        end
-        if keyDown == "p" then
-			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -disTeleport, 0)
-			lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -disTeleport, 0)
-        end
-        if keyDown == "m" then
-            if tostring(lplr.PlayerGui.Teleport.Enabled) == "true" then
-                lplr.PlayerGui.Teleport.Enabled = false
-            else
-                lplr.PlayerGui.Teleport.Enabled = true
-            end
+uis.InputBegan:Connect(function(keyDown, processed)
+    if keyDown.KeyCode == Enum.KeyCode.Z then
+        if tostring(aPlayer) == "false" then
+            aPlayer = "true"
+            lplr.Character.HumanoidRootPart.Anchored = true
+        else
+            aPlayer = "false"
+            lplr.Character.HumanoidRootPart.Anchored = false
         end
     end
-)
+    if keyDown.KeyCode == Enum.KeyCode.V then
+        lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -disTeleport, 0)
+        lplr.Character.HumanoidRootPart.CFrame = lplr.Character.HumanoidRootPart.CFrame * CFrame.new(0, -disTeleport, 0)
+    end
+    if keyDown.KeyCode == Enum.KeyCode.M then
+        if tostring(lplr.PlayerGui.Teleport.Enabled) == "true" then
+            lplr.PlayerGui.Teleport.Enabled = false
+        else
+            lplr.PlayerGui.Teleport.Enabled = true
+        end
+    end
+    if keyDown.KeyCode == Enum.KeyCode.LeftControl then
+        if ws_g == 30 then
+            ws_g = 100
+            NotifyG("Walk Speed", ws_g)
+        else
+            ws_g = 30
+            NotifyG("Walk Speed", ws_g)
+        end
+    end
+end)
 
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/NoClip.lua"), true))() -- Inf_Jump Lua

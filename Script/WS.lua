@@ -2,12 +2,12 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 
 function statsPlayerWs()
 	if lplr.Character then
-		lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
+		lplr.Character.Humanoid.WalkSpeed = ws_g
 	
-		lplr.Character:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("WalkSpeed"):connect(
+		lplr.Character.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
 			function()
-				if lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed ~= ws_g then
-					lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
+				if lplr.Character.Humanoid.WalkSpeed ~= ws_g then
+					lplr.Character.Humanoid.WalkSpeed = ws_g
 				end
 			end
 		)
@@ -16,11 +16,11 @@ function statsPlayerWs()
 	lplr.CharacterAdded:Connect(
 		function(characterModel)
 			wait(1)
-			characterModel:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
-			characterModel:FindFirstChildOfClass("Humanoid"):GetPropertyChangedSignal("WalkSpeed"):connect(
+			characterModel.Humanoid.WalkSpeed = ws_g
+			characterModel.Humanoid:GetPropertyChangedSignal("WalkSpeed"):connect(
 				function()
-					if characterModel:FindFirstChildOfClass("Humanoid").WalkSpeed ~= ws_g then
-						characterModel:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
+					if characterModel.Humanoid.WalkSpeed ~= ws_g then
+						characterModel.Humanoid.WalkSpeed = ws_g
 					end
 				end
 			)
@@ -33,15 +33,15 @@ function changeWS(typeWS)
 	if lplr.Character then
 		if typeWS == 0 then
 			ws_g = ws_g + 5
-			lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
+			lplr.Character.Humanoid.WalkSpeed = ws_g
 		elseif typeWS == 1 then
 			if ws_g >= 0 then
 				ws_g = ws_g - 5
-				lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
+				lplr.Character.Humanoid.WalkSpeed = ws_g
 			end
 			if ws_g < 16 then
 				ws_g = 16
-				lplr.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = ws_g
+				lplr.Character.Humanoid.WalkSpeed = ws_g
 			end
 		end
 	end
