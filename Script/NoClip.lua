@@ -14,14 +14,22 @@ game:GetService("RunService").Stepped:connect(
         if lplr.Character then
             if noclipAll then
                 for i = 1, #checkRigType() do
-                    lplr.Character[checkRigType()[i]].CanCollide = false
+                    if lplr.Character[checkRigType()[i]] then
+                        lplr.Character[checkRigType()[i]].CanCollide = false
+                    end
                 end
-                lplr.Character.HumanoidRootPart.CanCollide = false
+                if lplr.Character.HumanoidRootPart then
+                    lplr.Character.HumanoidRootPart.CanCollide = false
+                end
             else
                 for i = 1, #checkRigType() do
-                    lplr.Character[checkRigType()[i]].CanCollide = true
+                    if lplr.Character[checkRigType()[i]] then
+                        lplr.Character[checkRigType()[i]].CanCollide = true
+                    end
                 end
-                lplr.Character.HumanoidRootPart.CanCollide = true
+                if lplr.Character.HumanoidRootPart then
+                    lplr.Character.HumanoidRootPart.CanCollide = true
+                end
             end
         end
     end
