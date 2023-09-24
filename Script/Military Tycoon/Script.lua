@@ -10,7 +10,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/mai
 loadstring(game:HttpGet(("https://raw.githubusercontent.com/novaghoul/Roblox/main/Script/HitBox.lua"), true))() -- HitBox Lua
 
 function createESP(c) --//Checks and calls the proper function
-    createESPItem(c.Head, 196, 40, 28, 14, plrs:FindFirstChild(c.Name).DisplayName)
+    createESPItem(c:WaitForChild("Head"), 196, 40, 28, 14, plrs:WaitForChild(c.Name).DisplayName)
     for _, v in pairs(c:GetChildren()) do
         if checkPart(v) then
             actualESP(v)
@@ -26,8 +26,8 @@ function enableESPCode()
             o.CharacterAdded:Connect(
                 function(characterModel)
                     spawn(function()
-                        if characterModel:WaitForChild("HumanoidRootPart") then
-                            wait(0.5)
+                        if characterModel:WaitForChild("Head") then
+                            wait(1)
                             createESP(characterModel)
                         end
                     end)
@@ -40,8 +40,8 @@ function enableESPCode()
             newPlayer.CharacterAdded:Connect(
                 function(characterModel)
                     spawn(function()
-                        if characterModel:WaitForChild("HumanoidRootPart") then
-                            wait(0.5)
+                        if characterModel:WaitForChild("Head") then
+                            wait(1)
                             createESP(characterModel)
                         end
                     end)
@@ -50,7 +50,6 @@ function enableESPCode()
         end
     )
 end
-
 enableESPCode()
 
 function espFirst()
@@ -58,8 +57,8 @@ function espFirst()
         if o.Name ~= lplr.Name then
             spawn(
                 function()
-                    if o.Character:WaitForChild("HumanoidRootPart") then
-                        wait(0.1)
+                    if o.Character:WaitForChild("Head") then
+                        wait(1)
                         createESP(o.Character)
                     end
                 end

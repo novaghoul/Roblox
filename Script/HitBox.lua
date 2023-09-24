@@ -6,7 +6,7 @@ function hitBox()
             o.CharacterAdded:Connect(
                 function(characterModel)
                     if characterModel:WaitForChild(hitBoxBody) then
-                        wait(0.5)
+                        wait(1)
                         createHitBox(characterModel)
                     end
                 end
@@ -19,7 +19,7 @@ function hitBox()
             newPlayer.CharacterAdded:Connect(
                 function(characterModel)
                     if characterModel:WaitForChild(hitBoxBody) then
-                        wait(0.5)
+                        wait(1)
                         createHitBox(characterModel)
                     end
                 end
@@ -32,7 +32,7 @@ function hitBox()
             spawn(
                 function()
                     if o.Character:WaitForChild(hitBoxBody) then
-                        wait(0.1)
+                        wait(1)
                         createHitBox(o.Character)
                     end
                 end
